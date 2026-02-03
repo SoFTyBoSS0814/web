@@ -21,9 +21,9 @@
       return;
     }
 
-    // Itt a TEST INBOX service (biztosan működik)
+    // Outlook Service ID-d
     emailjs.send(
-      "service_clmo87i",     // a te EmailJS Service ID-d
+      "service_h01oyeo",     // 🔥 Outlookhoz kötött Service ID
       "template_xrqx4lv",    // Template ID
       {
         megrendeles: megrendeles,
@@ -31,7 +31,7 @@
       }
     ).then(
       function () {
-        alert("✅ Email ELKÜLDVE! (teszt inboxba)");
+        alert("✅ Email ELKÜLDVE az Outlook fiókodra!");
         document.getElementById("megrendeles").value = "";
         document.getElementById("telefon").value = "";
       },
@@ -63,8 +63,6 @@
 
   <button type="submit">Küldés</button>
 </form>
-
-<p><em>Figyelem: ez a teszt inbox működik App Password nélkül. A Gmail-re való küldéshez App Password szükséges.</em></p>
 
 </body>
 </html>
