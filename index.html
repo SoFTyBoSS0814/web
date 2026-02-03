@@ -2,44 +2,44 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Megrendelés Küldése</title>
+<title>EmailJS Teszt</title>
 
 <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
 
 <script>
-  // Inicializáljuk az EmailJS-t a Public Key-vel
-  (function () {
-    emailjs.init("RJ8KpMBsys6naM2Ii"); // A te Public Key-d
-  })();
+  // Inicializáljuk az EmailJS-t
+  emailjs.init("RJ8KpMBsys6naM2Ii"); // Public Key
 
   function kuldesEmail() {
     const megrendeles = document.getElementById("megrendeles").value.trim();
     const telefon = document.getElementById("telefon").value.trim();
 
+    console.log("Küldés kezdődik...");
+
     if (!megrendeles || !telefon) {
       alert("Minden mezőt ki kell tölteni!");
+      console.log("Hiba: üres mezők");
       return;
     }
 
-    // Outlook Service ID-d
-    emailjs.send(
-      "service_h01oyeo",     // 🔥 Outlookhoz kötött Service ID
-      "template_xrqx4lv",    // Template ID
-      {
-        megrendeles: megrendeles,
-        telefon: telefon
-      }
-    ).then(
-      function () {
-        alert("✅ Email ELKÜLDVE az Outlook fiókodra!");
+    const templateParams = {
+      megrendeles: megrendeles,
+      telefon: telefon
+    };
+
+    console.log("templateParams:", templateParams);
+
+    // Küldés
+    emailjs.send("service_clmo87i", "template_hfqpbia", templateParams)
+      .then(function(response) {
+        alert("✅ Email elküldve!");
+        console.log("Response:", response);
         document.getElementById("megrendeles").value = "";
         document.getElementById("telefon").value = "";
-      },
-      function (error) {
-        alert("❌ Hiba történt az email küldésénél");
-        console.error(error);
-      }
-    );
+      }, function(error) {
+        alert("❌ Hiba az email küldésénél");
+        console.error("Error:", error);
+      });
   }
 </script>
 
@@ -52,7 +52,7 @@
 
 <body>
 
-<h2>Megrendelés</h2>
+<h2>EmailJS Teszt</h2>
 
 <form onsubmit="event.preventDefault(); kuldesEmail();">
   <label>Megrendelés típusa:</label><br>
@@ -63,6 +63,8 @@
 
   <button type="submit">Küldés</button>
 </form>
+
+<p><em>Figyelem: Outlook/Gmail címre App Password vagy OAuth kell, különben a böngészőből nem fog megérkezni az email.</em></p>
 
 </body>
 </html>
