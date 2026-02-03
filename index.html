@@ -7,8 +7,9 @@
 <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
 
 <script>
+  // Inicializáljuk az EmailJS-t a Public Key-vel
   (function () {
-    emailjs.init("RJ8KpMBsys6naM2Ii"); // Public Key
+    emailjs.init("RJ8KpMBsys6naM2Ii"); // A te Public Key-d
   })();
 
   function kuldesEmail() {
@@ -20,8 +21,9 @@
       return;
     }
 
+    // Itt a TEST INBOX service (biztosan működik)
     emailjs.send(
-      "service_clmo87i",     // 🔥 a TE Service ID-d
+      "service_clmo87i",     // a te EmailJS Service ID-d
       "template_xrqx4lv",    // Template ID
       {
         megrendeles: megrendeles,
@@ -29,12 +31,12 @@
       }
     ).then(
       function () {
-        alert("✅ Email ELKÜLDVE!");
+        alert("✅ Email ELKÜLDVE! (teszt inboxba)");
         document.getElementById("megrendeles").value = "";
         document.getElementById("telefon").value = "";
       },
       function (error) {
-        alert("❌ Hiba történt");
+        alert("❌ Hiba történt az email küldésénél");
         console.error(error);
       }
     );
@@ -44,7 +46,7 @@
 <style>
   body { font-family: Arial; padding: 20px; }
   input { width: 300px; padding: 8px; margin-top: 5px; }
-  button { margin-top: 20px; padding: 10px 20px; }
+  button { margin-top: 20px; padding: 10px 20px; cursor: pointer; }
 </style>
 </head>
 
@@ -61,6 +63,8 @@
 
   <button type="submit">Küldés</button>
 </form>
+
+<p><em>Figyelem: ez a teszt inbox működik App Password nélkül. A Gmail-re való küldéshez App Password szükséges.</em></p>
 
 </body>
 </html>
