@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Megrendelés Küldése</title>
+
+<script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+
+<script>
+  (function () {
+    emailjs.init("RJ8KpMBsys6naM2Ii"); // Public Key
+  })();
+
+  function kuldesEmail() {
+    const megrendeles = document.getElementById("megrendeles").value.trim();
+    const telefon = document.getElementById("telefon").value.trim();
+
+    if (!megrendeles || !telefon) {
+      alert("Minden mezőt ki kell tölteni!");
+      return;
+    }
+
+    emailjs.send(
+      "service_emailjs",     // 🔥 EMAILJS DEFAULT SERVICE
+      "template_xrqx4lv",    // Template ID
+      {
+        megrendeles: megrendeles,
+        telefon: telefon
+      }
+    ).then(
+      function () {
+        alert("✅ Email ELKÜLDVE!");
+        document.getElementById("megrendeles").value = "";
+        document.getElementById("telefon").value = "";
+      },
+      function (error) {
+        alert("❌ Hiba történt");
+        console.error(error);
+      }
+    );
+  }
+</script>
+
+<style>
+  body { font-family: Arial; padding: 20px; }
+  input { width: 300px; padding: 8px; margin-top: 5px; }
+  button { margin-top: 20px; padding: 10px 20px; }
+</style>
+</head>
+
+<body>
+
+<h2>Megrendelés</h2>
+
+<form onsubmit="event.preventDefault(); kuldesEmail();">
+  <label>Megrendelés típusa:</label><br>
+  <input id="megrendeles" type="text" required><br><br>
+
+  <label>Telefonszám:</label><br>
+  <input id="telefon" type="text" required><br><br>
+
+  <button type="submit">Küldés</button>
+</form>
+
+</body>
+</html>
