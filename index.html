@@ -117,10 +117,6 @@
         .contact-form {
             max-width:600px;
             margin:auto;
-            background: rgba(255, 111, 60, 0.1);
-            padding: 25px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
         }
 
         .contact-form input,
@@ -149,22 +145,6 @@
             transform: scale(1.05);
         }
 
-        /* ===== ELÉRHETŐSÉG ===== */
-        .contact-info {
-            text-align:center;
-            margin-top:30px;
-            line-height:1.8;
-            background: rgba(255, 111, 60, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-            max-width:600px;
-            margin-left:auto;
-            margin-right:auto;
-            font-weight:600;
-            color:#4a2a00;
-        }
-
         /* ===== LÁBLÉC ===== */
         footer {
             background-color:#222;
@@ -179,25 +159,6 @@
             .services {
                 flex-direction:column;
                 align-items:center;
-            }
-        }
-
-        /* ===== DISZKRÉT HÁTTÉR RÓLUNK ===== */
-        #about {
-            background: rgba(255, 111, 60, 0.1);
-            padding: 25px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-            color: #4a2a00;
-            max-width: 900px;
-            margin: 20px auto 0 auto;
-            font-weight: 600;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 768px) {
-            #about, .contact-form, .contact-info {
-                margin: 20px 10px 0 10px;
             }
         }
     </style>
@@ -311,12 +272,12 @@
         <p id="form-message" style="text-align:center; margin-top:10px;"></p>
     </div>
 
-    <div class="contact-info">
-        <strong>Elérhetőség:</strong><br><br>
-        Telefonszám: <strong>Név: +36 30 123 4567</strong><br>
-        E-mail: <strong>cegesmail@example.hu</strong>
-    </div>
-</section>
+<div style="text-align:center; margin-top:30px; line-height:1.8;">
+    <strong>Elérhetőség:</strong><br><br>
+
+    Telefonszám: <strong>Név: +36 30 123 4567</strong><br>
+    E-mail: <strong>cegesmail@example.hu</strong>
+</div>
 
 <footer>
     &copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.
@@ -348,3 +309,10 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
