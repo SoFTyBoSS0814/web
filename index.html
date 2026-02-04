@@ -6,201 +6,239 @@
     <title>M&M Otthonfelújítás</title>
 
     <style>
-        * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
-        body { line-height:1.6; background-color:#f8f8f8; color:#333; display:flex; flex-direction:column; min-height:100vh; }
-        a { text-decoration:none; color:#333; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f8f8f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         /* ===== FEJLÉC ===== */
         header {
             background-color: #ff6f3c;
             color: white;
             padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         header h1 {
-            text-align:center;
-            font-size:2.5em;
+            text-align: center;
+            font-size: 2.4em;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
         }
 
         nav {
-            text-align:center;
-            margin-top:10px;
+            text-align: center;
+            margin-top: 10px;
         }
 
         nav a {
             margin: 0 15px;
-            font-weight:bold;
-            color:white;
+            font-weight: 600;
+            color: white;
             transition: 0.3s;
         }
 
         nav a:hover {
-            text-decoration:underline;
+            text-decoration: underline;
             color: #fff9f0;
         }
 
-        /* ===== SZAKASZOK ===== */
         main {
             flex: 1;
         }
 
         section {
             padding: 60px 20px;
-            max-width:1000px;
-            margin:auto;
+            max-width: 1100px;
+            margin: auto;
         }
 
         h2 {
-            text-align:center;
-            margin-bottom:40px;
-            color:#fff;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #fff;
             background: linear-gradient(135deg, rgba(255,111,60,0.9), rgba(255,166,121,0.9));
-            display:inline-block;
-            padding: 12px 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
         }
 
         /* ===== HERO ===== */
         .hero {
-            text-align:center;
-            padding:100px 20px;
-            background-color:#fff5f0;
-            border-radius:10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 100px 20px;
+            background-color: #fff5f0;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .hero p {
-            font-size:1.2em;
-            margin-top:20px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #444;
         }
 
         .hero a {
-            display:inline-block;
-            margin-top:30px;
-            background:#ff6f3c;
-            color:white;
-            padding:15px 30px;
-            border-radius:8px;
-            font-weight:bold;
-            transition:0.3s;
+            display: inline-block;
+            margin-top: 35px;
+            background: #ff6f3c;
+            color: white;
+            padding: 16px 36px;
+            border-radius: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
         .hero a:hover {
-            background:#ff3f0c;
-            transform: scale(1.05);
+            background: #ff3f0c;
+            transform: scale(1.06);
+        }
+
+        /* ===== RÓLUNK ===== */
+        #about {
+            background: rgba(255, 111, 60, 0.1);
+            padding: 30px 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
+            color: #4a2a00;
+            font-weight: 600;
         }
 
         /* ===== SZOLGÁLTATÁSOK ===== */
         .services {
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:space-around;
-            gap:20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 25px;
         }
 
         .service-box {
-            background-color:#fff2e6;
-            padding:20px;
-            flex:1 1 250px;
-            border-radius:10px;
-            box-shadow:0 4px 15px rgba(0,0,0,0.15);
-            text-align:center;
+            background-color: #fff2e6;
+            padding: 25px 20px;
+            flex: 1 1 260px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            text-align: center;
             transition: 0.3s;
         }
 
+        .service-box h3 {
+            margin-bottom: 10px;
+        }
+
         .service-box:hover {
-            transform: translateY(-5px);
-            box-shadow:0 8px 25px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, rgba(255,111,60,0.85), rgba(255,200,150,0.85));
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, rgba(255,111,60,0.9), rgba(255,200,150,0.9));
+            color: white;
         }
 
         /* ===== KAPCSOLAT ===== */
         .contact-form {
-            max-width:600px;
-            margin:auto;
-            background: rgba(255, 111, 60, 0.1);
-            padding: 25px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 111, 60, 0.12);
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(255, 111, 60, 0.25);
         }
 
         .contact-form input,
         .contact-form textarea {
-            width:100%;
-            padding:12px;
-            margin-bottom:15px;
-            border-radius:5px;
-            border:1px solid #ccc;
-            font-size:1em;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            transition: 0.2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #ff6f3c;
+            box-shadow: 0 0 0 3px rgba(255,111,60,0.25);
         }
 
         .contact-form button {
-            background-color:#ff6f3c;
-            color:white;
-            border:none;
-            padding:15px 30px;
-            font-size:1em;
-            border-radius:5px;
-            cursor:pointer;
-            transition:0.3s;
+            width: 100%;
+            background-color: #ff6f3c;
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 1.05em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
         .contact-form button:hover {
-            background-color:#ff3f0c;
-            transform: scale(1.05);
+            background-color: #ff3f0c;
+            transform: scale(1.04);
+        }
+
+        .form-feedback {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ===== ELÉRHETŐSÉG ===== */
         .contact-info {
-            text-align:center;
-            margin-top:30px;
-            line-height:1.8;
-            background: rgba(255, 111, 60, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-            max-width:600px;
-            margin-left:auto;
-            margin-right:auto;
-            font-weight:600;
-            color:#4a2a00;
-        }
-
-        /* ===== LÁBLÉC ===== */
-        footer {
-            background-color:#222;
-            color:white;
-            text-align:center;
-            padding:20px 0;
-            font-size:0.9em;
-            margin-top:auto;
-        }
-
-        /* ===== MOBIL ===== */
-        @media(max-width:768px){
-            .services {
-                flex-direction:column;
-                align-items:center;
-            }
-            #about, .contact-form, .contact-info {
-                margin: 20px 10px 0 10px;
-            }
-        }
-
-        /* ===== DISZKRÉT HÁTTÉR RÓLUNK ===== */
-        #about {
-            background: rgba(255, 111, 60, 0.1);
-            padding: 25px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-            color: #4a2a00;
-            max-width: 900px;
-            margin: 20px auto 0 auto;
+            text-align: center;
+            margin: 40px auto 0;
+            line-height: 1.8;
+            background: rgba(255, 111, 60, 0.12);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.25);
+            max-width: 600px;
             font-weight: 600;
-            line-height: 1.5;
+            color: #4a2a00;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .services {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -219,6 +257,7 @@
 </header>
 
 <main>
+
 <section id="home" class="hero">
     <h2>Precíz munkavégzés és ház körüli munkák</h2>
     <p>
@@ -226,13 +265,14 @@
         felújítási munkákat Bács-Kiskun megyében és 100 km-es körzetében.
     </p>
     <a href="referenciak.html">Referenciák megtekintése</a>
+    <p style="margin-top:15px; font-weight:600;">📞 Gyors kapcsolat – 24 órán belüli válasz</p>
 </section>
 
 <section id="about">
     <h2>Rólunk</h2>
     <p>
         Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással,
-        beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak.
+        beltéri átalakításokkal és ház körüli munkákkal foglalkoznak.
         Munkánkra a precizitás és a megbízhatóság jellemző.
     </p>
 </section>
@@ -240,89 +280,34 @@
 <section id="services">
     <h2>Szolgáltatások</h2>
     <div class="services">
-        <div class="service-box">
-            <h3>Gipszkartonozás</h3>
-            <p>Falak, álmennyezetek és válaszfalak precíz kivitelezése.</p>
-        </div>
-        <div class="service-box">
-            <h3>Festések</h3>
-            <p>Beltéri és kültéri festés minőségi anyagokkal.</p>
-        </div>
-        <div class="service-box">
-            <h3>Tető felújítás</h3>
-            <p>Javítás, szigetelés és korszerűsítés.</p>
-        </div>
-        <div class="service-box">
-            <h3>Hálózások</h3>
-            <p>Villamos és egyéb hálózatok kiépítése.</p>
-        </div>
-        <div class="service-box">
-            <h3>Burkolások</h3>
-            <p>Padló- és falburkolatok profi kivitelezése.</p>
-        </div>
-        <div class="service-box">
-            <h3>Vakolások</h3>
-            <p>Sima, esztétikus és tartós felületek.</p>
-        </div>
-
-        <div class="service-box">
-            <h3>Munkák utáni takarítás</h3>
-            <p>Felújítás utáni alapos takarítás, por- és törmelékmentesítés.</p>
-        </div>
-        <div class="service-box">
-            <h3>Udvar és porta takarítás</h3>
-            <p>Udvarok, porták rendbetétele, lomtalanítás és tiszta környezet.</p>
-        </div>
-        <div class="service-box">
-            <h3>Kaszálás</h3>
-            <p>Fűnyírás, bozótirtás, elhanyagolt területek karbantartása.</p>
-        </div>
-
-        <div class="service-box">
-            <h3>Tető széldeszkázás</h3>
-            <p>Tetők szélének esztétikus és tartós kialakítása, időjárásálló anyagokkal, pontos illesztésekkel.</p>
-        </div>
-        <div class="service-box">
-            <h3>Oromlemez felhelyezése</h3>
-            <p>Oromfalak védelme és lezárása lemezborítással, szakszerű rögzítéssel a hosszú élettartam érdekében.</p>
-        </div>
-        <div class="service-box">
-            <h3>Kémények felújítása</h3>
-            <p>Kémények javítása, vakolása és bádogozása, beázás elleni védelemmel és esztétikus kivitelezéssel.</p>
-        </div>
-        <div class="service-box">
-            <h3>Nyílászárók teljeskörű cseréje</h3>
-            <p>Régi vagy hibás ajtó- és ablakzárak cseréje, biztonságos és precíz kivitelezéssel, minden típushoz.</p>
-        </div>
+        <div class="service-box"><h3>🛠️ Gipszkartonozás</h3><p>Falak, álmennyezetek és válaszfalak kivitelezése.</p></div>
+        <div class="service-box"><h3>🎨 Festések</h3><p>Beltéri és kültéri festés minőségi anyagokkal.</p></div>
+        <div class="service-box"><h3>🏠 Tető felújítás</h3><p>Javítás, szigetelés és korszerűsítés.</p></div>
+        <div class="service-box"><h3>⚡ Hálózások</h3><p>Villamos és egyéb hálózatok kiépítése.</p></div>
+        <div class="service-box"><h3>🧱 Burkolások</h3><p>Padló- és falburkolatok kivitelezése.</p></div>
+        <div class="service-box"><h3>🧹 Takarítás</h3><p>Felújítás utáni és udvari takarítás.</p></div>
     </div>
 </section>
-    
 
-    <!-- Kapcsolat (EmailJS) -->
-    <section id="contact">
-        <h2>Kapcsolat</h2>
-        <div class="contact-form">
-            <form id="contact-form">
-                <input type="text" name="name" placeholder="Név" required>
-                <input type="email" name="email" placeholder="E-mail" required>
-                <input type="tel" name="phone" placeholder="+36 30/20/70 +7 karakter, vagy egyben írva." 
-                       pattern="(\+36\s?(30|20|70)\s?\d{7}|06(30|20|70)\d{7})" 
-                       title="Érvényes magyar telefonszám: +36 30/20/70 +7 karakter, vagy egyben írva." 
-                       required>
-                <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
-                <button type="submit">Küldés</button>
-            </form>
-            <p id="form-message" style="text-align:center; margin-top:10px;"></p>
-        </div>
-        <p style="text-align:center; margin-top:20px;">
-        </p>
-    </section>
+<section id="contact">
+    <h2>Kapcsolat</h2>
+    <div class="contact-form">
+        <form id="contact-form">
+            <input type="text" name="name" placeholder="Név" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="tel" name="phone" placeholder="+36 30 123 4567" required>
+            <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
+            <button type="submit">Üzenet küldése</button>
+        </form>
+        <p id="form-message" class="form-feedback"></p>
+    </div>
+
     <div class="contact-info">
-        <strong>Elérhetőség:</strong><br><br>
-        Telefonszám: <strong>Név: +36 30 123 4567</strong><br>
-        E-mail: <strong>cegesmail@example.hu</strong>
+        Telefonszám: <strong><a href="tel:+36301234567">+36 30 123 4567</a></strong><br>
+        E-mail: <strong><a href="mailto:cegesmail@example.hu">cegesmail@example.hu</a></strong>
     </div>
 </section>
+
 </main>
 
 <footer>
@@ -331,29 +316,27 @@
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-    (function(){
-        emailjs.init("RJ8KpMBsys6naM2Ii");
-    })();
+(function(){
+    emailjs.init("RJ8KpMBsys6naM2Ii");
+})();
 
-    const form = document.getElementById('contact-form');
-    const formMessage = document.getElementById('form-message');
+const form = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
 
-    form.addEventListener('submit', function(e){
-        e.preventDefault();
+form.addEventListener('submit', function(e){
+    e.preventDefault();
 
-        emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
-        .then(() => {
-            formMessage.style.color = 'green';
-            formMessage.textContent = 'Üzenet elküldve, hamarosan felvesszük a kapcsolatot!';
-            form.reset();
-        }, () => {
-            formMessage.style.color = 'red';
-            formMessage.textContent = 'Hiba történt, kérlek próbáld újra!';
-        });
+    emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
+    .then(() => {
+        formMessage.style.color = 'green';
+        formMessage.textContent = 'Üzenet elküldve, hamarosan felvesszük a kapcsolatot!';
+        form.reset();
+    }, () => {
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Hiba történt, kérlek próbáld újra!';
     });
+});
 </script>
 
 </body>
 </html>
-
-
