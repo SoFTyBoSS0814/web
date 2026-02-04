@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referenciák – M&M Otthonfelújítás</title>
+
+    <style>
+        /* ===== ALAP ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* ===== FEJLÉC ===== */
+        header {
+            background-color: #ff6f3c;
+            color: white;
+            padding: 25px 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== GALÉRIA ===== */
+        .gallery {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(255,255,255,0.3);
+        }
+
+        /* ===== LÁBLÉC ===== */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== FEJLÉC ===== -->
+    <header>
+        <h1>Referenciáink</h1>
+        <p><a href="index.html">← Vissza a főoldalra</a></p>
+    </header>
+
+    <!-- ===== GALÉRIA ===== -->
+    <div class="gallery">
+        <img src="szetyanyaral/b2611639-ed40-4d2d-a086-13f3354bd35f.jpg" alt="Referencia 1">
+        <img src="szetyanyaral/0fea1508-26bd-4f91-9f1c-b9552af80364.jpg" alt="Referencia 2">
+        <img src="szetyanyaral/b0203106-8f90-4fe2-8b96-e980338d7b59.jpg" alt="Referencia 3">
+    </div>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" src="">
+    </div>
+
+    <!-- ===== LÁBLÉC ===== -->
+    <footer>
+        &copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.
+    </footer>
+
+    <!-- ===== SCRIPT ===== -->
+    <script>
+        const images = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>
