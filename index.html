@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gipszkarton Csapat</title>
+    <title><<IDE FOG JÖNNI MAJD A NÉV>></title>
     <style>
         /* --- Alap stílusok --- */
         * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
@@ -118,20 +118,20 @@
             <p id="form-message" style="text-align:center; margin-top:10px;"></p>
         </div>
         <p style="text-align:center; margin-top:20px;">
-            Telefon: +36 30 123 4567 | E-mail: info@gipszkartoncsapat.hu
+            Telefon: +36 30 123 4567 | E-mail: <<MAIL>>
         </p>
     </section>
 
     <!-- Lábléc -->
     <footer>
-        &copy; 2026 Gipszkarton Csapat. Minden jog fenntartva.
+        &copy; 2026 <<IDE FOG JÖNNI MAJD A NÉV>>. Minden jog fenntartva.
     </footer>
 
     <!-- EmailJS script -->
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
-            emailjs.init("YOUR_PUBLIC_KEY"); // <-- ide a Public Key
+            emailjs.init("RJ8KpMBsys6naM2Ii"); // <-- ide a Public Key
         })();
 
         const form = document.getElementById('contact-form');
@@ -140,7 +140,7 @@
         form.addEventListener('submit', function(event) {
             event.preventDefault();
 
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+            emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
             .then(function() {
                 formMessage.style.color = 'green';
                 formMessage.textContent = 'Köszönjük, üzeneted elküldve!';
@@ -155,3 +155,4 @@
 
 </body>
 </html>
+
