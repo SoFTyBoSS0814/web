@@ -300,20 +300,26 @@
 <section id="contact">
     <h2>Kapcsolat</h2>
 
-    <div class="contact-form">
-        <form id="contact-form">
-            <input type="text" name="name" placeholder="Név" required>
-            <input type="email" name="email" placeholder="E-mail" required>
-            <input type="tel" name="phone"
-                placeholder="+36 30/20/70 +7 szám"
-                pattern="(\+36\s?(30|20|70)\s?\d{7}|06(30|20|70)\d{7})"
-                required>
-            <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
-            <button type="submit">Küldés</button>
-        </form>
-        <p id="form-message" style="text-align:center; margin-top:10px;"></p>
-    </div>
-
+    <!-- Kapcsolat (EmailJS) -->
+    <section id="contact">
+        <h2>Kapcsolat</h2>
+        <div class="contact-form">
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="Név" required>
+                <input type="email" name="email" placeholder="E-mail" required>
+                <input type="tel" name="phone" placeholder="+36 30/20/70 +7 karakter, vagy egyben írva." 
+                       pattern="(\+36\s?(30|20|70)\s?\d{7}|06(30|20|70)\d{7})" 
+                       title="Érvényes magyar telefonszám: +36 30/20/70 +7 karakter, vagy egyben írva." 
+                       required>
+                <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
+                <button type="submit">Küldés</button>
+            </form>
+            <p id="form-message" style="text-align:center; margin-top:10px;"></p>
+        </div>
+        <p style="text-align:center; margin-top:20px;">
+            Telefon: +36 30 123 4567 | E-mail: <<MAIL>>
+        </p>
+    </section>
     <div class="contact-info">
         <strong>Elérhetőség:</strong><br><br>
         Telefonszám: <strong>Név: +36 30 123 4567</strong><br>
@@ -352,3 +358,4 @@
 
 </body>
 </html>
+
