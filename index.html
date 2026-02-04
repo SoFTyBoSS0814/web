@@ -111,7 +111,9 @@
             <form id="contact-form">
                 <input type="text" name="name" placeholder="Név" required>
                 <input type="email" name="email" placeholder="E-mail" required>
-                <input type="text" name="phone" placeholder="Telefonszám">
+                <input type="tel" name="phone" placeholder="Telefonszám" 
+       pattern="\+36\s?(30|20|70)\s?\d{7}" 
+       title="Érvényes magyar telefonszám: +36 30/20/70 és 7 számjegy" required>
                 <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
                 <button type="submit">Küldés</button>
             </form>
@@ -155,5 +157,6 @@
 
 </body>
 </html>
+
 
 
