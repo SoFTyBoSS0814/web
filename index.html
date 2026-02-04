@@ -114,6 +114,30 @@
                 <input type="tel" name="phone" placeholder="Telefonszám" 
        pattern="\+36\s?(30|20|70)\s?\d{7}" 
        title="Érvényes magyar telefonszám: +36 30/20/70 és 7 számjegy" required>
+                form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const phone = form.phone.value.trim();
+    // +36 szóköz 30/20/70 szóköz 7 számjegy
+    const phonePattern = /^\+36\s(30|20|70)\s\d{7}$/;
+
+    if (!phonePattern.test(phone)) {
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Kérlek, érvényes magyar telefonszámot adj meg a következő formátumban: +36 30 1234567';
+        return; // ne küldje el az űrlapot
+    }
+
+    emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
+    .then(function() {
+        formMessage.style.color = 'green';
+        formMessage.textContent = 'Köszönjük, üzeneted elküldve!';
+        form.reset();
+    }, function(error) {
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Hiba történt, próbáld újra!';
+        console.log('FAILED...', error);
+    });
+});
                 <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
                 <button type="submit">Küldés</button>
             </form>
@@ -157,6 +181,7 @@
 
 </body>
 </html>
+
 
 
 
