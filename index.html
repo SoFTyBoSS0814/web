@@ -1,68 +1,240 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<title>EmailJS Teszt Inbox</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gipszkarton Csapat</title>
+    <style>
+        /* --- Alap stílusok --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-<!-- EmailJS SDK -->
-<script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+        body {
+            line-height: 1.6;
+            background-color: #f8f8f8;
+            color: #333;
+        }
 
-<script>
-  // Inicializáljuk a Public Key-t
-  emailjs.init("RJ8KpMBsys6naM2Ii"); // A te Public Key-d
+        a {
+            text-decoration: none;
+            color: #333;
+        }
 
-  function kuldesEmail() {
-    const megrendeles = document.getElementById("megrendeles").value.trim();
-    const telefon = document.getElementById("telefon").value.trim();
+        /* --- Fejléc --- */
+        header {
+            background-color: #ff7f50; /* meleg narancs */
+            color: white;
+            padding: 20px 0;
+        }
 
-    console.log("Küldés kezdődik...");
+        header h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
 
-    if (!megrendeles || !telefon) {
-      alert("Minden mezőt ki kell tölteni!");
-      console.log("Hiba: üres mezők");
-      return;
-    }
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
 
-    const templateParams = { megrendeles, telefon };
-    console.log("templateParams:", templateParams);
+        nav a {
+            margin: 0 15px;
+            font-weight: bold;
+            color: white;
+        }
 
-    // 🔹 Küldés teszt Inbox-ra (EmailJS Inbox)
-    emailjs.send("service_clmo87i", "template_hfqpbia", templateParams)
-      .then(function(response) {
-        console.log("✅ Email elküldve!");
-        console.log("Response:", response);
-        alert("Email sikeresen elküldve a teszt Inbox-ra!");
-        document.getElementById("megrendeles").value = "";
-        document.getElementById("telefon").value = "";
-      }, function(error) {
-        console.error("❌ Hiba az email küldésénél:", error);
-        alert("Hiba történt, nézd a konzolt!");
-      });
-  }
-</script>
+        nav a:hover {
+            text-decoration: underline;
+        }
 
-<style>
-  body { font-family: Arial; padding: 20px; }
-  input { width: 300px; padding: 8px; margin-top: 5px; }
-  button { margin-top: 20px; padding: 10px 20px; cursor: pointer; }
-</style>
+        /* --- Szakaszok --- */
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ff7f50;
+        }
+
+        /* --- Főoldal szöveg --- */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background-color: #fff5f0;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        /* --- Szolgáltatások --- */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .service-box {
+            background-color: white;
+            padding: 20px;
+            flex: 1 1 250px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* --- Referenciák / Galéria --- */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .gallery img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        /* --- Kapcsolat --- */
+        .contact-form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        .contact-form button {
+            background-color: #ff7f50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #ff6333;
+        }
+
+        /* --- Lábléc --- */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* --- Reszponzív --- */
+        @media(max-width: 768px){
+            .services {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gallery img {
+                width: 90%;
+                height: auto;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<h2>EmailJS Teszt Inbox</h2>
+    <!-- Fejléc -->
+    <header>
+        <h1>Gipszkarton Csapat</h1>
+        <nav>
+            <a href="#home">Főoldal</a>
+            <a href="#about">Rólunk</a>
+            <a href="#services">Szolgáltatások</a>
+            <a href="#gallery">Referenciák</a>
+            <a href="#contact">Kapcsolat</a>
+        </nav>
+    </header>
 
-<form onsubmit="event.preventDefault(); kuldesEmail();">
-  <label>Megrendelés típusa:</label><br>
-  <input id="megrendeles" type="text" required><br><br>
+    <!-- Főoldal -->
+    <section id="home" class="hero">
+        <h2>Precíz gipszkartonozás és ház körüli munkák</h2>
+        <p>Kétfős csapatunk gyorsan és szakszerűen végzi a kisebb-nagyobb felújítási munkákat Budapesten és környékén.</p>
+    </section>
 
-  <label>Telefonszám:</label><br>
-  <input id="telefon" type="text" required><br><br>
+    <!-- Rólunk -->
+    <section id="about">
+        <h2>Rólunk</h2>
+        <p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
+    </section>
 
-  <button type="submit">Küldés teszt Inbox-ra</button>
-</form>
+    <!-- Szolgáltatások -->
+    <section id="services">
+        <h2>Szolgáltatások</h2>
+        <div class="services">
+            <div class="service-box">
+                <h3>Gipszkartonozás</h3>
+                <p>Falak, álmennyezetek és válaszfalak gyors és precíz kivitelezése.</p>
+            </div>
+            <div class="service-box">
+                <h3>Ház körüli munkák</h3>
+                <p>Kisebb javítások, festés, szerelés és egyéb házkörüli feladatok.</p>
+            </div>
+            <div class="service-box">
+                <h3>Felújítás</h3>
+                <p>Teljes vagy részleges beltéri felújítások szakértelemmel.</p>
+            </div>
+        </div>
+    </section>
 
-<p><em>Ez a verzió csak az EmailJS teszt Inboxra küld működőképesen, böngészőből. Gmail/Outlook címre App Password/OAuth kell.</em></p>
+    <!-- Referenciák / Galéria -->
+    <section id="gallery">
+        <h2>Referenciák</h2>
+        <div class="gallery">
+            <img src="https://via.placeholder.com/300x200.png?text=Referencia+1" alt="Referencia 1">
+            <img src="https://via.placeholder.com/300x200.png?text=Referencia+2" alt="Referencia 2">
+            <img src="https://via.placeholder.com/300x200.png?text=Referencia+3" alt="Referencia 3">
+        </div>
+    </section>
+
+    <!-- Kapcsolat -->
+    <section id="contact">
+        <h2>Kapcsolat</h2>
+        <div class="contact-form">
+            <form action="mailto:email@pelda.hu" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Név" required>
+                <input type="email" name="email" placeholder="E-mail" required>
+                <input type="text" name="phone" placeholder="Telefonszám">
+                <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
+                <button type="submit">Küldés</button>
+            </form>
+        </div>
+        <p style="text-align:center; margin-top:20px;">Telefon: +36 30 123 4567 | E-mail: info@gipszkartoncsapat.hu</p>
+    </section>
+
+    <!-- Lábléc -->
+    <footer>
+        &copy; 2026 Gipszkarton Csapat. Minden jog fenntartva.
+    </footer>
 
 </body>
 </html>
