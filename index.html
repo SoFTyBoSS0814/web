@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M&M Otthonfelújítás</title>
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
+        * { box-sizing: border-box; margin:0; padding:0; font-family: 'Montserrat', Arial, sans-serif; }
         body { line-height:1.6; background-color:#f8f8f8; color:#333; display:flex; flex-direction:column; min-height:100vh; }
-        a { text-decoration:none; color:#333; }
+
+        a { text-decoration:none; color:inherit; transition:0.3s; }
 
         /* ===== FEJLÉC ===== */
         header {
@@ -20,7 +24,7 @@
 
         header h1 {
             text-align:center;
-            font-size:2.5em;
+            font-size:2.8em;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
         }
 
@@ -31,9 +35,8 @@
 
         nav a {
             margin: 0 15px;
-            font-weight:bold;
+            font-weight:600;
             color:white;
-            transition: 0.3s;
         }
 
         nav a:hover {
@@ -41,10 +44,8 @@
             color: #fff9f0;
         }
 
-        /* ===== SZAKASZOK ===== */
-        main {
-            flex: 1;
-        }
+        /* ===== MAIN ===== */
+        main { flex:1; }
 
         section {
             padding: 60px 20px;
@@ -55,8 +56,6 @@
         h2 {
             text-align:center;
             margin-bottom:40px;
-            color:#fff;
-            background: linear-gradient(135deg, rgba(255,111,60,0.9), rgba(255,166,121,0.9));
             display:inline-block;
             padding: 12px 25px;
             border-radius: 10px;
@@ -67,9 +66,20 @@
         .hero {
             text-align:center;
             padding:100px 20px;
-            background-color:#fff5f0;
-            border-radius:10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(120deg, #fff5f0, #ffe8d6);
+            border-radius:15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom:50px;
+        }
+
+        .hero h2 {
+            font-size:3em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6f3c, #ffae79);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            margin-bottom:20px;
         }
 
         .hero p {
@@ -82,15 +92,29 @@
             margin-top:30px;
             background:#ff6f3c;
             color:white;
-            padding:15px 30px;
-            border-radius:8px;
-            font-weight:bold;
+            padding:15px 35px;
+            border-radius:10px;
+            font-weight:700;
+            box-shadow:0 5px 15px rgba(255,111,60,0.3);
             transition:0.3s;
         }
 
         .hero a:hover {
             background:#ff3f0c;
             transform: scale(1.05);
+        }
+
+        /* ===== ABOUT ===== */
+        #about {
+            background: rgba(255, 111, 60, 0.1);
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
+            color: #4a2a00;
+            max-width: 900px;
+            margin: 20px auto 0 auto;
+            font-weight: 600;
+            line-height: 1.6;
         }
 
         /* ===== SZOLGÁLTATÁSOK ===== */
@@ -103,27 +127,42 @@
 
         .service-box {
             background-color:#fff2e6;
-            padding:20px;
+            padding:25px 20px;
             flex:1 1 250px;
-            border-radius:10px;
-            box-shadow:0 4px 15px rgba(0,0,0,0.15);
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
             text-align:center;
             transition: 0.3s;
         }
 
+        .service-box h3 {
+            color:#ff6f3c;
+            margin-bottom:10px;
+            transition: color 0.3s;
+        }
+
+        .service-box p {
+            font-weight:500;
+            color:#4a2a00;
+        }
+
         .service-box:hover {
-            transform: translateY(-5px);
-            box-shadow:0 8px 25px rgba(0,0,0,0.3);
+            transform: translateY(-8px);
+            box-shadow:0 12px 30px rgba(0,0,0,0.3);
             background: linear-gradient(135deg, rgba(255,111,60,0.85), rgba(255,200,150,0.85));
+        }
+
+        .service-box:hover h3 {
+            color:white;
         }
 
         /* ===== KAPCSOLAT ===== */
         .contact-form {
             max-width:600px;
             margin:auto;
-            background: rgba(255, 111, 60, 0.1);
+            background: rgba(255, 111, 60, 0.08);
             padding: 25px 20px;
-            border-radius: 12px;
+            border-radius: 15px;
             box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
         }
 
@@ -132,19 +171,29 @@
             width:100%;
             padding:12px;
             margin-bottom:15px;
-            border-radius:5px;
-            border:1px solid #ccc;
+            border-radius:8px;
+            border:1px solid #ff6f3c;
             font-size:1em;
+            transition:0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color:#ff3f0c;
+            box-shadow:0 0 8px rgba(255,111,60,0.5);
+            outline:none;
         }
 
         .contact-form button {
             background-color:#ff6f3c;
             color:white;
             border:none;
-            padding:15px 30px;
+            padding:15px 35px;
             font-size:1em;
-            border-radius:5px;
+            border-radius:8px;
             cursor:pointer;
+            font-weight:700;
+            box-shadow:0 5px 15px rgba(255,111,60,0.3);
             transition:0.3s;
         }
 
@@ -158,9 +207,9 @@
             text-align:center;
             margin-top:30px;
             line-height:1.8;
-            background: rgba(255, 111, 60, 0.1);
+            background: rgba(255, 111, 60, 0.08);
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 15px;
             box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
             max-width:600px;
             margin-left:auto;
@@ -190,18 +239,6 @@
             }
         }
 
-        /* ===== DISZKRÉT HÁTTÉR RÓLUNK ===== */
-        #about {
-            background: rgba(255, 111, 60, 0.1);
-            padding: 25px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-            color: #4a2a00;
-            max-width: 900px;
-            margin: 20px auto 0 auto;
-            font-weight: 600;
-            line-height: 1.5;
-        }
     </style>
 </head>
 
@@ -219,86 +256,80 @@
 </header>
 
 <main>
-<section id="home" class="hero">
-    <h2>Precíz munkavégzés és ház körüli munkák</h2>
-    <p>
-        Kétfős csapatunk gyorsan és szakszerűen végzi a kisebb-nagyobb
-        felújítási munkákat Bács-Kiskun megyében és 100 km-es körzetében.
-    </p>
-    <a href="referenciak.html">Referenciák megtekintése</a>
-</section>
 
-<section id="about">
-    <h2>Rólunk</h2>
-    <p>
-        Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással,
-        beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak.
-        Munkánkra a precizitás és a megbízhatóság jellemző.
-    </p>
-</section>
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <h2>Precíz munkavégzés és ház körüli munkák</h2>
+        <p>Kétfős csapatunk gyorsan és szakszerűen végzi a kisebb-nagyobb felújítási munkákat Bács-Kiskun megyében és 100 km-es körzetében.</p>
+        <a href="referenciak.html">Referenciák megtekintése</a>
+    </section>
 
-<section id="services">
-    <h2>Szolgáltatások</h2>
-    <div class="services">
-        <div class="service-box">
-            <h3>Gipszkartonozás</h3>
-            <p>Falak, álmennyezetek és válaszfalak precíz kivitelezése.</p>
-        </div>
-        <div class="service-box">
-            <h3>Festések</h3>
-            <p>Beltéri és kültéri festés minőségi anyagokkal.</p>
-        </div>
-        <div class="service-box">
-            <h3>Tető felújítás</h3>
-            <p>Javítás, szigetelés és korszerűsítés.</p>
-        </div>
-        <div class="service-box">
-            <h3>Hálózások</h3>
-            <p>Villamos és egyéb hálózatok kiépítése.</p>
-        </div>
-        <div class="service-box">
-            <h3>Burkolások</h3>
-            <p>Padló- és falburkolatok profi kivitelezése.</p>
-        </div>
-        <div class="service-box">
-            <h3>Vakolások</h3>
-            <p>Sima, esztétikus és tartós felületek.</p>
-        </div>
+    <!-- ABOUT -->
+    <section id="about">
+        <h2>Rólunk</h2>
+        <p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
+    </section>
 
-        <div class="service-box">
-            <h3>Munkák utáni takarítás</h3>
-            <p>Felújítás utáni alapos takarítás, por- és törmelékmentesítés.</p>
+    <!-- SZOLGÁLTATÁSOK -->
+    <section id="services">
+        <h2>Szolgáltatások</h2>
+        <div class="services">
+            <div class="service-box">
+                <h3>Gipszkartonozás</h3>
+                <p>Falak, álmennyezetek és válaszfalak precíz kivitelezése.</p>
+            </div>
+            <div class="service-box">
+                <h3>Festések</h3>
+                <p>Beltéri és kültéri festés minőségi anyagokkal.</p>
+            </div>
+            <div class="service-box">
+                <h3>Tető felújítás</h3>
+                <p>Javítás, szigetelés és korszerűsítés.</p>
+            </div>
+            <div class="service-box">
+                <h3>Hálózások</h3>
+                <p>Villamos és egyéb hálózatok kiépítése.</p>
+            </div>
+            <div class="service-box">
+                <h3>Burkolások</h3>
+                <p>Padló- és falburkolatok profi kivitelezése.</p>
+            </div>
+            <div class="service-box">
+                <h3>Vakolások</h3>
+                <p>Sima, esztétikus és tartós felületek.</p>
+            </div>
+            <div class="service-box">
+                <h3>Munkák utáni takarítás</h3>
+                <p>Felújítás utáni alapos takarítás, por- és törmelékmentesítés.</p>
+            </div>
+            <div class="service-box">
+                <h3>Udvar és porta takarítás</h3>
+                <p>Udvarok, porták rendbetétele, lomtalanítás és tiszta környezet.</p>
+            </div>
+            <div class="service-box">
+                <h3>Kaszálás</h3>
+                <p>Fűnyírás, bozótirtás, elhanyagolt területek karbantartása.</p>
+            </div>
+            <div class="service-box">
+                <h3>Tető széldeszkázás</h3>
+                <p>Tetők szélének esztétikus és tartós kialakítása, időjárásálló anyagokkal.</p>
+            </div>
+            <div class="service-box">
+                <h3>Oromlemez felhelyezése</h3>
+                <p>Oromfalak védelme és lezárása lemezborítással, szakszerű rögzítéssel.</p>
+            </div>
+            <div class="service-box">
+                <h3>Kémények felújítása</h3>
+                <p>Kémények javítása, vakolása és bádogozása, beázás elleni védelemmel.</p>
+            </div>
+            <div class="service-box">
+                <h3>Nyílászárók teljeskörű cseréje</h3>
+                <p>Régi vagy hibás ajtó- és ablakzárak cseréje, biztonságos kivitelezéssel.</p>
+            </div>
         </div>
-        <div class="service-box">
-            <h3>Udvar és porta takarítás</h3>
-            <p>Udvarok, porták rendbetétele, lomtalanítás és tiszta környezet.</p>
-        </div>
-        <div class="service-box">
-            <h3>Kaszálás</h3>
-            <p>Fűnyírás, bozótirtás, elhanyagolt területek karbantartása.</p>
-        </div>
+    </section>
 
-        <div class="service-box">
-            <h3>Tető széldeszkázás</h3>
-            <p>Tetők szélének esztétikus és tartós kialakítása, időjárásálló anyagokkal, pontos illesztésekkel.</p>
-        </div>
-        <div class="service-box">
-            <h3>Oromlemez felhelyezése</h3>
-            <p>Oromfalak védelme és lezárása lemezborítással, szakszerű rögzítéssel a hosszú élettartam érdekében.</p>
-        </div>
-        <div class="service-box">
-            <h3>Kémények felújítása</h3>
-            <p>Kémények javítása, vakolása és bádogozása, beázás elleni védelemmel és esztétikus kivitelezéssel.</p>
-        </div>
-        <div class="service-box">
-            <h3>Nyílászárók teljeskörű cseréje</h3>
-            <p>Régi vagy hibás ajtó- és ablakzárak cseréje, biztonságos és precíz kivitelezéssel, minden típushoz.</p>
-        </div>
-    </div>
-</section>
-    
-
-    <!-- Kapcsolat (EmailJS) -->
+    <!-- KAPCSOLAT -->
     <section id="contact">
         <h2>Kapcsolatfelvétel/Árajánlatkérés</h2>
         <div class="contact-form">
@@ -314,16 +345,14 @@
             </form>
             <p id="form-message" style="text-align:center; margin-top:10px;"></p>
         </div>
-        <p style="text-align:center; margin-top:20px;">
-        </p>
+        <div class="contact-info">
+            <strong>Elérhetőség:</strong><br><br>
+            Telefonszám: <strong>Ferenc: +36 20 626 0128</strong><br>
+            Telefonszám: <strong>Mónika: +36 30 261 5676</strong><br>
+            E-mail: <strong>mmotthonfelujitas@outlook.hu</strong>
+        </div>
     </section>
-    <div class="contact-info">
-        <strong>Elérhetőség:</strong><br><br>
-        Telefonszám: <strong>Ferenc: +36 20 626 0128</strong><br>
-        Telefonszám: <strong>Mónika: +36 30 261 5676</strong><br>
-        E-mail: <strong>mmotthonfelujitas@outlook.hu</strong>
-    </div>
-</section>
+
 </main>
 
 <footer>
@@ -356,8 +385,3 @@
 
 </body>
 </html>
-
-
-
-
-
