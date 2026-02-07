@@ -203,12 +203,9 @@
             line-height: 1.5;
         }
 
-        /* ===== Villogó üzenet ===== */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .blinking { animation: blink 0.5s infinite; }
+        /* ===== ÜZENET TIPUSOK ===== */
+        #form-message.success { color: green; font-weight: bold; }
+        #form-message.error { color: red; font-weight: bold; }
     </style>
 </head>
 
@@ -337,38 +334,56 @@
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-    (function(){
-        emailjs.init("RJ8KpMBsys6naM2Ii");
-    })();
+emailjs.init("RJ8KpMBsys6naM2Ii");
 
-    const form = document.getElementById('contact-form');
-    const formMessage = document.getElementById('form-message');
+const form = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
 
-    form.addEventListener('submit', function(e){
-        e.preventDefault();
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = this.querySelector('button');
+    btn.disabled = true; 
+    btn.textContent = "Küldés...";
 
-        emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
-        .then(() => {
-            formMessage.style.color = 'green';
-            formMessage.textContent = '✅ Üzenet elküldve, hamarosan felvesszük a kapcsolatot!';
-            formMessage.classList.add('blinking');
-            form.reset();
-
-            setTimeout(() => {
-                formMessage.textContent = '';
-                formMessage.classList.remove('blinking');
-            }, 5000);
-        }, () => {
-            formMessage.style.color = 'red';
-            formMessage.textContent = '❌ Hiba történt, kérlek próbáld újra!';
-            formMessage.classList.add('blinking');
-
-            setTimeout(() => {
-                formMessage.textContent = '';
-                formMessage.classList.remove('blinking');
-            }, 5000);
-        });
+    emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
+    .then(() => {
+        showMessage("✅ Üzenet elküldve! Hamarosan felvesszük a kapcsolatot.", "success");
+        confetti();
+        form.reset();
+    }, () => {
+        showMessage("❌ Hiba történt, kérlek próbáld újra!", "error");
+    })
+    .finally(() => {
+        btn.disabled = false;
+        btn.textContent = "Küldés";
     });
+});
+
+function showMessage(msg, type) {
+    formMessage.textContent = msg;
+    formMessage.className = type;
+    setTimeout(() => { formMessage.textContent = ""; formMessage.className = ""; }, 5000);
+}
+
+// Egyszerű konfetti effekt
+function confetti() {
+    for(let i=0;i<100;i++){
+        let c = document.createElement('div');
+        c.style.position = 'fixed';
+        c.style.width = '6px';
+        c.style.height = '6px';
+        c.style.backgroundColor = ['#ff6f3c','#ffb07c','#ffdfc1'][Math.floor(Math.random()*3)];
+        c.style.left = Math.random()*window.innerWidth+'px';
+        c.style.top = Math.random()*window.innerHeight+'px';
+        c.style.borderRadius = '50%';
+        c.style.opacity = '0.8';
+        c.style.transform = 'translateY(0)';
+        c.style.transition = 'all 1s linear';
+        document.body.appendChild(c);
+        setTimeout(()=>{c.style.transform='translateY(100vh)'; c.style.opacity='0';},50);
+        setTimeout(()=>{c.remove();},1050);
+    }
+}
 </script>
 
 </body>
