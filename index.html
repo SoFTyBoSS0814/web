@@ -347,7 +347,7 @@ form.addEventListener('submit', function(e){
 
     emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
     .then(() => {
-        showMessage("✅ Üzenet elküldve! Szakembereink hamarosan felvesszük a kapcsolatot veled emailben/telefonon.", "success");
+        showMessage("✅ Üzenet elküldve! Szakembereink hamarosan felveszik a kapcsolatot veled emailben/telefonon.", "success");
         confetti();
         form.reset();
     }, () => {
@@ -388,4 +388,5 @@ function confetti() {
 
 </body>
 </html>
+
 
