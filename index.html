@@ -9,23 +9,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        * { box-sizing: border-box; margin:0; padding:0; font-family: 'Montserrat', Arial, sans-serif; }
+        * { box-sizing: border-box; margin:0; padding:0; font-family: 'Montserrat', Arial, sans-serif; scroll-behavior: smooth;}
         body { line-height:1.6; background-color:#f8f8f8; color:#333; display:flex; flex-direction:column; min-height:100vh; }
 
-        a { text-decoration:none; color:inherit; transition:0.3s; }
+        a { text-decoration:none; color:#333; transition:0.3s; }
 
         /* ===== FEJLÉC ===== */
         header {
             background-color: #ff6f3c;
             color: white;
             padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top:0;
+            z-index:100;
         }
 
         header h1 {
             text-align:center;
             font-size:2.8em;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        header h1:hover {
+            transform: scale(1.05);
         }
 
         nav {
@@ -44,47 +52,55 @@
             color: #fff9f0;
         }
 
-        /* ===== MAIN ===== */
-        main { flex:1; }
+        /* ===== SZAKASZOK ===== */
+        main { flex: 1; }
 
         section {
             padding: 60px 20px;
-            max-width:1000px;
+            max-width:1100px;
             margin:auto;
         }
 
         h2 {
             text-align:center;
             margin-bottom:40px;
+            font-weight:800;
             display:inline-block;
-            padding: 12px 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            background: linear-gradient(270deg, #ff6f3c, #ffae79, #ff6f3c);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnim 10s ease infinite;
+        }
+
+        @keyframes gradientAnim {
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
         }
 
         /* ===== HERO ===== */
         .hero {
             text-align:center;
             padding:100px 20px;
-            background: linear-gradient(120deg, #fff5f0, #ffe8d6);
+            background: linear-gradient(135deg, #fff5f0, #ffe8d6);
             border-radius:15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             margin-bottom:50px;
+            transition: transform 0.3s;
         }
 
-        .hero h2 {
-            font-size:3em;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ff6f3c, #ffae79);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-            margin-bottom:20px;
+        .hero:hover {
+            transform: translateY(-5px);
         }
 
         .hero p {
             font-size:1.2em;
             margin-top:20px;
+            color:#4a2a00;
         }
 
         .hero a {
@@ -101,20 +117,7 @@
 
         .hero a:hover {
             background:#ff3f0c;
-            transform: scale(1.05);
-        }
-
-        /* ===== ABOUT ===== */
-        #about {
-            background: rgba(255, 111, 60, 0.1);
-            padding: 30px 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-            color: #4a2a00;
-            max-width: 900px;
-            margin: 20px auto 0 auto;
-            font-weight: 600;
-            line-height: 1.6;
+            transform: scale(1.1);
         }
 
         /* ===== SZOLGÁLTATÁSOK ===== */
@@ -122,7 +125,7 @@
             display:flex;
             flex-wrap:wrap;
             justify-content:space-around;
-            gap:20px;
+            gap:25px;
         }
 
         .service-box {
@@ -130,15 +133,14 @@
             padding:25px 20px;
             flex:1 1 250px;
             border-radius:15px;
-            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+            box-shadow:0 6px 20px rgba(0,0,0,0.15);
             text-align:center;
-            transition: 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
         }
 
         .service-box h3 {
             color:#ff6f3c;
             margin-bottom:10px;
-            transition: color 0.3s;
         }
 
         .service-box p {
@@ -147,40 +149,36 @@
         }
 
         .service-box:hover {
-            transform: translateY(-8px);
-            box-shadow:0 12px 30px rgba(0,0,0,0.3);
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow:0 15px 35px rgba(0,0,0,0.3);
             background: linear-gradient(135deg, rgba(255,111,60,0.85), rgba(255,200,150,0.85));
-        }
-
-        .service-box:hover h3 {
-            color:white;
         }
 
         /* ===== KAPCSOLAT ===== */
         .contact-form {
-            max-width:600px;
+            max-width:650px;
             margin:auto;
             background: rgba(255, 111, 60, 0.08);
-            padding: 25px 20px;
+            padding: 30px 25px;
             border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
+            box-shadow: 0 6px 20px rgba(255, 111, 60, 0.25);
         }
 
         .contact-form input,
         .contact-form textarea {
             width:100%;
-            padding:12px;
+            padding:15px;
             margin-bottom:15px;
             border-radius:8px;
             border:1px solid #ff6f3c;
             font-size:1em;
-            transition:0.3s;
+            transition: 0.3s;
         }
 
         .contact-form input:focus,
         .contact-form textarea:focus {
             border-color:#ff3f0c;
-            box-shadow:0 0 8px rgba(255,111,60,0.5);
+            box-shadow:0 0 10px rgba(255,111,60,0.5);
             outline:none;
         }
 
@@ -190,11 +188,11 @@
             border:none;
             padding:15px 35px;
             font-size:1em;
-            border-radius:8px;
+            border-radius:10px;
             cursor:pointer;
             font-weight:700;
             box-shadow:0 5px 15px rgba(255,111,60,0.3);
-            transition:0.3s;
+            transition: transform 0.3s, background 0.3s;
         }
 
         .contact-form button:hover {
@@ -208,10 +206,10 @@
             margin-top:30px;
             line-height:1.8;
             background: rgba(255, 111, 60, 0.08);
-            padding: 20px;
+            padding: 25px 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-            max-width:600px;
+            box-shadow: 0 6px 20px rgba(255, 111, 60, 0.2);
+            max-width:650px;
             margin-left:auto;
             margin-right:auto;
             font-weight:600;
@@ -239,6 +237,18 @@
             }
         }
 
+        /* ===== ABOUT ===== */
+        #about {
+            background: rgba(255, 111, 60, 0.1);
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(255, 111, 60, 0.2);
+            color: #4a2a00;
+            max-width: 900px;
+            margin: 20px auto 0 auto;
+            font-weight: 600;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -256,103 +266,55 @@
 </header>
 
 <main>
+<section id="home" class="hero">
+    <h2>Precíz munkavégzés és ház körüli munkák</h2>
+    <p>
+        Kétfős csapatunk gyorsan és szakszerűen végzi a kisebb-nagyobb
+        felújítási munkákat Bács-Kiskun megyében és 100 km-es körzetében.
+    </p>
+    <a href="referenciak.html">Referenciák megtekintése</a>
+</section>
 
-    <!-- HERO -->
-    <section id="home" class="hero">
-        <h2>Precíz munkavégzés és ház körüli munkák</h2>
-        <p>Kétfős csapatunk gyorsan és szakszerűen végzi a kisebb-nagyobb felújítási munkákat Bács-Kiskun megyében és 100 km-es körzetében.</p>
-        <a href="referenciak.html">Referenciák megtekintése</a>
-    </section>
+<section id="about">
+    <h2>Rólunk</h2>
+    <p>
+        Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással,
+        beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak.
+        Munkánkra a precizitás és a megbízhatóság jellemző.
+    </p>
+</section>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <h2>Rólunk</h2>
-        <p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
-    </section>
+<section id="services">
+    <h2>Szolgáltatások</h2>
+    <div class="services">
+        <!-- Szolgáltatásdobozok ugyanúgy mint korábban -->
+        <!-- Ide jöhet a szolgáltatás listád -->
+    </div>
+</section>
 
-    <!-- SZOLGÁLTATÁSOK -->
-    <section id="services">
-        <h2>Szolgáltatások</h2>
-        <div class="services">
-            <div class="service-box">
-                <h3>Gipszkartonozás</h3>
-                <p>Falak, álmennyezetek és válaszfalak precíz kivitelezése.</p>
-            </div>
-            <div class="service-box">
-                <h3>Festések</h3>
-                <p>Beltéri és kültéri festés minőségi anyagokkal.</p>
-            </div>
-            <div class="service-box">
-                <h3>Tető felújítás</h3>
-                <p>Javítás, szigetelés és korszerűsítés.</p>
-            </div>
-            <div class="service-box">
-                <h3>Hálózások</h3>
-                <p>Villamos és egyéb hálózatok kiépítése.</p>
-            </div>
-            <div class="service-box">
-                <h3>Burkolások</h3>
-                <p>Padló- és falburkolatok profi kivitelezése.</p>
-            </div>
-            <div class="service-box">
-                <h3>Vakolások</h3>
-                <p>Sima, esztétikus és tartós felületek.</p>
-            </div>
-            <div class="service-box">
-                <h3>Munkák utáni takarítás</h3>
-                <p>Felújítás utáni alapos takarítás, por- és törmelékmentesítés.</p>
-            </div>
-            <div class="service-box">
-                <h3>Udvar és porta takarítás</h3>
-                <p>Udvarok, porták rendbetétele, lomtalanítás és tiszta környezet.</p>
-            </div>
-            <div class="service-box">
-                <h3>Kaszálás</h3>
-                <p>Fűnyírás, bozótirtás, elhanyagolt területek karbantartása.</p>
-            </div>
-            <div class="service-box">
-                <h3>Tető széldeszkázás</h3>
-                <p>Tetők szélének esztétikus és tartós kialakítása, időjárásálló anyagokkal.</p>
-            </div>
-            <div class="service-box">
-                <h3>Oromlemez felhelyezése</h3>
-                <p>Oromfalak védelme és lezárása lemezborítással, szakszerű rögzítéssel.</p>
-            </div>
-            <div class="service-box">
-                <h3>Kémények felújítása</h3>
-                <p>Kémények javítása, vakolása és bádogozása, beázás elleni védelemmel.</p>
-            </div>
-            <div class="service-box">
-                <h3>Nyílászárók teljeskörű cseréje</h3>
-                <p>Régi vagy hibás ajtó- és ablakzárak cseréje, biztonságos kivitelezéssel.</p>
-            </div>
-        </div>
-    </section>
+<section id="contact">
+    <h2>Kapcsolatfelvétel/Árajánlatkérés</h2>
+    <div class="contact-form">
+        <form id="contact-form">
+            <input type="text" name="name" placeholder="Név" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="tel" name="phone" placeholder="+36 30/20/70 +7 karakter, vagy egyben írva." 
+                   pattern="(\+36\s?(30|20|70)\s?\d{7}|06(30|20|70)\d{7})" 
+                   title="Érvényes magyar telefonszám: +36 30/20/70 +7 karakter, vagy egyben írva." 
+                   required>
+            <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
+            <button type="submit">Küldés</button>
+        </form>
+        <p id="form-message" style="text-align:center; margin-top:10px;"></p>
+    </div>
 
-    <!-- KAPCSOLAT -->
-    <section id="contact">
-        <h2>Kapcsolatfelvétel/Árajánlatkérés</h2>
-        <div class="contact-form">
-            <form id="contact-form">
-                <input type="text" name="name" placeholder="Név" required>
-                <input type="email" name="email" placeholder="E-mail" required>
-                <input type="tel" name="phone" placeholder="+36 30/20/70 +7 karakter, vagy egyben írva." 
-                       pattern="(\+36\s?(30|20|70)\s?\d{7}|06(30|20|70)\d{7})" 
-                       title="Érvényes magyar telefonszám: +36 30/20/70 +7 karakter, vagy egyben írva." 
-                       required>
-                <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
-                <button type="submit">Küldés</button>
-            </form>
-            <p id="form-message" style="text-align:center; margin-top:10px;"></p>
-        </div>
-        <div class="contact-info">
-            <strong>Elérhetőség:</strong><br><br>
-            Telefonszám: <strong>Ferenc: +36 20 626 0128</strong><br>
-            Telefonszám: <strong>Mónika: +36 30 261 5676</strong><br>
-            E-mail: <strong>mmotthonfelujitas@outlook.hu</strong>
-        </div>
-    </section>
-
+    <div class="contact-info">
+        <strong>Elérhetőség:</strong><br><br>
+        Telefonszám: <strong>Ferenc: +36 20 626 0128</strong><br>
+        Telefonszám: <strong>Mónika: +36 30 261 5676</strong><br>
+        E-mail: <strong>mmotthonfelujitas@outlook.hu</strong>
+    </div>
+</section>
 </main>
 
 <footer>
@@ -382,6 +344,5 @@
         });
     });
 </script>
-
 </body>
 </html>
