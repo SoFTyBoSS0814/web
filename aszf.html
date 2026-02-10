@@ -16,13 +16,40 @@
         a:hover { text-decoration:underline; }
         footer { background-color:#222; color:white; text-align:center; padding:20px 0; margin-top:40px; }
         .container { max-width:900px; margin:auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+
+        /* Vissza gomb stílus */
+        .back-link {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .back-link a {
+            display: inline-block;
+            background-color: #ff6f3c;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-link a:hover {
+            background-color: #e85f2f;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+
     <h1>Általános Szerződési Feltételek (ÁSZF)</h1>
-    <p><a href="index.html">← Vissza a főoldalra</a></p>
+
+    <!-- Vissza a főoldalra – középen, a cím alatt -->
+    <div class="back-link">
+        <a href="index.html">← Vissza a főoldalra</a>
+    </div>
+
     <p>Ez az oldal tartalmazza a M&M Otthonfelújítás szolgáltatásaira vonatkozó általános szerződési feltételeket. Kérjük, figyelmesen olvassa el az alábbiakat a szolgáltatás igénybevétele előtt.</p>
 
     <h2>1. Szolgáltatások</h2>
@@ -61,9 +88,8 @@
         <br>
         <a href="index.html">Főoldal</a> | <a href="gdpr.html">GDPR tájékoztató</a>
     </footer>
+
 </div>
 
 </body>
 </html>
-
-
