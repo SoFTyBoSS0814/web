@@ -6,7 +6,6 @@
     <title>Referenciák – M&M Otthonfelújítás</title>
 
     <style>
-        /* ===== ALAP ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -25,7 +24,6 @@
             font-weight: bold;
         }
 
-        /* ===== FEJLÉC ===== */
         header {
             background-color: #ff6f3c;
             color: white;
@@ -39,11 +37,6 @@
             margin-bottom: 10px;
         }
 
-        header a:hover {
-            text-decoration: underline;
-        }
-
-        /* ===== ÉV VÁLASZTÓ ===== */
         .years {
             text-align: center;
             margin: 40px 0;
@@ -64,10 +57,28 @@
             background: #e85c2a;
         }
 
-        /* ===== GALÉRIA / ÉV FELIRAT ===== */
-        .gallery {
+        .gallery-wrapper {
+            position: relative;
             max-width: 1200px;
             margin: 0 auto 60px;
+        }
+
+        .year-background {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10em;
+            font-weight: bold;
+            color: rgba(0,0,0,0.05);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .gallery {
+            position: relative;
+            z-index: 2;
             padding: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -87,16 +98,14 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.35);
         }
 
-        .year-placeholder {
-            grid-column: 1 / -1;
-            text-align: center;
+        .year-front {
             font-size: 6em;
             font-weight: bold;
             color: #ddd;
-            padding: 120px 0;
+            padding: 140px 0;
+            text-align: center;
         }
 
-        /* ===== LIGHTBOX ===== */
         .lightbox {
             display: none;
             position: fixed;
@@ -111,10 +120,8 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
-            box-shadow: 0 0 40px rgba(255,255,255,0.3);
         }
 
-        /* ===== LÁBLÉC ===== */
         footer {
             background-color: #222;
             color: white;
@@ -123,13 +130,16 @@
             font-size: 0.9em;
         }
 
-        /* ===== MOBIL ===== */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2em;
             }
 
-            .year-placeholder {
+            .year-background {
+                font-size: 5em;
+            }
+
+            .year-front {
                 font-size: 4em;
             }
         }
@@ -138,94 +148,82 @@
 
 <body>
 
-    <!-- ===== FEJLÉC ===== -->
-    <header>
-        <h1>Referenciáink</h1>
-        <p><a href="index.html">← Vissza a főoldalra</a></p>
-    </header>
+<header>
+    <h1>Referenciáink</h1>
+    <p><a href="index.html">← Vissza a főoldalra</a></p>
+</header>
 
-    <!-- ===== ÉV VÁLASZTÓ ===== -->
-    <div class="years">
-        <button class="active" data-year="2025">2025</button>
-        <button data-year="2026">2026</button>
-    </div>
+<div class="years">
+    <button class="active" data-year="2025">2025</button>
+    <button data-year="2026">2026</button>
+</div>
 
-    <!-- ===== GALÉRIA ===== -->
+<div class="gallery-wrapper">
+    <div class="year-background" id="yearBackground"></div>
     <div class="gallery" id="gallery"></div>
+</div>
 
-    <!-- ===== LIGHTBOX ===== -->
-    <div class="lightbox" id="lightbox">
-        <img id="lightbox-img" src="">
-    </div>
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="">
+</div>
 
-    <!-- ===== LÁBLÉC ===== -->
-    <footer>
-        &copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.
-    </footer>
+<footer>
+    &copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.
+</footer>
 
-    <!-- ===== SCRIPT ===== -->
-    <script>
-        const data = {
-            2025: {
-                images: [
-                    "kepek/ref1.jpg",
-                    "kepek/ref2.jpg",
-                    "kepek/ref3.jpg",
-                    "kepek/ref4.jpg"
-                ]
-            },
-            2026: {
-                images: [
-                "kepek/ref1.jpg",
-                "kepek/ref2.jpg"
-                ]
-            }
-        };
+<script>
+    const data = {
+        2025: [
+            "kepek/ref1.jpg",
+            "kepek/ref2.jpg",
+            "kepek/ref3.jpg",
+            "kepek/ref4.jpg"
+        ],
+        2026: []
+    };
 
-        const gallery = document.getElementById("gallery");
-        const buttons = document.querySelectorAll(".years button");
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImg = document.getElementById("lightbox-img");
+    const gallery = document.getElementById("gallery");
+    const yearBg = document.getElementById("yearBackground");
+    const buttons = document.querySelectorAll(".years button");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
 
-        function loadYear(year) {
-            gallery.innerHTML = "";
+    function loadYear(year) {
+        gallery.innerHTML = "";
+        yearBg.textContent = "";
 
-            if (data[year].images.length === 0) {
-                const placeholder = document.createElement("div");
-                placeholder.className = "year-placeholder";
-                placeholder.textContent = year;
-                gallery.appendChild(placeholder);
-                return;
-            }
-
-            data[year].images.forEach(src => {
-                const img = document.createElement("img");
-                img.src = src;
-                img.addEventListener("click", () => {
-                    lightbox.style.display = "flex";
-                    lightboxImg.src = src;
-                });
-                gallery.appendChild(img);
-            });
+        if (data[year].length === 0) {
+            gallery.innerHTML = `<div class="year-front">${year}</div>`;
+            return;
         }
 
-        buttons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                buttons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                loadYear(btn.dataset.year);
-            });
-        });
+        yearBg.textContent = year;
 
-        loadYear(2025);
-
-        lightbox.addEventListener("click", () => {
-            lightbox.style.display = "none";
+        data[year].forEach(src => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.onclick = () => {
+                lightbox.style.display = "flex";
+                lightboxImg.src = src;
+            };
+            gallery.appendChild(img);
         });
-    </script>
+    }
+
+    buttons.forEach(btn => {
+        btn.onclick = () => {
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            loadYear(btn.dataset.year);
+        };
+    });
+
+    loadYear(2025);
+
+    lightbox.onclick = () => {
+        lightbox.style.display = "none";
+    };
+</script>
 
 </body>
 </html>
-
-
-
