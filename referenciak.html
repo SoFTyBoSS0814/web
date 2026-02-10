@@ -46,17 +46,17 @@
         /* ===== ÉV VÁLASZTÓ ===== */
         .years {
             text-align: center;
-            margin: 40px 0 20px;
+            margin: 40px 0;
         }
 
         .years button {
             background: #ff6f3c;
             border: none;
             color: white;
-            padding: 12px 20px;
-            margin: 5px;
-            border-radius: 25px;
-            font-size: 1em;
+            padding: 14px 28px;
+            margin: 10px;
+            border-radius: 30px;
+            font-size: 1.2em;
             cursor: pointer;
         }
 
@@ -64,20 +64,10 @@
             background: #e85c2a;
         }
 
-        /* ===== TÖRTÉNET ===== */
-        .story {
-            max-width: 900px;
-            margin: 0 auto 30px;
-            padding: 0 20px;
-            font-size: 1.1em;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        /* ===== GALÉRIA ===== */
+        /* ===== GALÉRIA / ÉV FELIRAT ===== */
         .gallery {
             max-width: 1200px;
-            margin: 0 auto 50px;
+            margin: 0 auto 60px;
             padding: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -95,6 +85,15 @@
         .gallery img:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+        }
+
+        .year-placeholder {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 6em;
+            font-weight: bold;
+            color: #ddd;
+            padding: 120px 0;
         }
 
         /* ===== LIGHTBOX ===== */
@@ -129,6 +128,10 @@
             header h1 {
                 font-size: 2em;
             }
+
+            .year-placeholder {
+                font-size: 4em;
+            }
         }
     </style>
 </head>
@@ -144,12 +147,8 @@
     <!-- ===== ÉV VÁLASZTÓ ===== -->
     <div class="years">
         <button class="active" data-year="2025">2025</button>
-        <button data-year="2024">2024</button>
-        <button data-year="2023">2023</button>
+        <button data-year="2026">2026</button>
     </div>
-
-    <!-- ===== TÖRTÉNET ===== -->
-    <div class="story" id="story"></div>
 
     <!-- ===== GALÉRIA ===== -->
     <div class="gallery" id="gallery"></div>
@@ -168,35 +167,33 @@
     <script>
         const data = {
             2025: {
-                story: "2025-ben több komplett lakásfelújítást végeztünk Budapesten és környékén, modern burkolatokkal és egyedi megoldásokkal.",
                 images: [
                     "kepek/ref1.jpg",
-                    "kepek/ref2.jpg"
-                ]
-            },
-            2024: {
-                story: "2024-ben főként családi házak felújításán dolgoztunk, fürdőszobák és konyhák teljes átalakításával.",
-                images: [
-                    "kepek/ref3.jpg"
-                ]
-            },
-            2023: {
-                story: "2023-ban indult a vállalkozásunk, kisebb munkákkal és az első elégedett ügyfeleinkkel.",
-                images: [
+                    "kepek/ref2.jpg",
+                    "kepek/ref3.jpg",
                     "kepek/ref4.jpg"
                 ]
+            },
+            2026: {
+                images: []
             }
         };
 
-        const buttons = document.querySelectorAll(".years button");
-        const story = document.getElementById("story");
         const gallery = document.getElementById("gallery");
+        const buttons = document.querySelectorAll(".years button");
         const lightbox = document.getElementById("lightbox");
         const lightboxImg = document.getElementById("lightbox-img");
 
         function loadYear(year) {
-            story.textContent = data[year].story;
             gallery.innerHTML = "";
+
+            if (data[year].images.length === 0) {
+                const placeholder = document.createElement("div");
+                placeholder.className = "year-placeholder";
+                placeholder.textContent = year;
+                gallery.appendChild(placeholder);
+                return;
+            }
 
             data[year].images.forEach(src => {
                 const img = document.createElement("img");
