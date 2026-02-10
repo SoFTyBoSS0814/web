@@ -81,10 +81,10 @@
 
         .year-only {
             text-align: center;
-            font-size: 6em;
+            font-size: 4em;
             font-weight: bold;
             color: #ccc;
-            padding: 150px 0;
+            padding: 160px 20px;
         }
 
         .lightbox {
@@ -117,7 +117,7 @@
             }
 
             .year-only {
-                font-size: 4em;
+                font-size: 2.5em;
             }
         }
     </style>
@@ -130,7 +130,6 @@
     <p><a href="index.html">← Vissza a főoldalra</a></p>
 </header>
 
-<!-- 2026 ELŐL -->
 <div class="years">
     <button class="active" data-year="2026">2026</button>
     <button data-year="2025">2025</button>
@@ -148,7 +147,7 @@
 
 <script>
     const data = {
-        2026: [],   // nincs kép
+        2026: null,   // nincs kép
         2025: [
             "kepek/ref1.jpg",
             "kepek/ref2.jpg",
@@ -165,8 +164,8 @@
     function loadYear(year) {
         content.innerHTML = "";
 
-        if (data[year].length === 0) {
-            content.innerHTML = `<div class="year-only">${year}</div>`;
+        if (!data[year]) {
+            content.innerHTML = `<div class="year-only">Feltöltés alatt áll</div>`;
             return;
         }
 
@@ -194,7 +193,7 @@
         };
     });
 
-    /* INDULÁSKOR 2026 VAN ELŐL */
+    /* INDULÁSKOR 2026 */
     loadYear(2026);
 
     lightbox.onclick = () => {
