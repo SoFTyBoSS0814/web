@@ -130,9 +130,10 @@
     <p><a href="index.html">← Vissza a főoldalra</a></p>
 </header>
 
+<!-- 2026 ELŐL -->
 <div class="years">
-    <button class="active" data-year="2025">2025</button>
-    <button data-year="2026">2026</button>
+    <button class="active" data-year="2026">2026</button>
+    <button data-year="2025">2025</button>
 </div>
 
 <div id="content"></div>
@@ -147,10 +148,7 @@
 
 <script>
     const data = {
-        2026: [
-
-            
-        ],
+        2026: [],   // nincs kép
         2025: [
             "kepek/ref1.jpg",
             "kepek/ref2.jpg",
@@ -196,7 +194,8 @@
         };
     });
 
-    loadYear(2025);
+    /* INDULÁSKOR 2026 VAN ELŐL */
+    loadYear(2026);
 
     lightbox.onclick = () => {
         lightbox.style.display = "none";
@@ -205,4 +204,3 @@
 
 </body>
 </html>
-
