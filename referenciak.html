@@ -27,14 +27,34 @@
         header {
             background-color: #ff6f3c;
             color: white;
-            padding: 25px 10px;
+            padding: 25px 10px 35px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
         header h1 {
             font-size: 2.5em;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Vissza gomb – egységes az ÁSZF / GDPR oldalakkal */
+        .back-link {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .back-link a {
+            background-color: white;
+            color: #ff6f3c;
+            padding: 10px 26px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-link a:hover {
+            background-color: #f2f2f2;
         }
 
         .years {
@@ -127,7 +147,9 @@
 
 <header>
     <h1>Referenciáink</h1>
-    <p><a href="index.html">← Vissza a főoldalra</a></p>
+    <div class="back-link">
+        <a href="index.html">← Vissza a főoldalra</a>
+    </div>
 </header>
 
 <div class="years">
@@ -147,7 +169,7 @@
 
 <script>
     const data = {
-        2026: null,   // nincs kép
+        2026: null,
         2025: [
             "kepek/ref1.jpg",
             "kepek/ref2.jpg",
@@ -193,7 +215,6 @@
         };
     });
 
-    /* INDULÁSKOR 2026 */
     loadYear(2026);
 
     lightbox.onclick = () => {
@@ -203,4 +224,3 @@
 
 </body>
 </html>
-
