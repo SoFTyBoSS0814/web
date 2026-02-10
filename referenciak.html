@@ -57,28 +57,9 @@
             background: #e85c2a;
         }
 
-        .gallery-wrapper {
-            position: relative;
+        .gallery {
             max-width: 1200px;
             margin: 0 auto 60px;
-        }
-
-        .year-background {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 10em;
-            font-weight: bold;
-            color: rgba(0,0,0,0.05);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .gallery {
-            position: relative;
-            z-index: 2;
             padding: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -98,12 +79,12 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.35);
         }
 
-        .year-front {
+        .year-only {
+            text-align: center;
             font-size: 6em;
             font-weight: bold;
-            color: #ddd;
-            padding: 140px 0;
-            text-align: center;
+            color: #ccc;
+            padding: 150px 0;
         }
 
         .lightbox {
@@ -135,11 +116,7 @@
                 font-size: 2em;
             }
 
-            .year-background {
-                font-size: 5em;
-            }
-
-            .year-front {
+            .year-only {
                 font-size: 4em;
             }
         }
@@ -158,10 +135,7 @@
     <button data-year="2026">2026</button>
 </div>
 
-<div class="gallery-wrapper">
-    <div class="year-background" id="yearBackground"></div>
-    <div class="gallery" id="gallery"></div>
-</div>
+<div id="content"></div>
 
 <div class="lightbox" id="lightbox">
     <img id="lightbox-img" src="">
@@ -182,22 +156,21 @@
         2026: []
     };
 
-    const gallery = document.getElementById("gallery");
-    const yearBg = document.getElementById("yearBackground");
+    const content = document.getElementById("content");
     const buttons = document.querySelectorAll(".years button");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
 
     function loadYear(year) {
-        gallery.innerHTML = "";
-        yearBg.textContent = "";
+        content.innerHTML = "";
 
         if (data[year].length === 0) {
-            gallery.innerHTML = `<div class="year-front">${year}</div>`;
+            content.innerHTML = `<div class="year-only">${year}</div>`;
             return;
         }
 
-        yearBg.textContent = year;
+        const gallery = document.createElement("div");
+        gallery.className = "gallery";
 
         data[year].forEach(src => {
             const img = document.createElement("img");
@@ -208,6 +181,8 @@
             };
             gallery.appendChild(img);
         });
+
+        content.appendChild(gallery);
     }
 
     buttons.forEach(btn => {
