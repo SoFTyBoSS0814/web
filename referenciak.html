@@ -43,10 +43,41 @@
             text-decoration: underline;
         }
 
+        /* ===== ÉV VÁLASZTÓ ===== */
+        .years {
+            text-align: center;
+            margin: 40px 0 20px;
+        }
+
+        .years button {
+            background: #ff6f3c;
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .years button.active {
+            background: #e85c2a;
+        }
+
+        /* ===== TÖRTÉNET ===== */
+        .story {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: center;
+        }
+
         /* ===== GALÉRIA ===== */
         .gallery {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 0 auto 50px;
             padding: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -110,13 +141,18 @@
         <p><a href="index.html">← Vissza a főoldalra</a></p>
     </header>
 
-    <!-- ===== GALÉRIA ===== -->
-    <div class="gallery">
-        <img src="kepek/ref1.jpg" alt="Referencia 1">
-        <img src="kepek/ref2.jpg" alt="Referencia 2">
-        <img src="kepek/ref3.jpg" alt="Referencia 3">
-        <img src="kepek/ref4.jpg" alt="Referencia 4">
+    <!-- ===== ÉV VÁLASZTÓ ===== -->
+    <div class="years">
+        <button class="active" data-year="2025">2025</button>
+        <button data-year="2024">2024</button>
+        <button data-year="2023">2023</button>
     </div>
+
+    <!-- ===== TÖRTÉNET ===== -->
+    <div class="story" id="story"></div>
+
+    <!-- ===== GALÉRIA ===== -->
+    <div class="gallery" id="gallery"></div>
 
     <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox">
@@ -130,24 +166,63 @@
 
     <!-- ===== SCRIPT ===== -->
     <script>
-        const images = document.querySelectorAll('.gallery img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+        const data = {
+            2025: {
+                story: "2025-ben több komplett lakásfelújítást végeztünk Budapesten és környékén, modern burkolatokkal és egyedi megoldásokkal.",
+                images: [
+                    "kepek/ref1.jpg",
+                    "kepek/ref2.jpg"
+                ]
+            },
+            2024: {
+                story: "2024-ben főként családi házak felújításán dolgoztunk, fürdőszobák és konyhák teljes átalakításával.",
+                images: [
+                    "kepek/ref3.jpg"
+                ]
+            },
+            2023: {
+                story: "2023-ban indult a vállalkozásunk, kisebb munkákkal és az első elégedett ügyfeleinkkel.",
+                images: [
+                    "kepek/ref4.jpg"
+                ]
+            }
+        };
 
-        images.forEach(img => {
-            img.addEventListener('click', () => {
-                lightbox.style.display = 'flex';
-                lightboxImg.src = img.src;
+        const buttons = document.querySelectorAll(".years button");
+        const story = document.getElementById("story");
+        const gallery = document.getElementById("gallery");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+
+        function loadYear(year) {
+            story.textContent = data[year].story;
+            gallery.innerHTML = "";
+
+            data[year].images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.addEventListener("click", () => {
+                    lightbox.style.display = "flex";
+                    lightboxImg.src = src;
+                });
+                gallery.appendChild(img);
+            });
+        }
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                buttons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                loadYear(btn.dataset.year);
             });
         });
 
-        lightbox.addEventListener('click', () => {
-            lightbox.style.display = 'none';
+        loadYear(2025);
+
+        lightbox.addEventListener("click", () => {
+            lightbox.style.display = "none";
         });
     </script>
 
 </body>
-
 </html>
-
-
