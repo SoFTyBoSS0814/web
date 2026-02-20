@@ -53,6 +53,7 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
     font-weight: 600;
 }
 
+.contact-info p { margin-bottom:15px; font-weight:normal; color:#4a2a00;}
 .contact-item {
     display: flex;
     justify-content: space-between;
@@ -81,6 +82,26 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
 /* MOBIL */
 @media(max-width:768px){ .services { flex-direction:column; align-items:center; } #about, .contact-form, .contact-info { margin: 20px 10px 0 10px; } }
 @media (max-width:600px){ .footer { flex-direction: column; gap:10px; text-align:center; } .contact-item { flex-direction: column; align-items:flex-start; } .contact-btn { margin-top:5px; } }
+
+/* LEBEGŐ HÍVÁS MOBILON */
+.floating-call {
+    display:none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color:#ff6f3c;
+    color:white;
+    padding:12px 20px;
+    border-radius:50px;
+    font-weight:bold;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    z-index:1000;
+    text-decoration:none;
+    transition:0.3s;
+}
+.floating-call:hover { background-color:#ff3f0c; transform:scale(1.05); }
+
+@media(max-width:600px){ .floating-call { display:block; } }
 </style>
 </head>
 <body>
@@ -146,23 +167,22 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
 
 <!-- Kontakt elérhetőségek gombokkal -->
 <div class="contact-info">
-<strong>Elérhetőség:</strong><br><br>
-
+<p>Gyors kapcsolat? Hívd vagy írj e-mailt:</p>
 <div class="contact-item">
     <span>Ferenc: +36 20 626 0128</span>
     <a href="tel:+36206260128" class="contact-btn">Hívás most</a>
 </div>
-
 <div class="contact-item">
     <span>Mónika: +36 30 261 5676</span>
     <a href="tel:+36302615676" class="contact-btn">Hívás most</a>
 </div>
-
 <div class="contact-item">
     <span>E-mail: mmotthonfelujitas@outlook.hu</span>
     <a href="mailto:mmotthonfelujitas@outlook.hu" class="contact-btn">E-mail küldése</a>
 </div>
 </div>
+
+<a href="tel:+36206260128" class="floating-call">Hívás most</a>
 
 </main>
 
