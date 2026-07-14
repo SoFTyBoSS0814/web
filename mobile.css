@@ -46,41 +46,44 @@
         display: block !important;
     }
     
-    /* Navigáció: 2 oszlopos rács, hogy minden kiférjen görgetés nélkül */
-    nav {
+    /* Szigorú 2 oszlopos rács, hogy minden kiférjen görgetés nélkül */
+    header nav {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important; /* Két egyenlő oszlop */
         gap: 8px !important;
         width: 100% !important;
         padding: 5px 15px 10px 15px !important;
-        overflow: visible !important; /* Kikapcsoljuk a görgetést */
+        overflow-x: hidden !important; /* Vízszintes görgetés letiltása */
+        overflow-y: visible !important;
     }
     
     /* Az utolsó (5.) gomb (Kapcsolat) nyúljon el teljes szélességében alul */
-    nav a:last-child {
+    header nav a:last-child {
         grid-column: span 2 !important;
+        margin-left: 0 !important;
     }
     
-    /* Gombok dizájnja */
-    nav a {
+    /* Gombok dizájnja - Erősített szelektorral a belső stílusok ellen */
+    header nav a {
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        margin: 0 !important;
+        margin: 0 !important; /* Eltünteti a beépített bal oldali margót */
         padding: 10px 8px !important;
         background: rgba(255, 255, 255, 0.08) !important;
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 12px !important; /* Kicsit szögletesebb kártya-szerűbb dizájn */
+        border-radius: 12px !important;
         font-size: 0.85em !important;
         font-weight: 600 !important;
         color: #f1f5f9 !important;
         text-align: center !important;
         white-space: normal !important; /* Engedjük a szövegtörést, ha nagyon kicsi a kijelző */
-        min-height: 44px !important; /* iOS minimális érintési magasság */
+        min-height: 44px !important;
     }
-    nav a:active {
+    header nav a:hover, header nav a:active {
         background: rgba(255, 255, 255, 0.2) !important;
         border-color: var(--primary) !important;
+        color: white !important;
     }
 
     /* 3. Hero és tartalmi kártyák finomhangolása */
