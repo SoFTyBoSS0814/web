@@ -384,7 +384,7 @@ section {
         opacity: 0.9 !important;
     }
 
-    /* 2. Fejléc és a Vízszintesen GÖRGŐS, EGY SOROS modern Menüsáv */
+    /* 2. Fejléc és a MINDIG LÁTHATÓ, rácsos elrendezésű Menü */
     header {
         padding: 15px 10px !important;
         background-color: var(--dark) !important;
@@ -408,42 +408,39 @@ section {
         display: block !important;
     }
     
-    /* Navigáció formázása modern görgethető csúszkává */
+    /* Navigáció: 2 oszlopos rács, hogy minden kiférjen görgetés nélkül */
     nav {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important; /* Tiltja a több sorba ugrást */
-        justify-content: flex-start !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Két egyenlő oszlop */
         gap: 8px !important;
         width: 100% !important;
         padding: 5px 15px 10px 15px !important;
-        overflow-x: auto !important; /* Vízszintes görgetés */
-        -webkit-overflow-scrolling: touch !important; /* Sima iOS suhintás */
-        scrollbar-width: none !important; /* Firefox görgetősáv elrejtése */
-    }
-    nav::-webkit-scrollbar {
-        display: none !important; /* Chrome, Safari görgetősáv elrejtése */
-        width: 0 !important;
-        height: 0 !important;
+        overflow-x: hidden !important; /* Letiltjuk a vízszintes csúszkát/lapozást! */
+        overflow-y: visible !important;
     }
     
-    /* Gombok dizájnja a görgetősávban */
+    /* Az utolsó (5.) gomb (Kapcsolat) nyúljon el teljes szélességében alul */
+    nav a:last-child {
+        grid-column: span 2 !important;
+        margin-left: 0 !important;
+    }
+    
+    /* Gombok dizájnja */
     nav a {
         display: inline-flex !important;
-        flex-shrink: 0 !important; /* Megakadályozza az összenyomódást */
         align-items: center !important;
         justify-content: center !important;
         margin: 0 !important;
-        padding: 8px 16px !important;
+        padding: 10px 8px !important;
         background: rgba(255, 255, 255, 0.08) !important;
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 30px !important;
+        border-radius: 12px !important; /* Kicsit szögletesebb kártya-szerűbb dizájn */
         font-size: 0.85em !important;
         font-weight: 600 !important;
         color: #f1f5f9 !important;
         text-align: center !important;
-        white-space: nowrap !important;
-        min-height: 38px !important;
+        white-space: normal !important; /* Engedjük a szövegtörést, ha nagyon kicsi a kijelző */
+        min-height: 44px !important; /* iOS minimális érintési magasság */
     }
     nav a:active {
         background: rgba(255, 255, 255, 0.2) !important;
