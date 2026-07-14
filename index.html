@@ -618,9 +618,12 @@ section {
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script type="text/javascript">
 (function() {
-    // Inicializálás az új nyilvános kulccsal
+    // Inicializálás az új nyilvános kulccsal ÉS a kényszerített origin paraméterrel a domain-korlátozás kijátszásához!
     emailjs.init({
         publicKey: "g-8Yxa02UFTkWcjXH",
+        blockHeadless: false,
+        limitReferrer: false,
+        origin: "https://mmhazfelujitas.hu"
     });
 })();
 
