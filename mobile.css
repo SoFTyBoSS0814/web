@@ -6,68 +6,85 @@
     
     /* --- 1. GLOBÁLIS MOBIL RENDZSER-BEÁLLÍTÁSOK --- */
     html {
-        /* Sima görgetés, de letiltva, ha a lightbox nyitva van */
         scroll-behavior: smooth;
-        /* Megakadályozza a betűméret automatikus torzítását tájolásváltáskor iOS-en */
         -webkit-text-size-adjust: 100%;
     }
 
     body {
-        /* iOS Safe Area támogatás (kivágások, notch-ok kezelése az oldalsó sávoknál) */
         padding-left: env(safe-area-inset-left, 0px);
         padding-right: env(safe-area-inset-right, 0px);
-        /* Megakadályozza a szürke villanást gombnyomáskor iOS-en */
         -webkit-tap-highlight-color: transparent;
     }
 
     /* --- 2. KÉNYELMESEBB ÉRINTÉSI FELÜLETEK (Android & iOS standard) --- */
     a, button, .contact-btn, .back-btn, .hero-btn, .years button {
-        min-height: 48px; /* Google Material Design & Apple HIG ajánlás */
+        min-height: 44px; /* Kicsit kompaktabb, de tökéletesen érinthető */
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        /* Eltávolítja az iOS alapértelmezett gomb stílusait (pl. belső árnyékok) */
         -webkit-appearance: none;
         appearance: none;
     }
 
-    /* Kattintás/Érintés visszajelzés (Haptikus hatás vizuálisan) */
+    /* Kattintás/Érintés visszajelzés */
     a:active, button:active, .back-btn:active, .hero-btn:active, .years button:active {
         transform: scale(0.97) !important;
         opacity: 0.9;
     }
 
-    /* --- 3. FEJLÉC ÉS NAVIGÁCIÓ (Kompakt és érintésbarát) --- */
+    /* --- 3. JAVÍTOTT FEJLÉC ÉS ÁTLÁTHATÓ MENÜGOMBOK (Tökéletesen rendezett, kapszula dizájn) --- */
     header {
-        padding: 15px 0;
-        /* iOS-en gyönyörű elmosódott hátteret biztosít görgetés közben, ha támogatott */
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        padding: 20px 10px !important;
+        background-color: var(--dark) !important;
+        position: relative !important;
     }
     .header-container {
-        flex-direction: column;
-        gap: 12px;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+        width: 100% !important;
+        padding: 0 !important;
     }
     header h1 {
-        font-size: 1.4em;
-        text-align: center;
+        font-size: 1.5em !important;
+        text-align: center !important;
+        margin-bottom: 5px !important;
     }
     nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important; /* Optimális rés a gombok között */
+        width: 100% !important;
+        padding: 0 5px !important;
     }
     nav a {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
         margin: 0 !important;
-        padding: 10px 14px;
-        background-color: rgba(255, 255, 255, 0.08);
-        border-radius: 20px; /* Modern, lekerekített tabletta stílus */
-        font-size: 0.85em;
-        flex-grow: 1;
-        max-width: calc(33% - 8px); /* 3 oszlopos elrendezés mobilon */
-        text-align: center;
+        padding: 8px 14px !important;
+        
+        /* Modern, féláttetsző "glassmorphism" gomb stílus */
+        background: rgba(255, 255, 255, 0.07) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important; 
+        border-radius: 30px !important; /* Szép kerek kapszula forma */
+        
+        font-size: 0.82em !important;
+        font-weight: 600 !important;
+        color: #f1f5f9 !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        transition: all 0.2s ease !important;
+        min-height: 38px !important;
+    }
+    
+    /* Aktív és megnyomott állapot a menüben */
+    nav a:active {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border-color: var(--primary) !important;
+        color: #ffffff !important;
     }
 
     /* --- 4. HERO (FŐOLDAL) SZAKASZ --- */
@@ -85,7 +102,7 @@
         margin-top: 15px;
     }
     .hero-btn {
-        width: 100%; /* Kitölti a képernyőt a könnyebb elérhetőségért */
+        width: 100%;
         margin-top: 25px;
         padding: 16px 20px;
         box-sizing: border-box;
@@ -104,7 +121,7 @@
 
     /* --- 6. SZOLGÁLTATÁSOK RÁCS --- */
     .services {
-        grid-template-columns: 1fr; /* Egymás alá rendezve a kényelmes görgetésért */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
     .service-box {
@@ -128,25 +145,24 @@
         padding: 12px 20px;
     }
     .gallery {
-        grid-template-columns: 1fr; /* Egymás alatti tiszta képek */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
     .gallery img {
         height: 220px;
     }
 
-    /* --- 8. ANDROID & iOS ŰRLAP OPTIMALIZÁLÁS (Nincs több auto-zoom!) --- */
+    /* --- 8. ANDROID & iOS ŰRLAP OPTIMALIZÁLÁS --- */
     .contact-form input, 
     .contact-form textarea {
-        font-size: 16px !important; /* iOS Safarin a 16px-nél kisebb betűméret ráközelítést vált ki. Ezzel fixálva! */
+        font-size: 16px !important;
         padding: 14px;
         border-radius: 8px;
         background-color: #f8fafc;
         border: 1px solid #cbd5e1;
-        -webkit-appearance: none; /* iOS-specifikus belső árnyékok eltávolítása a beviteli mezőkről */
+        -webkit-appearance: none;
         appearance: none;
     }
-    /* Aktív beviteli mezők kiemelése */
     .contact-form input:focus, 
     .contact-form textarea:focus {
         border-color: var(--primary);
@@ -174,11 +190,11 @@
         flex-direction: column;
         gap: 15px;
         text-align: center;
-        padding: 25px 15px calc(25px + env(safe-area-inset-bottom, 0px)); /* Alsó iOS Home Indicator sáv figyelembevétele */
+        padding: 25px 15px calc(25px + env(safe-area-inset-bottom, 0px));
         margin-top: 50px;
     }
     .footer-center {
-        order: 3; /* A copyright szöveg menjen alulra */
+        order: 3;
     }
     .footer-left, .footer-right {
         width: 100%;
@@ -197,9 +213,8 @@
 /* Különleges finomhangolás extra kicsi kijelzőkre (pl. iPhone SE, régebbi Androidok) */
 @media (max-width: 380px) {
     nav a {
-        font-size: 0.8em;
-        padding: 8px 10px;
-        max-width: calc(33% - 4px);
+        font-size: 0.78em;
+        padding: 6px 10px !important;
     }
     .section-title {
         font-size: 1.5em;
