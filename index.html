@@ -318,7 +318,7 @@ section {
     box-shadow: 0 4px 10px rgba(242, 106, 54, 0.2);
 }
 
-/* LÁBLÉC */
+/* LÁBLÉC STÍLUSOK */
 .footer {
     background-color: var(--dark);
     color: #cbd5e1;
@@ -331,12 +331,15 @@ section {
     margin-top: 80px;
     border-top: 1px solid #334155;
 }
-.footer a {
-    color: #ffffff;
+/* MEGOLDVA: Elkülönített, egyedi stílus a láblécben lévő linkeknek */
+.footer-link {
+    color: #ffffff !important;
     font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
 }
-.footer a:hover {
-    color: var(--primary);
+.footer-link:hover {
+    color: var(--primary) !important;
 }
 .footer-center { text-align: center; flex: 1; }
 
@@ -405,7 +408,6 @@ section {
 
 <header>
     <div class="header-container">
-        <!-- Átnevezett és kattinthatóvá tett logó -->
         <a href="#home" class="logo-link">
             <h1>M&M Házfelújítás</h1>
         </a>
@@ -487,12 +489,17 @@ section {
 
 <a href="tel:+36206260128" class="floating-call">Hívás most</a>
 
-</main>
+</main> <!-- Itt zártuk le helyesen a főoldali szakaszt, függetlenítve a láblécet -->
 
 <footer class="footer">
-    <div class="footer-left"><a href="aszf.html">ÁSZF</a></div>
+    <!-- MEGOLDVA: Helyes, önálló hivatkozások a láblécben -->
+    <div class="footer-left">
+        <a href="aszf.html" class="footer-link">ÁSZF</a>
+    </div>
     <div class="footer-center">&copy; 2026 M&M Házfelújítás. Minden jog fenntartva.</div>
-    <div class="footer-right"><a href="gdpr.html">GDPR tájékoztató</a></div>
+    <div class="footer-right">
+        <a href="gdpr.html" class="footer-link">GDPR tájékoztató</a>
+    </div>
 </footer>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
