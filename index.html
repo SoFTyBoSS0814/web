@@ -679,19 +679,45 @@ function confetti() {
         setTimeout(()=>{c.remove();},1050);
     }
 }
+    <script type="text/javascript">
+// 1. Jobb klikk letiltása
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// 2. Gyorsbillentyűk letiltása (F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+S)
+document.addEventListener('keydown', function(e) {
+    // F12 letiltása
+    if (e.key === "F12") {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Ctrl+U (Forráskód megtekintése)
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Ctrl+Shift+I (Fejlesztői eszközök)
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Ctrl+Shift+J (Fejlesztői konzol)
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+        e.preventDefault();
+        return false;
+    }
+
+    // Ctrl+S (Mentés másként - hogy ne tudják egyben lementeni az oldalt)
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        return false;
+    }
+});
 </script>
-
-                   // Jobb klikk tiltása
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-    // Billentyűkombinációk tiltása (F12, Ctrl+Shift+I, Ctrl+U)
-    document.onkeydown = function(e) {
-        if (e.keyCode == 123 || 
-            (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) || 
-            (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
-            return false;
-        }
-    };
-
+</script>
 </body>
 </html>
