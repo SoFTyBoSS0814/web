@@ -18,48 +18,59 @@ nav a:hover { text-decoration:underline; color:#fff9f0;}
 
 /* SZAKASZOK */
 main { flex:1; }
-section { padding:60px 20px; max-width:1000px; margin:auto; }
+section { padding:60px 20px; max-width:1000px; margin:auto; text-align: center; }
 h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradient(135deg, rgba(255,111,60,0.9), rgba(255,166,121,0.9)); display:inline-block; padding:12px 25px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);}
 
-/* TARTALOM DOBOZ */
-.content-box {
-    background-color: #fff;
-    padding: 40px 30px;
+/* ÁSZF TARTALOM STÍLUS (Az index.html stílusára szabva) */
+.legal-text {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    background: rgba(255, 111, 60, 0.05); /* Nagyon finom narancsos-homok háttér, mint a kapcsolatnál */
+    padding: 35px 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
+    box-shadow: 0 4px 12px rgba(255, 111, 60, 0.1);
+    color: #4a2a00;
 }
-.content-box p, .content-box li {
-    font-size: 1.05em;
-    margin-bottom: 20px;
-    color: #444;
+.legal-text p {
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    color: #333;
 }
-.content-box ul {
-    margin-left: 25px;
-    margin-bottom: 20px;
-}
-.content-box li {
+.legal-text h3 {
+    color: #ff6f3c;
+    font-size: 1.3em;
+    margin-top: 30px;
     margin-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 111, 60, 0.2);
+    padding-bottom: 5px;
 }
-.content-box a {
+.legal-text ul {
+    margin-left: 20px;
+    margin-bottom: 25px;
+}
+.legal-text li {
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+.legal-text a {
     color: #ff6f3c;
     font-weight: bold;
 }
-.content-box a:hover {
+.legal-text a:hover {
     text-decoration: underline;
 }
 
-/* VISSZA GOMB */
+/* VISSZA GOMB STÍLUS (A Hero gomb mintájára) */
 .back-btn-container {
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin-top: 30px;
 }
 .back-btn {
     display: inline-block;
     background: #ff6f3c;
     color: white;
-    padding: 12px 25px;
+    padding: 15px 30px;
     border-radius: 8px;
     font-weight: bold;
     transition: 0.3s;
@@ -76,7 +87,7 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
 .footer-center { text-align:center; flex:1; }
 
 /* MOBIL */
-@media(max-width:768px){ .content-box { padding: 25px 15px; margin: 10px; } }
+@media(max-width:768px){ .legal-text { padding: 20px 15px; margin: 10px; } }
 @media (max-width:600px){ .footer { flex-direction: column; gap:10px; text-align:center; } }
 </style>
 </head>
@@ -97,39 +108,39 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
 <section>
     <h2>Általános Szerződési Feltételek</h2>
     
-    <div class="content-box">
+    <div class="legal-text">
         <p>Ez az oldal tartalmazza a M&M Otthonfelújítás szolgáltatásaira vonatkozó általános szerződési feltételeket. Kérjük, figyelmesen olvassa el az alábbiakat a szolgáltatás igénybevétele előtt.</p>
 
-        <p><strong>1. Szolgáltatások</strong><br>
-        A M&M Otthonfelújítás különféle ház körüli és beltéri felújítási munkákat kínál, beleértve a gipszkartonozást, festést, tetőfelújítást, burkolást és takarítást. A szolgáltatások részleteit a weboldalon található leírások tartalmazzák.</p>
+        <h3>1. Szolgáltatások</h3>
+        <p>A M&M Otthonfelújítás különféle ház körüli és beltéri felújítási munkákat kínál, beleértve a gipszkartonozást, festést, tetőfelújítást, burkolást és takarítást. A szolgáltatások részleteit a weboldalon található leírások tartalmazzák.</p>
 
-        <p><strong>2. Megrendelés és ajánlatkérés</strong><br>
-        Az ajánlatkérés a weboldalon keresztül, e-mailen vagy telefonon történhet. Az ajánlatot a megrendelő részére a lehető legrövidebb időn belül továbbítjuk. A szolgáltatás megrendelésekor a megrendelőnek pontosan meg kell adnia a szükséges információkat.</p>
+        <h3>2. Megrendelés és ajánlatkérés</h3>
+        <p>Az ajánlatkérés a weboldalon keresztül, e-mailen vagy telefonon történhet. Az ajánlatot a megrendelő részére a lehető legrövidebb időn belül továbbítjuk. A szolgáltatás megrendelésekor a megrendelőnek pontosan meg kell adnia a szükséges információkat.</p>
 
-        <p><strong>3. Díjak és fizetés</strong></p>
+        <h3>3. Díjak és fizetés</h3>
         <ul>
             <li>A szolgáltatások díját az egyedi árajánlat tartalmazza.</li>
             <li>A fizetés készpénzben, átutalással vagy előre egyeztetett módon történhet.</li>
             <li>A díjak tartalmazzák a munkadíjat és az alapanyagokat, kivéve, ha az árajánlat mást tartalmaz.</li>
         </ul>
 
-        <p><strong>4. Teljesítés és határidők</strong><br>
-        A M&M Otthonfelújítás a lehető leghamarabb végzi el a megrendelt szolgáltatásokat, a megrendelővel egyeztetett határidők szerint. A határidők betartása a helyszíni körülményektől és időjárási viszonyoktól is függhet.</p>
+        <h3>4. Teljesítés és határidők</h3>
+        <p>A M&M Otthonfelújítás a lehető leghamarabb végzi el a megrendelt szolgáltatásokat, a megrendelővel egyeztetett határidők szerint. A határidők betartása a helyszíni körülményektől és időjárási viszonyoktól is függhet.</p>
 
-        <p><strong>5. Felelősség és garancia</strong><br>
-        A szolgáltató minden tőle telhetőt megtesz a precíz és biztonságos munkavégzés érdekében. Kizárólag a szolgáltatás teljesítéséért vállalunk felelősséget. Bármely anyaghiba, természeti kár vagy külső beavatkozás esetén a szolgáltató felelőssége korlátozott.</p>
+        <h3>5. Felelősség és garancia</h3>
+        <p>A szolgáltató minden tőle telhetőt megtesz a precíz és biztonságos munkavégzés érdekében. Kizárólag a szolgáltatás teljesítéséért vállalunk felelősséget. Bármely anyaghiba, természeti kár vagy külső beavatkozás esetén a szolgáltató felelőssége korlátozott.</p>
 
-        <p><strong>6. Adatvédelem</strong><br>
-        A megrendelők adatait a M&M Otthonfelújítás bizalmasan kezeli, és kizárólag a szolgáltatás teljesítéséhez használja fel. Részletes adatkezelési tájékoztatót a <a href="gdpr.html">GDPR tájékoztató</a> tartalmaz.</p>
+        <h3>6. Adatvédelem</h3>
+        <p>A megrendelők adatait a M&M Otthonfelújítás bizalmasan kezeli, és kizárólag a szolgáltatás teljesítéséhez használja fel. Részletes adatkezelési tájékoztatót a <a href="gdpr.html">GDPR tájékoztató</a> tartalmaz.</p>
 
-        <p><strong>7. Panaszkezelés</strong><br>
-        Amennyiben a megrendelő a szolgáltatással kapcsolatban panaszt kíván tenni, azt írásban, e-mailen vagy telefonon jelezheti. A panaszokat a M&M Otthonfelújítás haladéktalanul kivizsgálja.</p>
+        <h3>7. Panaszkezelés</h3>
+        <p>Amennyiben a megrendelő a szolgáltatással kapcsolatban panaszt kíván tenni, azt írásban, e-mailen vagy telefonon jelezheti. A panaszokat a M&M Otthonfelújítás haladéktalanul kivizsgálja.</p>
 
-        <p><strong>8. Jogviták</strong><br>
-        Az ÁSZF-ben nem rendezett kérdésekben a hatályos magyar jogszabályok az irányadók. A szolgáltató és a megrendelő között felmerülő jogvitákat elsősorban békés úton próbáljuk rendezni, ennek sikertelensége esetén a magyar bíróság illetékes.</p>
+        <h3>8. Jogviták</h3>
+        <p>Az ÁSZF-ben nem rendezett kérdésekben a hatályos magyar jogszabályok az irányadók. A szolgáltató és a megrendelő között felmerülő jogvitákat elsősorban békés úton próbáljuk rendezni, ennek sikertelensége esetén a magyar bíróság illetékes.</p>
 
-        <p><strong>9. Az ÁSZF elfogadása</strong><br>
-        A szolgáltatás igénybevételével a megrendelő tudomásul veszi, hogy elolvasta az Általános Szerződési Feltételeket, és azok minden pontjával <strong>teljes mértékben egyetért és elfogadja</strong>. Az ÁSZF elfogadása a szolgáltatás megrendelésének előfeltétele.</p>
+        <h3>9. Az ÁSZF elfogadása</h3>
+        <p>A szolgáltatás igénybevételével a megrendelő tudomásul veszi, hogy elolvasta az Általános Szerződési Feltételeket, és azok minden pontjával <strong>teljes mértékben egyetért és elfogadja</strong>. Az ÁSZF elfogadása a szolgáltatás megrendelésének előfeltétele.</p>
     </div>
 
     <div class="back-btn-container">
