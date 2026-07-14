@@ -3,116 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M&M Otthonfelújítás - ÁSZF</title>
+<title>M&M Házfelújítás - ÁSZF</title>
+<!-- Modern betűtípus beágyazása -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
-body { line-height:1.6; background-color:#f8f8f8; color:#333; display:flex; flex-direction:column; min-height:100vh; }
-a { text-decoration:none; color:#333; }
-
-/* FEJLÉC */
-header { background-color:#ff6f3c; color:white; padding:20px 0; box-shadow:0 4px 6px rgba(0,0,0,0.1);}
-header h1 { text-align:center; font-size:2.5em; text-shadow:1px 1px 4px rgba(0,0,0,0.3);}
-nav { text-align:center; margin-top:10px;}
-nav a { margin:0 15px; font-weight:bold; color:white; transition:0.3s;}
-nav a:hover { text-decoration:underline; color:#fff9f0;}
-
-/* SZAKASZOK */
-main { flex:1; }
-section { padding:60px 20px; max-width:1000px; margin:auto; text-align: center; }
-h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradient(135deg, rgba(255,111,60,0.9), rgba(255,166,121,0.9)); display:inline-block; padding:12px 25px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);}
-
-/* ÁSZF TARTALOM STÍLUS (Az index.html stílusára szabva) */
-.legal-text {
-    text-align: left;
-    max-width: 800px;
-    margin: 0 auto 30px auto;
-    background: rgba(255, 111, 60, 0.05); /* Nagyon finom narancsos-homok háttér, mint a kapcsolatnál */
-    padding: 35px 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(255, 111, 60, 0.1);
-    color: #4a2a00;
+/* GLOBÁLIS BEÁLLÍTÁSOK (Pontosan mint az index.html-ben) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
 }
-.legal-text p {
-    font-size: 1.1em;
-    margin-bottom: 25px;
-    color: #333;
+:root {
+    --primary: #f26a36; /* Meleg, modern narancs */
+    --primary-hover: #d95523;
+    --dark: #1e293b; /* Elegáns pala-szürke */
+    --light-bg: #cbd5e1; /* Sötétebb szürke az átmenethez */
+    --card-bg: #ffffff;
+    --text-main: #1e293b; /* Sötétebb szövegszín a jobb olvashatóságért */
+    --text-muted: #475569;
+    --radius: 16px;
+    --shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    --shadow-hover: 0 15px 35px rgba(15, 23, 42, 0.2);
+    --transition: all 0.3s ease;
 }
-.legal-text h3 {
-    color: #ff6f3c;
-    font-size: 1.3em;
+
+body {
+    line-height: 1.7;
+    background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%) !important;
+    background-attachment: fixed !important;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+/* FEJLÉC (Pontosan mint az index.html-ben) */
+header {
+    background-color: var(--dark);
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+}
+.header-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.logo-link {
+    display: inline-block;
+    transition: var(--transition);
+}
+.logo-link:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+header h1 {
+    font-size: 1.6em;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff, #ffb090);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+nav a {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #cbd5e1;
+}
+nav a:hover {
+    color: var(--primary);
+}
+
+/* SZAKASZOK KÖZÖS STÍLUSAI */
+main { flex: 1; }
+section {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--dark);
+    font-size: 2.2em;
+    font-weight: 800;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* ÁSZF TARTALOM KÁRTYA (Az index.html #about kártya stílusára építve) */
+.legal-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 60px 40px;
     margin-top: 30px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid rgba(255, 111, 60, 0.2);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    text-align: left; /* A jogi szöveg balra zárt a jobb olvashatóságért */
+}
+.legal-card p {
+    font-size: 1.05em;
+    color: var(--text-main);
+    margin-bottom: 25px;
+}
+.legal-card h3 {
+    font-size: 1.3em;
+    color: var(--dark);
+    margin-top: 35px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    border-bottom: 2px solid #f1f5f9;
     padding-bottom: 5px;
 }
-.legal-text ul {
-    margin-left: 20px;
+.legal-card ul {
+    margin-left: 25px;
     margin-bottom: 25px;
 }
-.legal-text li {
-    margin-bottom: 8px;
+.legal-card li {
     font-size: 1.05em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
 }
-.legal-text a {
-    color: #ff6f3c;
-    font-weight: bold;
+.legal-card a {
+    color: var(--primary);
+    font-weight: 600;
 }
-.legal-text a:hover {
+.legal-card a:hover {
+    color: var(--primary-hover);
     text-decoration: underline;
 }
 
-/* VISSZA GOMB STÍLUS (A Hero gomb mintájára) */
+/* VISSZA GOMB (A Hero-btn stílusában) */
 .back-btn-container {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 .back-btn {
     display: inline-block;
-    background: #ff6f3c;
+    background: linear-gradient(135deg, var(--primary) 0%, #e0531f 100%);
     color: white;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
+    padding: 16px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    box-shadow: 0 10px 20px rgba(242, 106, 54, 0.3);
+    transition: var(--transition);
 }
 .back-btn:hover {
-    background: #ff3f0c;
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(242, 106, 54, 0.5);
 }
 
-/* LÁBLÉC */
-.footer { background-color:#222; color:white; padding:20px; font-size:0.9em; display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; margin-top: auto; }
-.footer a { color:white; font-weight:bold; text-decoration:none; transition:0.3s; }
-.footer a:hover { text-decoration: underline; }
-.footer-center { text-align:center; flex:1; }
+/* LÁBLÉC (Pontosan mint az index.html-ben) */
+.footer {
+    background-color: var(--dark);
+    color: #cbd5e1;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 80px;
+    border-top: 1px solid #334155;
+}
+.footer-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+.footer-link:hover {
+    color: var(--primary) !important;
+}
+.footer-center { text-align: center; flex: 1; }
 
-/* MOBIL */
-@media(max-width:768px){ .legal-text { padding: 20px 15px; margin: 10px; } }
-@media (max-width:600px){ .footer { flex-direction: column; gap:10px; text-align:center; } }
+/* REZPONZIVITÁS */
+@media(max-width:768px){
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a {
+        margin: 0 10px;
+    }
+    section {
+        padding: 50px 15px;
+    }
+    .legal-card {
+        padding: 40px 20px;
+    }
+}
+@media (max-width:600px){
+    .footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
 </style>
 </head>
 <body>
 
 <header>
-<h1>M&M Otthonfelújítás</h1>
-<nav>
-<a href="index.html#home">Főoldal</a>
-<a href="index.html#about">Rólunk</a>
-<a href="index.html#services">Szolgáltatások</a>
-<a href="referenciak.html">Referenciák</a>
-<a href="index.html#contact">Kapcsolat</a>
-</nav>
+    <div class="header-container">
+        <a href="index.html#home" class="logo-link">
+            <h1>M&M Házfelújítás</h1>
+        </a>
+        <nav>
+            <a href="index.html#home">Főoldal</a>
+            <a href="index.html#about">Rólunk</a>
+            <a href="index.html#services">Szolgáltatások</a>
+            <a href="referenciak.html">Referenciák</a>
+            <a href="index.html#contact">Kapcsolat</a>
+        </nav>
+    </div>
 </header>
 
 <main>
 <section>
-    <h2>Általános Szerződési Feltételek</h2>
+    <h2 class="section-title">Általános Szerződési Feltételek</h2>
     
-    <div class="legal-text">
-        <p>Ez az oldal tartalmazza a M&M Otthonfelújítás szolgáltatásaira vonatkozó általános szerződési feltételeket. Kérjük, figyelmesen olvassa el az alábbiakat a szolgáltatás igénybevétele előtt.</p>
+    <div class="legal-card">
+        <p>Ez az oldal tartalmazza a M&M Házfelújítás szolgáltatásaira vonatkozó általános szerződési feltételeket. Kérjük, figyelmesen olvassa el az alábbiakat a szolgáltatás igénybevétele előtt.</p>
 
         <h3>1. Szolgáltatások</h3>
-        <p>A M&M Otthonfelújítás különféle ház körüli és beltéri felújítási munkákat kínál, beleértve a gipszkartonozást, festést, tetőfelújítást, burkolást és takarítást. A szolgáltatások részleteit a weboldalon található leírások tartalmazzák.</p>
+        <p>A M&M Házfelújítás különféle ház körüli és beltéri felújítási munkákat kínál, beleértve a gipszkartonozást, festést, tetőfelújítást, burkolást és takarítást. A szolgáltatások részleteit a weboldalon található leírások tartalmazzák.</p>
 
         <h3>2. Megrendelés és ajánlatkérés</h3>
         <p>Az ajánlatkérés a weboldalon keresztül, e-mailen vagy telefonon történhet. Az ajánlatot a megrendelő részére a lehető legrövidebb időn belül továbbítjuk. A szolgáltatás megrendelésekor a megrendelőnek pontosan meg kell adnia a szükséges információkat.</p>
@@ -125,16 +264,16 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
         </ul>
 
         <h3>4. Teljesítés és határidők</h3>
-        <p>A M&M Otthonfelújítás a lehető leghamarabb végzi el a megrendelt szolgáltatásokat, a megrendelővel egyeztetett határidők szerint. A határidők betartása a helyszíni körülményektől és időjárási viszonyoktól is függhet.</p>
+        <p>A M&M Házfelújítás a lehető leghamarabb végzi el a megrendelt szolgáltatásokat, a megrendelővel egyeztetett határidők szerint. A határidők betartása a helyszíni körülményektől és időjárási viszonyoktól is függhet.</p>
 
         <h3>5. Felelősség és garancia</h3>
         <p>A szolgáltató minden tőle telhetőt megtesz a precíz és biztonságos munkavégzés érdekében. Kizárólag a szolgáltatás teljesítéséért vállalunk felelősséget. Bármely anyaghiba, természeti kár vagy külső beavatkozás esetén a szolgáltató felelőssége korlátozott.</p>
 
         <h3>6. Adatvédelem</h3>
-        <p>A megrendelők adatait a M&M Otthonfelújítás bizalmasan kezeli, és kizárólag a szolgáltatás teljesítéséhez használja fel. Részletes adatkezelési tájékoztatót a <a href="gdpr.html">GDPR tájékoztató</a> tartalmaz.</p>
+        <p>A megrendelők adatait a M&M Házfelújítás bizalmasan kezeli, és kizárólag a szolgáltatás teljesítéséhez használja fel. Részletes adatkezelési tájékoztatót a <a href="gdpr.html">GDPR tájékoztató</a> tartalmaz.</p>
 
         <h3>7. Panaszkezelés</h3>
-        <p>Amennyiben a megrendelő a szolgáltatással kapcsolatban panaszt kíván tenni, azt írásban, e-mailen vagy telefonon jelezheti. A panaszokat a M&M Otthonfelújítás haladéktalanul kivizsgálja.</p>
+        <p>Amennyiben a megrendelő a szolgáltatással kapcsolatban panaszt kíván tenni, azt írásban, e-mailen vagy telefonon jelezheti. A panaszokat a M&M Házfelújítás haladéktalanul kivizsgálja.</p>
 
         <h3>8. Jogviták</h3>
         <p>Az ÁSZF-ben nem rendezett kérdésekben a hatályos magyar jogszabályok az irányadók. A szolgáltató és a megrendelő között felmerülő jogvitákat elsősorban békés úton próbáljuk rendezni, ennek sikertelensége esetén a magyar bíróság illetékes.</p>
@@ -150,9 +289,13 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
 </main>
 
 <footer class="footer">
-<div class="footer-left"><a href="aszf.html">ÁSZF</a></div>
-<div class="footer-center">&copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.</div>
-<div class="footer-right"><a href="gdpr.html">GDPR tájékoztató</a></div>
+    <div class="footer-left">
+        <a href="aszf.html" class="footer-link">ÁSZF</a>
+    </div>
+    <div class="footer-center">&copy; 2026 M&M Házfelújítás. Minden jog fenntartva.</div>
+    <div class="footer-right">
+        <a href="gdpr.html" class="footer-link">GDPR tájékoztató</a>
+    </div>
 </footer>
 
 </body>
