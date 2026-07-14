@@ -1,82 +1,317 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M&M Otthonfelújítás - GDPR Tájékoztató</title>
-    <style>
-        * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
-        body { line-height:1.6; background-color:#f8f8f8; color:#333; padding:20px; }
-        h1, h2 { text-align:center; margin-bottom:20px; color:#ff6f3c; }
-        h1 { font-size:2.5em; }
-        h2 { font-size:1.8em; margin-top:40px; }
-        p, li { margin-bottom:15px; }
-        ul { margin-left:20px; margin-bottom:15px; }
-        a { color:#ff6f3c; text-decoration:none; }
-        a:hover { text-decoration:underline; }
-        footer { background-color:#222; color:white; text-align:center; padding:20px 0; margin-top:40px; }
-        .container { max-width:900px; margin:auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&M Házfelújítás - GDPR Tájékoztató</title>
+<!-- Modern betűtípus beágyazása -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* GLOBÁLIS BEÁLLÍTÁSOK (Pontosan mint az index.html-ben) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+:root {
+    --primary: #f26a36; /* Meleg, modern narancs */
+    --primary-hover: #d95523;
+    --dark: #1e293b; /* Elegáns pala-szürke */
+    --light-bg: #cbd5e1; /* Sötétebb szürke az átmenethez */
+    --card-bg: #ffffff;
+    --text-main: #1e293b; /* Sötétebb szövegszín a jobb olvashatóságért */
+    --text-muted: #475569;
+    --radius: 16px;
+    --shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    --shadow-hover: 0 15px 35px rgba(15, 23, 42, 0.2);
+    --transition: all 0.3s ease;
+}
+
+body {
+    line-height: 1.7;
+    background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%) !important;
+    background-attachment: fixed !important;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+/* FEJLÉC (Pontosan mint az index.html-ben) */
+header {
+    background-color: var(--dark);
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+}
+.header-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.logo-link {
+    display: inline-block;
+    transition: var(--transition);
+}
+.logo-link:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+header h1 {
+    font-size: 1.6em;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff, #ffb090);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+nav a {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #cbd5e1;
+}
+nav a:hover {
+    color: var(--primary);
+}
+
+/* SZAKASZOK KÖZÖS STÍLUSAI */
+main { flex: 1; }
+section {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--dark);
+    font-size: 2.2em;
+    font-weight: 800;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* GDPR TARTALOM KÁRTYA (Az ÁSZF-el megegyező elegáns stílus) */
+.legal-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 60px 40px;
+    margin-top: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    text-align: left;
+}
+.legal-card p {
+    font-size: 1.05em;
+    color: var(--text-main);
+    margin-bottom: 25px;
+}
+.legal-card h3 {
+    font-size: 1.3em;
+    color: var(--dark);
+    margin-top: 35px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 5px;
+}
+.legal-card ul {
+    margin-left: 25px;
+    margin-bottom: 25px;
+}
+.legal-card li {
+    font-size: 1.05em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+.legal-card a {
+    color: var(--primary);
+    font-weight: 600;
+}
+.legal-card a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* VISSZA GOMB (A Hero-btn stílusában) */
+.back-btn-container {
+    text-align: center;
+    margin-top: 40px;
+}
+.back-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary) 0%, #e0531f 100%);
+    color: white;
+    padding: 16px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    box-shadow: 0 10px 20px rgba(242, 106, 54, 0.3);
+    transition: var(--transition);
+}
+.back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(242, 106, 54, 0.5);
+}
+
+/* LÁBLÉC (Pontosan mint az index.html-ben) */
+.footer {
+    background-color: var(--dark);
+    color: #cbd5e1;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 80px;
+    border-top: 1px solid #334155;
+}
+.footer-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+.footer-link:hover {
+    color: var(--primary) !important;
+}
+.footer-center { text-align: center; flex: 1; }
+
+/* REZPONZIVITÁS */
+@media(max-width:768px){
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a {
+        margin: 0 10px;
+    }
+    section {
+        padding: 50px 15px;
+    }
+    .legal-card {
+        padding: 40px 20px;
+    }
+}
+@media (max-width:600px){
+    .footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-    <h1>GDPR Tájékoztató</h1>
+<header>
+    <div class="header-container">
+        <a href="index.html#home" class="logo-link">
+            <h1>M&M Házfelújítás</h1>
+        </a>
+        <nav>
+            <a href="index.html#home">Főoldal</a>
+            <a href="index.html#about">Rólunk</a>
+            <a href="index.html#services">Szolgáltatások</a>
+            <a href="referenciak.html">Referenciák</a>
+            <a href="index.html#contact">Kapcsolat</a>
+        </nav>
+    </div>
+</header>
 
-    <p>A M&M Otthonfelújítás (a továbbiakban: Adatkezelő) elkötelezett az Ön személyes adatainak védelme mellett. Jelen tájékoztató ismerteti, hogyan kezeljük a weboldalon keresztül megadott személyes adatokat.</p>
+<main>
+<section>
+    <h2 class="section-title">GDPR Tájékoztató</h2>
+    
+    <div class="legal-card">
+        <p>A M&M Házfelújítás (a továbbiakban: Adatkezelő) elkötelezett az Ön személyes adatainak védelme mellett. Jelen tájékoztató ismerteti, hogyan kezeljük a weboldalon keresztül megadott személyes adatokat.</p>
 
-    <h2>1. Adatkezelő</h2>
-    <p>
-        Adatkezelő neve: M&M Otthonfelújítás<br>
-        E-mail: <strong>mmotthonfelujitas@outlook.hu</strong><br>
-        Telefonszám: <strong>+36 20 626 0128 / +36 30 261 5676</strong>
-    </p>
+        <h3>1. Adatkezelő</h3>
+        <p>
+            Adatkezelő neve: M&M Házfelújítás<br>
+            E-mail: <strong>mmotthonfelujitas@outlook.hu</strong><br>
+            Telefonszám: <strong>+36 20 626 0128 / +36 30 261 5676</strong>
+        </p>
 
-    <h2>2. Kezelt adatok köre</h2>
-    <ul>
-        <li>Név</li>
-        <li>E-mail cím</li>
-        <li>Telefonszám</li>
-        <li>Üzenet tartalma a kapcsolatfelvételi űrlapon keresztül</li>
-    </ul>
+        <h3>2. Kezelt adatok köre</h3>
+        <ul>
+            <li>Név</li>
+            <li>E-mail cím</li>
+            <li>Telefonszám</li>
+            <li>Üzenet tartalma a kapcsolatfelvételi űrlapon keresztül</li>
+        </ul>
 
-    <h2>3. Adatok felhasználása</h2>
-    <p>A megadott adatokat kizárólag a szolgáltatás teljesítése, árajánlat küldése és kapcsolatfelvétel céljából kezeljük. Adatokat nem adunk át harmadik félnek, kivéve, ha jogszabály kötelez minket rá.</p>
+        <h3>3. Adatok felhasználása</h3>
+        <p>A megadott adatokat kizárólag a szolgáltatás teljesítése, árajánlat küldése és kapcsolatfelvétel céljából kezeljük. Adatokat nem adunk át harmadik félnek, kivéve, ha jogszabály kötelez minket rá.</p>
 
-    <h2>4. Adatkezelés jogalapja</h2>
-    <p>Az adatkezelés jogalapja az Ön önkéntes hozzájárulása (kapcsolatfelvételi űrlap elküldésével).</p>
+        <h3>4. Adatkezelés jogalapja</h3>
+        <p>Az adatkezelés jogalapja az Ön önkéntes hozzájárulása (kapcsolatfelvételi űrlap elküldésével).</p>
 
-    <h2>5. Adattárolás időtartama</h2>
-    <p>Az adatokat addig tároljuk, amíg a szolgáltatás teljesítése szükséges, vagy amíg a jogszabály másként nem rendelkezik.</p>
+        <h3>5. Adattárolás időtartama</h3>
+        <p>Az adatokat addig tároljuk, amíg a szolgáltatás teljesítése szükséges, vagy amíg a jogszabály másként nem rendelkezik.</p>
 
-    <h2>6. Az Ön jogai</h2>
-    <ul>
-        <li>Hozzáférés a személyes adatokhoz</li>
-        <li>Helyesbítés kérésének joga</li>
-        <li>Törlés (adatok „elfeledtetésének”) joga</li>
-        <li>Adatkezelés korlátozásának joga</li>
-        <li>Adathordozhatóság joga</li>
-        <li>Tiltakozás a személyes adatok kezelése ellen</li>
-    </ul>
+        <h3>6. Az Ön jogai</h3>
+        <ul>
+            <li>Hozzáférés a személyes adatokhoz</li>
+            <li>Helyesbítés kérésének joga</li>
+            <li>Törlés (adatok „elfeledtetésének”) joga</li>
+            <li>Adatkezelés korlátozásának joga</li>
+            <li>Adathordozhatóság joga</li>
+            <li>Tiltakozás a személyes adatok kezelése ellen</li>
+        </ul>
 
-    <h2>7. Kapcsolat az adatvédelem ügyében</h2>
-    <p>Bármely kérdés, panasz vagy jogérvényesítési igény esetén vegye fel a kapcsolatot az adatkezelővel a megadott e-mail címen vagy telefonszámon.</p>
+        <h3>7. Kapcsolat az adatvédelem ügyében</h3>
+        <p>Bármely kérdés, panasz vagy jogérvényesítési igény esetén vegye fel a kapcsolatot az adatkezelővel a megadott e-mail címen vagy telefonszámon.</p>
 
-    <h2>8. Adatbiztonság</h2>
-    <p>Minden szükséges technikai és szervezési intézkedést megteszünk az Ön személyes adatainak védelme érdekében.</p>
+        <h3>8. Adatbiztonság</h3>
+        <p>Minden szükséges technikai és szervezési intézkedést megteszünk az Ön személyes adatainak védelme érdekében.</p>
 
-    <h2>9. Cookie-k</h2>
-    <p>A weboldal jelenleg nem alkalmaz marketing, analitikai vagy követőkód alapú cookie-kat, és nem tárol személyes adatot a felhasználó eszközén.</p>
+        <h3>9. Cookie-k</h3>
+        <p>A weboldal jelenleg nem alkalmaz marketing, analitikai vagy követőkód alapú cookie-kat, és nem tárol személyes adatot a felhasználó eszközén.</p>
 
-    <h2>10. Adatkezelés elfogadása</h2>
-    <p>A kapcsolatfelvételi űrlap elküldésével Ön tudomásul veszi, hogy elolvasta a GDPR tájékoztatót, és annak minden pontjával <strong>teljes mértékben egyetért és elfogadja</strong>.</p>
+        <h3>10. Adatkezelés elfogadása</h3>
+        <p>A kapcsolatfelvételi űrlap elküldésével Ön tudomásul veszi, hogy elolvasta a GDPR tájékoztatót, and annak minden pontjával <strong>teljes mértékben egyetért és elfogadja</strong>.</p>
+    </div>
 
-    <footer>
-        &copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva. 
-        <br>
-        <a href="index.html">Főoldal</a> | <a href="aszf.html">ÁSZF</a>
-    </footer>
-</div>
+    <div class="back-btn-container">
+        <a href="index.html" class="back-btn">← Vissza a főoldalra</a>
+    </div>
+</section>
+</main>
+
+<footer class="footer">
+    <div class="footer-left">
+        <a href="aszf.html" class="footer-link">ÁSZF</a>
+    </div>
+    <div class="footer-center">&copy; 2026 M&M Házfelújítás. Minden jog fenntartva.</div>
+    <div class="footer-right">
+        <a href="gdpr.html" class="footer-link">GDPR tájékoztató</a>
+    </div>
+</footer>
 
 </body>
 </html>
