@@ -543,7 +543,7 @@ section {
 
 <section id="about">
     <h2 class="section-title">Rólunk</h2>
-    <p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
+    <p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és house körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
 </section>
 
 <section id="services">
@@ -595,8 +595,8 @@ section {
         <a href="tel:+36302615676" class="contact-btn">Hívás most</a>
     </div>
     <div class="contact-item">
-        <span>E-mail: mmotthonfelujitas@outlook.hu</span>
-        <a href="mailto:mmotthonfelujitas@outlook.hu" class="contact-btn">E-mail küldése</a>
+        <span>E-mail: kapcsolat@mmhazfelujitas.hu</span>
+        <a href="mailto:kapcsolat@mmhazfelujitas.hu" class="contact-btn">E-mail küldése</a>
     </div>
 </div>
 
@@ -627,7 +627,8 @@ form.addEventListener('submit', function(e){
     btn.disabled = true; 
     btn.textContent = "Küldés...";
 
-    emailjs.sendForm('service_h01oyeo', 'template_hfqpbia', this)
+    // AZ ÚJ ID-K BEILLESZTVE: service_2azfi3i ÉS ob8ryfb
+    emailjs.sendForm('service_2azfi3i', 'ob8ryfb', this)
     .then(() => {
         showMessage("✅ Üzenet elküldve! Szakembereink hamarosan felveszik a kapcsolatot veled emailben/telefonon.", "success");
         confetti();
