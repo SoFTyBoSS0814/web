@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karbantartás - M&M Otthonfelújítás</title>
+<!-- Modern betűtípus beágyazása -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* GLOBÁLIS BEÁLLÍTÁSOK */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Inter', sans-serif; 
+}
+:root {
+    --primary: #f26a36; /* Meleg, modern narancs */
+    --primary-hover: #d95523;
+    --dark: #1e293b; /* Elegáns pala-szürke */
+    --light-bg: #cbd5e1; 
+    --card-bg: #ffffff;
+    --text-main: #1e293b; 
+    --text-muted: #475569;
+    --radius: 16px;
+    --shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    --transition: all 0.3s ease;
+}
+
+body { 
+    line-height: 1.7; 
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%);
+    background-attachment: fixed;
+    color: var(--text-main); 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* KARBANTARTÁS DOBOZ */
+.maintenance-container {
+    max-width: 600px;
+    width: 90%;
+    background-color: var(--card-bg);
+    padding: 50px 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    margin: 20px auto;
+}
+
+/* IKON / GRAFIKA HELYETT */
+.maintenance-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: wrench-wiggle 2.5s ease-in-out infinite;
+}
+
+@keyframes wrench-wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    15% { transform: rotate(-15deg); }
+    30% { transform: rotate(10deg); }
+    45% { transform: rotate(-10deg); }
+    60% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+
+h1 {
+    font-size: 2.2em;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+p {
+    color: var(--text-muted);
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+/* ELÉRHETŐSÉG SZEKCIÓ */
+.quick-contact {
+    background-color: #f1f5f9;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.quick-contact h2 {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.contact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.contact-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.contact-row span {
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.contact-btn {
+    background-color: var(--dark);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.contact-btn:hover {
+    background-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* LÁBLÉC UTALÁS */
+.footer-text {
+    margin-top: 30px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* MOBIL REZPONZIVITÁS */
+@media(max-width: 480px) {
+    .maintenance-container {
+        padding: 35px 20px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .contact-row {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    .contact-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="maintenance-container">
+    <div class="maintenance-icon">🛠️</div>
+    <h1>Weboldalunk szépül!</h1>
+    <p>Épp a háttérmunkálatokat végezzük a honlapon, hogy még áttekinthetőbb formában mutathassuk be nektek a szolgáltatásainkat.</p>
+    
+    <div class="quick-contact">
+        <h2>Addig is elértek minket telefonon vagy e-mailben:</h2>
+        
+        <div class="contact-row">
+            <span>Ferenc: +36 20 626 0128</span>
+            <a href="tel:+36206260128" class="contact-btn">Hívás most</a>
+        </div>
+        
+        <div class="contact-row">
+            <span>Mónika: +36 30 261 5676</span>
+            <a href="tel:+36302615676" class="contact-btn">Hívás most</a>
+        </div>
+        
+        <div class="contact-row">
+            <span>kapcsolat@mmotthonfelujitas.hu</span>
+            <a href="mailto:kapcsolat@mmhazfelujitas.hu" class="contact-btn">E-mail küldése</a>
+        </div>
+    </div>
+    
+    <div class="footer-text">
+        &copy; 2026 M&M Otthonfelújítás. Türelmeteket köszönjük!
+    </div>
+</div>
+
+</body>
+</html>
