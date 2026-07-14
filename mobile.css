@@ -1,0 +1,145 @@
+/* ==========================================
+   M&M HÁZFELÚJÍTÁS - MOBIL OPTIMALIZÁLÁS (mobile.css)
+   ========================================== */
+
+@media (max-width: 768px) {
+    /* 1. KÉNYELMESEBB ÉRINTÉSI FELÜLETEK (GOMBOK) */
+    a, button, .contact-btn, .back-btn, .hero-btn, .years button {
+        min-height: 48px; /* Google ajánlás a kényelmes érintéshez */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 2. FEJLÉC ÉS NAVIGÁCIÓ */
+    header {
+        padding: 15px 0;
+    }
+    .header-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    header h1 {
+        font-size: 1.4em;
+        text-align: center;
+    }
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    nav a {
+        margin: 0 !important;
+        padding: 8px 12px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        font-size: 0.85em;
+    }
+
+    /* 3. HERO (FŐOLDAL) SZAKASZ */
+    .hero {
+        padding: 60px 15px;
+        margin-top: 15px;
+        border-radius: 12px;
+    }
+    .hero h2 {
+        font-size: 1.8em;
+    }
+    .hero p {
+        font-size: 1em;
+        margin-top: 15px;
+    }
+    .hero-btn {
+        width: 100%; /* Mobilon kényelmesebb, ha teljes szélességű a gomb */
+        margin-top: 25px;
+        padding: 16px 20px;
+    }
+
+    /* 4. RÓLUNK ÉS JOGI KÁRTYÁK (ÁSZF, GDPR, REFERENCIÁK) */
+    #about, .legal-card, .content-card, .contact-container {
+        padding: 30px 20px !important;
+        margin-top: 25px !important;
+        border-radius: 12px;
+    }
+    .section-title {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    /* 5. SZOLGÁLTATÁSOK RÁCS */
+    .services {
+        grid-template-columns: 1fr; /* Mobilon egymás alatt legyenek */
+        gap: 15px;
+    }
+    .service-box {
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    /* 6. REFERENCIA ÉV VÁLASZTÓ ÉS GALÉRIA */
+    .years {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+    .years button {
+        flex: 1;
+        max-width: 150px;
+        margin: 0 !important;
+        font-size: 0.95em;
+        padding: 12px 20px;
+    }
+    .gallery {
+        grid-template-columns: 1fr; /* Egymás alatti nagy képek */
+        gap: 15px;
+    }
+    .gallery img {
+        height: 200px; /* Kicsit alacsonyabb kép, hogy több látszódjon egyszerre */
+    }
+
+    /* 7. KAPCSOLAT KÁRTYA ÉS INFÓK */
+    .contact-form input, .contact-form textarea {
+        padding: 14px;
+        font-size: 1em; /* Megakadályozza az iOS automatikus zoomolását fókuszkor */
+    }
+    .contact-info {
+        padding: 20px;
+        margin: 25px auto;
+        border-radius: 12px;
+    }
+    .contact-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 10px;
+    }
+    .contact-btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* 8. LÁBLÉC */
+    .footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 25px 15px;
+        margin-top: 50px;
+    }
+    .footer-center {
+        order: 3; /* A jogi linkek legyenek felül, a copyright legalul */
+    }
+}
+
+/* KÜLÖNLEGES BEÁLLÍTÁS NAGYON KICSI KIJELZŐKRE (pl. iPhone SE) */
+@media (max-width: 380px) {
+    nav a {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+    .section-title {
+        font-size: 1.5em;
+    }
+}
