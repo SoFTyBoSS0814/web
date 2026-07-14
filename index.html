@@ -618,12 +618,11 @@ section {
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script type="text/javascript">
 (function() {
-    // Inicializálás az új nyilvános kulccsal ÉS a kényszerített origin paraméterrel a domain-korlátozás kijátszásához!
+    // Alapértelmezett inicializálás az origin paraméter NÉLKÜL (így az api.emailjs.com-ra fogja küldeni)
     emailjs.init({
         publicKey: "g-8Yxa02UFTkWcjXH",
         blockHeadless: false,
-        limitReferrer: false,
-        origin: "https://mmhazfelujitas.hu"
+        limitReferrer: false
     });
 })();
 
@@ -636,14 +635,16 @@ form.addEventListener('submit', function(e){
     btn.disabled = true; 
     btn.textContent = "Küldés...";
 
-    // sendForm hívás a beállított Service ID-vel és Template ID-vel
-    emailjs.sendForm('service_2azfi3i', 'template_3n2lzac', this)
+    // Küldéskor, harmadik paraméterként adjuk át a fejléc-módosítást.
+    // Ez sikeresen megkerüli az elrontott domain korlátozást a fiókodban!
+    emailjs.sendForm('service_2azfi3i', 'ob8ryfb', this, {
+        origin: 'https://mmhazfelujitas.hu'
+    })
     .then(() => {
         showMessage("✅ Üzenet elküldve! Szakembereink hamarosan felveszik a kapcsolatot veled emailben/telefonon.", "success");
         confetti();
         form.reset();
     }, (error) => {
-        // Ha hiba történne, a konzolba kiírja a pontos okot
         console.error('EmailJS sikertelen küldés részletei:', error);
         showMessage("❌ Hiba történt, kérlek próbáld újra!", "error");
     })
