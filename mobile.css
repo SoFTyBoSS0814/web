@@ -4,223 +4,205 @@
 
 @media (max-width: 768px) {
     
-    /* --- 1. GLOBÁLIS MOBIL RENDZSER-BEÁLLÍTÁSOK --- */
+    /* --- 1. GLOBÁLIS MOBIL BEÁLLÍTÁSOK --- */
     html {
         scroll-behavior: smooth;
         -webkit-text-size-adjust: 100%;
     }
 
     body {
-        padding-left: env(safe-area-inset-left, 0px);
-        padding-right: env(safe-area-inset-right, 0px);
+        padding-left: env(safe-area-inset-left, 0px) !important;
+        padding-right: env(safe-area-inset-right, 0px) !important;
         -webkit-tap-highlight-color: transparent;
     }
 
-    /* --- 2. KÉNYELMESEBB ÉRINTÉSI FELÜLETEK (Android & iOS standard) --- */
+    /* --- 2. KÉNYELMESEBB ÉRINTÉSI FELÜLETEK --- */
     a, button, .contact-btn, .back-btn, .hero-btn, .years button {
-        min-height: 44px; /* Kicsit kompaktabb, de tökéletesen érinthető */
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        min-height: 44px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
         -webkit-appearance: none;
         appearance: none;
     }
 
-    /* Kattintás/Érintés visszajelzés */
     a:active, button:active, .back-btn:active, .hero-btn:active, .years button:active {
         transform: scale(0.97) !important;
-        opacity: 0.9;
+        opacity: 0.9 !important;
     }
 
-    /* --- 3. JAVÍTOTT FEJLÉC ÉS ÁTLÁTHATÓ MENÜGOMBOK (Tökéletesen rendezett, kapszula dizájn) --- */
+    /* --- 3. RENDKÍVÜL STABIL, EGY SOROS, VÍZSZINTESEN GÖRGETHETŐ MENÜSÁV --- */
     header {
-        padding: 20px 10px !important;
-        background-color: var(--dark) !important;
+        padding: 15px 10px !important;
+        background-color: #1e293b !important; /* Fixen a sötétkék pala háttér */
         position: relative !important;
+        display: block !important;
     }
+    
     .header-container {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        gap: 15px !important;
+        gap: 12px !important;
         width: 100% !important;
         padding: 0 !important;
+        max-width: 100% !important;
     }
+
     header h1 {
-        font-size: 1.5em !important;
+        font-size: 1.4em !important;
         text-align: center !important;
-        margin-bottom: 5px !important;
+        margin: 0 0 5px 0 !important;
+        width: 100% !important;
+        display: block !important;
     }
+
+    /* Görgethető gomb-tároló */
     nav {
         display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 8px !important; /* Optimális rés a gombok között */
+        flex-direction: row !important; /* Kényszerített egy sor */
+        flex-wrap: nowrap !important; /* TILOS több sorba törni */
+        justify-content: flex-start !important; /* Balról indul */
+        gap: 8px !important;
         width: 100% !important;
-        padding: 0 5px !important;
+        padding: 5px 15px 10px 15px !important;
+        overflow-x: auto !important; /* Vízszintes görgetés engedélyezése */
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important; /* Sima, natív iOS görgetés */
     }
+
+    /* Eltüntetjük a görgetősávot Androidon és iOS-en, hogy szép letisztult legyen */
+    nav::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+    nav {
+        scrollbar-width: none !important; /* Firefoxhoz */
+    }
+
+    /* A gombok stílusa a görgetősávban */
     nav a {
         display: inline-flex !important;
+        flex-shrink: 0 !important; /* Megakadályozza, hogy összenyomódjanak a gombok */
         align-items: center !important;
         justify-content: center !important;
         margin: 0 !important;
-        padding: 8px 14px !important;
+        padding: 8px 16px !important;
         
-        /* Modern, féláttetsző "glassmorphism" gomb stílus */
-        background: rgba(255, 255, 255, 0.07) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important; 
-        border-radius: 30px !important; /* Szép kerek kapszula forma */
+        /* Glassmorphism tabletta stílus */
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 30px !important;
         
-        font-size: 0.82em !important;
+        font-size: 0.85em !important;
         font-weight: 600 !important;
         color: #f1f5f9 !important;
         text-align: center !important;
-        white-space: nowrap !important;
-        transition: all 0.2s ease !important;
+        white-space: nowrap !important; /* A gomb felirata sem törhet több sorba */
         min-height: 38px !important;
     }
-    
-    /* Aktív és megnyomott állapot a menüben */
+
     nav a:active {
         background: rgba(255, 255, 255, 0.2) !important;
-        border-color: var(--primary) !important;
-        color: #ffffff !important;
+        border-color: #f26a36 !important;
     }
 
-    /* --- 4. HERO (FŐOLDAL) SZAKASZ --- */
+    /* --- 4. HERO SZAKASZ --- */
     .hero {
-        padding: 50px 16px;
-        margin-top: 15px;
-        border-radius: 12px;
+        padding: 50px 16px !important;
+        margin-top: 15px !important;
+        border-radius: 12px !important;
     }
     .hero h2 {
-        font-size: 1.8em;
-        line-height: 1.3;
+        font-size: 1.8em !important;
+        line-height: 1.3 !important;
     }
     .hero p {
-        font-size: 1em;
-        margin-top: 15px;
+        font-size: 1em !important;
+        margin-top: 15px !important;
     }
     .hero-btn {
-        width: 100%;
-        margin-top: 25px;
-        padding: 16px 20px;
-        box-sizing: border-box;
+        width: 100% !important;
+        margin-top: 25px !important;
+        padding: 16px 20px !important;
     }
 
-    /* --- 5. RÓLUNK, JOGI ÉS TARTALMI KÁRTYÁK --- */
+    /* --- 5. TARTALMI KÁRTYÁK --- */
     #about, .legal-card, .content-card, .contact-container {
         padding: 30px 20px !important;
         margin-top: 25px !important;
-        border-radius: 12px;
+        border-radius: 12px !important;
     }
     .section-title {
-        font-size: 1.8em;
-        margin-bottom: 30px;
+        font-size: 1.8em !important;
+        margin-bottom: 30px !important;
     }
 
     /* --- 6. SZOLGÁLTATÁSOK RÁCS --- */
     .services {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
     }
     .service-box {
-        padding: 22px;
-        border-radius: 12px;
+        padding: 22px !important;
+        border-radius: 12px !important;
     }
 
     /* --- 7. REFERENCIA ÉV VÁLASZTÓ ÉS GALÉRIA --- */
     .years {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 25px;
-        padding: 0 10px;
+        display: flex !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        margin-bottom: 25px !important;
+        padding: 0 10px !important;
     }
     .years button {
-        flex: 1;
-        max-width: 150px;
+        flex: 1 !important;
+        max-width: 150px !important;
         margin: 0 !important;
-        font-size: 0.95em;
-        padding: 12px 20px;
+        font-size: 0.95em !important;
+        padding: 12px 20px !important;
     }
     .gallery {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
     }
     .gallery img {
-        height: 220px;
+        height: 220px !important;
     }
 
-    /* --- 8. ANDROID & iOS ŰRLAP OPTIMALIZÁLÁS --- */
+    /* --- 8. ŰRLAP OPTIMALIZÁLÁS --- */
     .contact-form input, 
     .contact-form textarea {
         font-size: 16px !important;
-        padding: 14px;
-        border-radius: 8px;
-        background-color: #f8fafc;
-        border: 1px solid #cbd5e1;
+        padding: 14px !important;
+        border-radius: 8px !important;
         -webkit-appearance: none;
         appearance: none;
     }
-    .contact-form input:focus, 
-    .contact-form textarea:focus {
-        border-color: var(--primary);
-        background-color: #ffffff;
-        outline: none;
-    }
-    .contact-info {
-        padding: 20px;
-        margin: 25px auto;
-        border-radius: 12px;
-    }
-    .contact-item {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-        gap: 12px;
-    }
-    .contact-btn {
-        width: 100%;
-        padding: 12px;
-    }
 
-    /* --- 9. LÁBLÉC ÉS JOGI LINKEK --- */
+    /* --- 9. LÁBLÉC --- */
     .footer {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-        padding: 25px 15px calc(25px + env(safe-area-inset-bottom, 0px));
-        margin-top: 50px;
+        flex-direction: column !important;
+        gap: 15px !important;
+        text-align: center !important;
+        padding: 25px 15px calc(25px + env(safe-area-inset-bottom, 0px)) !important;
+        margin-top: 50px !important;
     }
     .footer-center {
-        order: 3;
+        order: 3 !important;
     }
     .footer-left, .footer-right {
-        width: 100%;
-        display: flex;
-        justify-content: center;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
     }
     .footer-link {
-        padding: 10px 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        width: 80%;
-        max-width: 250px;
-    }
-}
-
-/* Különleges finomhangolás extra kicsi kijelzőkre (pl. iPhone SE, régebbi Androidok) */
-@media (max-width: 380px) {
-    nav a {
-        font-size: 0.78em;
-        padding: 6px 10px !important;
-    }
-    .section-title {
-        font-size: 1.5em;
-    }
-    .years button {
-        padding: 10px 15px;
-        font-size: 0.9em;
+        padding: 10px 20px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 20px !important;
+        width: 80% !important;
+        max-width: 250px !important;
     }
 }
