@@ -156,7 +156,7 @@ section {
     box-shadow: 0 15px 25px rgba(242, 106, 54, 0.5);
 }
 
-/* RÓLUNK */
+/* RÓLUNK & MIÉRT MINKET VÁLASSZON */
 #about {
     background-color: var(--card-bg);
     border-radius: var(--radius);
@@ -166,11 +166,68 @@ section {
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.8);
 }
-#about p {
+#about p.about-lead {
     font-size: 1.15em;
     color: var(--text-main);
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
+}
+.why-us-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+    margin: 40px 0;
+}
+.why-us-title {
+    font-size: 1.6em;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 30px;
+}
+.why-us-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: left;
+}
+.why-card {
+    background-color: #f8fafc;
+    padding: 24px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    transition: var(--transition);
+}
+.why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+.why-icon-placeholder {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(242, 106, 54, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.why-icon-placeholder::after {
+    content: '✓';
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 1.1em;
+}
+.why-card h4 {
+    font-size: 1.1em;
+    color: var(--dark);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+.why-card p {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    line-height: 1.5;
 }
 
 /* SZOLGÁLTATÁSOK */
@@ -477,6 +534,12 @@ section {
         margin-bottom: 30px !important;
     }
 
+    /* "Miért minket válasszon" rács mobilos elrendezése */
+    .why-us-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
     /* 4. Szolgáltatások egymás alá */
     .services {
         grid-template-columns: 1fr !important;
@@ -543,7 +606,33 @@ section {
 
 <section id="about">
     <h2 class="section-title">Rólunk</h2>
-    <p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és house körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
+    <p class="about-lead">Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
+    
+    <hr class="why-us-divider">
+    
+    <h3 class="why-us-title">Miért minket válasszon?</h3>
+    <div class="why-us-grid">
+        <div class="why-card">
+            <div class="why-icon-placeholder"></div>
+            <h4>Tiszta munkavégzés</h4>
+            <p>A munka végeztével mindig alaposan összetakarítunk magunk után, nem hagyunk hátra romokat vagy koszt.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon-placeholder"></div>
+            <h4>Fix, rejtett költség nélküli árak</h4>
+            <p>Pontosan annyit fizet, amennyiben megállapodtunk. Nincsenek utólagos meglepetések az elszámolásnál.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon-placeholder"></div>
+            <h4>Pontos határidők</h4>
+            <p>A megbeszélt időpontban pontosan érkezünk, a vállalt munkát pedig a megbeszélt időre befejezzük.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon-placeholder"></div>
+            <h4>Megbízható garancia</h4>
+            <p>Minden elvégzett felújítási és ház körüli munkánkra teljes körű szakmai garanciát vállalunk.</p>
+        </div>
+    </div>
 </section>
 
 <section id="services">
