@@ -4,182 +4,467 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M&M Otthonfelújítás</title>
+<!-- Modern betűtípus beágyazása -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
-body { line-height:1.6; background-color:#f8f8f8; color:#333; display:flex; flex-direction:column; min-height:100vh; }
-a { text-decoration:none; color:#333; }
+/* GLOBÁLIS BEÁLLÍTÁSOK */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Inter', sans-serif; 
+}
+:root {
+    --primary: #f26a36; /* Meleg, modern narancs */
+    --primary-hover: #d95523;
+    --dark: #1e293b; /* Elegáns pala-szürke */
+    --light-bg: #f8fafc; /* Világos szürke háttér */
+    --card-bg: #ffffff;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    --shadow-hover: 0 10px 30px rgba(15, 23, 42, 0.12);
+    --transition: all 0.3s ease;
+}
+
+body { 
+    line-height: 1.7; 
+    background-color: var(--light-bg); 
+    color: var(--text-main); 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
+}
+a { 
+    text-decoration: none; 
+    color: inherit; 
+    transition: var(--transition);
+}
 
 /* FEJLÉC */
-header { background-color:#ff6f3c; color:white; padding:20px 0; box-shadow:0 4px 6px rgba(0,0,0,0.1);}
-header h1 { text-align:center; font-size:2.5em; text-shadow:1px 1px 4px rgba(0,0,0,0.3);}
-nav { text-align:center; margin-top:10px;}
-nav a { margin:0 15px; font-weight:bold; color:white; transition:0.3s;}
-nav a:hover { text-decoration:underline; color:#fff9f0;}
+header { 
+    background-color: var(--dark); 
+    color: white; 
+    padding: 20px 0; 
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+.header-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+header h1 { 
+    font-size: 1.6em; 
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff, #ffb090);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+nav a { 
+    margin-left: 20px; 
+    font-weight: 600; 
+    font-size: 0.95em;
+    color: #cbd5e1; 
+}
+nav a:hover { 
+    color: var(--primary);
+}
 
-/* SZAKASZOK */
-main { flex:1; }
-section { padding:60px 20px; max-width:1000px; margin:auto; }
-h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradient(135deg, rgba(255,111,60,0.9), rgba(255,166,121,0.9)); display:inline-block; padding:12px 25px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+/* SZAKASZOK KÖZÖS STÍLUSAI */
+main { flex: 1; }
+section { 
+    padding: 80px 20px; 
+    max-width: 1100px; 
+    margin: auto; 
+}
+.section-title { 
+    text-align: center; 
+    margin-bottom: 50px; 
+    color: var(--dark); 
+    font-size: 2.2em;
+    font-weight: 800;
+    position: relative;
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
+}
 
-/* HERO */
-.hero { text-align:center; padding:100px 20px; background-color:#fff5f0; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-.hero p { font-size:1.2em; margin-top:20px;}
-.hero a { display:inline-block; margin-top:30px; background:#ff6f3c; color:white; padding:15px 30px; border-radius:8px; font-weight:bold; transition:0.3s;}
-.hero a:hover { background:#ff3f0c; transform: scale(1.05);}
+/* HERO (FŐOLDAL) */
+.hero { 
+    text-align: center; 
+    padding: 100px 20px; 
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    border-radius: var(--radius); 
+    margin-top: 30px;
+    box-shadow: var(--shadow);
+}
+.hero h2 {
+    font-size: 2.6em;
+    font-weight: 800;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero p { 
+    font-size: 1.2em; 
+    margin-top: 20px;
+    color: #94a3b8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hero-btn { 
+    display: inline-block; 
+    margin-top: 35px; 
+    background: linear-gradient(135deg, var(--primary) 0%, #e0531f 100%);
+    color: white; 
+    padding: 16px 35px; 
+    border-radius: 30px; 
+    font-weight: 700; 
+    box-shadow: 0 10px 20px rgba(242, 106, 54, 0.3);
+}
+.hero-btn:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 15px 25px rgba(242, 106, 54, 0.4);
+}
+
+/* RÓLUNK */
+#about {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 60px 40px;
+    margin-top: 40px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+#about p {
+    font-size: 1.15em;
+    color: var(--text-main);
+    max-width: 800px;
+    margin: 0 auto;
+}
 
 /* SZOLGÁLTATÁSOK */
-.services { display:flex; flex-wrap:wrap; justify-content:space-around; gap:20px; }
-.service-box { background-color:#fff2e6; padding:20px; flex:1 1 250px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.15); text-align:center; transition:0.3s; }
-.service-box:hover { transform:translateY(-5px); box-shadow:0 8px 25px rgba(0,0,0,0.3); background:linear-gradient(135deg, rgba(255,111,60,0.85), rgba(255,200,150,0.85)); }
+.services { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px; 
+}
+.service-box { 
+    background-color: var(--card-bg); 
+    padding: 30px 25px; 
+    border-radius: var(--radius); 
+    box-shadow: var(--shadow); 
+    transition: var(--transition);
+    border: 1px solid #f1f5f9;
+    position: relative;
+    overflow: hidden;
+}
+.service-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary);
+    opacity: 0;
+    transition: var(--transition);
+}
+.service-box:hover { 
+    transform: translateY(-5px); 
+    box-shadow: var(--shadow-hover);
+    border-color: #e2e8f0;
+}
+.service-box:hover::before {
+    opacity: 1;
+}
+.service-box h3 {
+    font-size: 1.25em;
+    color: var(--dark);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+.service-box p {
+    font-size: 0.95em;
+    color: var(--text-muted);
+}
 
 /* KAPCSOLAT */
-.contact-form { max-width:600px; margin:auto; background: rgba(255, 111, 60, 0.1); padding:25px 20px; border-radius:12px; box-shadow:0 4px 12px rgba(255,111,60,0.2);}
-.contact-form input, .contact-form textarea { width:100%; padding:12px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc; font-size:1em; }
-.contact-form button { background-color:#ff6f3c; color:white; border:none; padding:15px 30px; font-size:1em; border-radius:5px; cursor:pointer; transition:0.3s;}
-.contact-form button:hover { background-color:#ff3f0c; transform: scale(1.05);}
-#form-message.success { color: green; font-weight: bold; }
-#form-message.error { color: red; font-weight: bold; }
+.contact-container {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 50px 40px;
+    box-shadow: var(--shadow);
+    margin-top: 40px;
+}
+.contact-form { 
+    max-width: 600px; 
+    margin: auto; 
+}
+.contact-form input, .contact-form textarea { 
+    width: 100%; 
+    padding: 14px 18px; 
+    margin-bottom: 20px; 
+    border-radius: 8px; 
+    border: 1px solid #e2e8f0; 
+    font-size: 0.95em; 
+    background-color: #f8fafc;
+    color: var(--dark);
+    transition: var(--transition);
+}
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(242, 106, 54, 0.1);
+}
+.contact-form button { 
+    background: linear-gradient(135deg, var(--primary) 0%, #e0531f 100%);
+    color: white; 
+    border: none; 
+    padding: 16px 40px; 
+    font-size: 1em; 
+    font-weight: 700;
+    border-radius: 30px; 
+    cursor: pointer; 
+    width: 100%;
+    box-shadow: 0 8px 15px rgba(242, 106, 54, 0.2);
+    transition: var(--transition);
+}
+.contact-form button:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(242, 106, 54, 0.3);
+}
+#form-message.success { color: #10b981; font-weight: bold; }
+#form-message.error { color: #ef4444; font-weight: bold; }
 
 /* ELÉRHETŐSÉG + HÍVÁS GOMBOK */
 .contact-info {
     text-align: left;
-    margin: 30px auto;
+    margin: 40px auto;
     max-width: 600px;
-    background: rgba(255, 111, 60, 0.1);
-    padding: 25px 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(255, 111, 60, 0.2);
-    color: #4a2a00;
-    font-weight: 600;
+    background: #f1f5f9;
+    padding: 30px;
+    border-radius: var(--radius);
+    color: var(--dark);
 }
-
-.contact-info p { margin-bottom:15px; font-weight:normal; color:#4a2a00;}
+.contact-info p { 
+    margin-bottom: 20px; 
+    font-weight: 700; 
+    font-size: 1.1em;
+    color: var(--dark);
+}
 .contact-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
 }
-
+.contact-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.contact-item span {
+    font-weight: 600;
+    font-size: 0.95em;
+}
 .contact-btn {
-    background-color: #ff6f3c;
+    background-color: var(--dark);
     color: white;
-    padding: 8px 15px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: 700;
 }
-
-.contact-btn:hover { background-color: #ff3f0c; transform: scale(1.05); }
+.contact-btn:hover { 
+    background-color: var(--primary); 
+    transform: translateY(-2px); 
+}
 
 /* LÁBLÉC */
-.footer { background-color:#222; color:white; padding:20px; font-size:0.9em; display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; margin-top: auto; }
-.footer a { color:white; font-weight:bold; text-decoration:none; transition:0.3s; }
-.footer a:hover { text-decoration: underline; }
-.footer-center { text-align:center; flex:1; }
+.footer { 
+    background-color: var(--dark); 
+    color: #94a3b8; 
+    padding: 30px 20px; 
+    font-size: 0.9em; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    margin-top: 80px; 
+    border-top: 1px solid #334155;
+}
+.footer a { 
+    color: #cbd5e1; 
+    font-weight: 600; 
+}
+.footer a:hover { 
+    color: var(--primary); 
+}
+.footer-center { text-align: center; flex: 1; }
 
-/* MOBIL */
-@media(max-width:768px){ .services { flex-direction:column; align-items:center; } #about, .contact-form, .contact-info { margin: 20px 10px 0 10px; } }
-@media (max-width:600px){ .footer { flex-direction: column; gap:10px; text-align:center; } .contact-item { flex-direction: column; align-items:flex-start; } .contact-btn { margin-top:5px; } }
+/* MOBIL NÉZET REZPONZIVITÁS */
+@media(max-width:768px){ 
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a {
+        margin: 0 10px;
+    }
+    section {
+        padding: 50px 15px;
+    }
+    .hero h2 {
+        font-size: 2em;
+    }
+    #about {
+        padding: 40px 20px;
+    }
+    .contact-container {
+        padding: 30px 20px;
+    }
+}
+@media (max-width:600px){ 
+    .footer { 
+        flex-direction: column; 
+        gap: 15px; 
+        text-align: center; 
+    } 
+    .contact-item { 
+        flex-direction: column; 
+        align-items: stretch; 
+        text-align: center;
+        gap: 10px;
+    } 
+    .contact-btn { 
+        width: 100%;
+    } 
+}
 
 /* LEBEGŐ HÍVÁS MOBILON */
 .floating-call {
-    display:none;
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color:#ff6f3c;
-    color:white;
-    padding:12px 20px;
-    border-radius:50px;
-    font-weight:bold;
-    box-shadow:0 4px 12px rgba(0,0,0,0.3);
-    z-index:1000;
-    text-decoration:none;
-    transition:0.3s;
+    background: linear-gradient(135deg, var(--primary) 0%, #e0531f 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(242, 106, 54, 0.4);
+    z-index: 1000;
 }
-.floating-call:hover { background-color:#ff3f0c; transform:scale(1.05); }
-
-@media(max-width:600px){ .floating-call { display:block; } }
+.floating-call:hover { 
+    transform: scale(1.05); 
+}
+@media(max-width:600px){ 
+    .floating-call { display: block; } 
+}
 </style>
 </head>
 <body>
 
 <header>
-<h1>M&M Otthonfelújítás</h1>
-<nav>
-<a href="#home">Főoldal</a>
-<a href="#about">Rólunk</a>
-<a href="#services">Szolgáltatások</a>
-<a href="referenciak.html">Referenciák</a>
-<a href="#contact">Kapcsolat</a>
-</nav>
+    <div class="header-container">
+        <h1>M&M Otthonfelújítás</h1>
+        <nav>
+            <a href="#home">Főoldal</a>
+            <a href="#about">Rólunk</a>
+            <a href="#services">Szolgáltatások</a>
+            <a href="referenciak.html">Referenciák</a>
+            <a href="#contact">Kapcsolat</a>
+        </nav>
+    </div>
 </header>
 
 <main>
 <section id="home" class="hero">
-<h2>Precíz munkavégzés és ház körüli munkák</h2>
-<p>Kétfős csapatunk gyorsan és szakszerűen végzi a kisebb-nagyobb felújítási munkákat Bács-Kiskun megyében és 100 km-es körzetében.</p>
-<a href="referenciak.html">Referenciák megtekintése</a>
+    <h2>Precíz munkavégzés és ház körüli munkák</h2>
+    <p>Kétfős csapatunk gyorsan és szakszerűen végzi a kisebb-nagyobb felújítási munkákat Bács-Kiskun megyében és 100 km-es körzetében.</p>
+    <a href="referenciak.html" class="hero-btn">Referenciák megtekintése</a>
 </section>
 
 <section id="about">
-<h2>Rólunk</h2>
-<p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
+    <h2 class="section-title">Rólunk</h2>
+    <p>Két tapasztalt szakember vagyunk, akik évek óta gipszkartonozással, beltéri átalakításokkal és ház körüli kisebb munkákkal foglalkoznak. Munkánkra a precizitás és a megbízhatóság jellemző.</p>
 </section>
 
 <section id="services">
-<h2>Szolgáltatások</h2>
-<div class="services">
-<div class="service-box"><h3>Gipszkartonozás</h3><p>Falak, álmennyezetek és válaszfalak precíz kivitelezése.</p></div>
-<div class="service-box"><h3>Festések</h3><p>Beltéri és kültéri festés minőségi anyagokkal.</p></div>
-<div class="service-box"><h3>Tető felújítás</h3><p>Javítás, szigetelés és korszerűsítés.</p></div>
-<div class="service-box"><h3>Hálózások</h3><p>Villamos és egyéb hálózatok kiépítése.</p></div>
-<div class="service-box"><h3>Burkolások</h3><p>Padló- és falburkolatok profi kivitelezése.</p></div>
-<div class="service-box"><h3>Vakolások</h3><p>Sima, esztétikus és tartós felületek.</p></div>
-<div class="service-box"><h3>Munkák utáni takarítás</h3><p>Felújítás utáni alapos takarítás, por- és törmelékmentesítés.</p></div>
-<div class="service-box"><h3>Udvar és porta takarítás</h3><p>Udvarok, porták rendbetétele, lomtalanítás és tiszta környezet.</p></div>
-<div class="service-box"><h3>Kaszálás</h3><p>Fűnyírás, bozótirtás, elhanyagolt területek karbantartása.</p></div>
-<div class="service-box"><h3>Tető széldeszkázás</h3><p>Tetők szélének esztétikus és tartós kialakítása, időjárásálló anyagokkal, pontos illesztésekkel.</p></div>
-<div class="service-box"><h3>Oromlemez felhelyezése</h3><p>Oromfalak védelme és lezárása lemezborítással, szakszerű rögzítéssel a hosszú élettartam érdekében.</p></div>
-<div class="service-box"><h3>Kémények felújítása</h3><p>Kémények javítása, vakolása és bádogozása, beázás elleni védelemmel és esztétikus kivitelezéssel.</p></div>
-<div class="service-box"><h3>Nyílászárók teljeskörű cseréje</h3><p>Régi vagy hibás ajtó- és ablakzárak cseréje, biztonságos és precíz kivitelezéssel, minden típushoz.</p></div>
-</div>
+    <h2 class="section-title">Szolgáltatások</h2>
+    <div class="services">
+        <div class="service-box"><h3>Gipszkartonozás</h3><p>Falak, álmennyezetek és válaszfalak precíz kivitelezése.</p></div>
+        <div class="service-box"><h3>Festések</h3><p>Beltéri és kültéri festés minőségi anyagokkal.</p></div>
+        <div class="service-box"><h3>Tető felújítás</h3><p>Javítás, szigetelés és korszerűsítés.</p></div>
+        <div class="service-box"><h3>Hálózások</h3><p>Villamos és egyéb hálózatok kiépítése.</p></div>
+        <div class="service-box"><h3>Burkolások</h3><p>Padló- és falburkolatok profi kivitelezése.</p></div>
+        <div class="service-box"><h3>Vakolások</h3><p>Sima, esztétikus és tartós felületek.</p></div>
+        <div class="service-box"><h3>Munkák utáni takarítás</h3><p>Felújítás utáni alapos takarítás, por- és törmelékmentesítés.</p></div>
+        <div class="service-box"><h3>Udvar és porta takarítás</h3><p>Udvarok, porták rendbetétele, lomtalanítás és tiszta környezet.</p></div>
+        <div class="service-box"><h3>Kaszálás</h3><p>Fűnyírás, bozótirtás, elhanyagolt területek karbantartása.</p></div>
+        <div class="service-box"><h3>Tető széldeszkázás</h3><p>Tetők szélének esztétikus és tartós kialakítása, időjárásálló anyagokkal, pontos illesztésekkel.</p></div>
+        <div class="service-box"><h3>Oromlemez felhelyezése</h3><p>Oromfalak védelme és lezárása lemezborítással, szakszerű rögzítéssel a hosszú élettartam érdekében.</p></div>
+        <div class="service-box"><h3>Kémények felújítása</h3><p>Kémények javítása, vakolása és bádogozása, beázás elleni védelemmel és esztétikus kivitelezéssel.</p></div>
+        <div class="service-box"><h3>Nyílászárók teljeskörű cseréje</h3><p>Régi vagy hibás ajtó- és ablakzárak cseréje, biztonságos és precíz kivitelezéssel, minden típushoz.</p></div>
+    </div>
 </section>
 
 <section id="contact">
-<h2>Kapcsolatfelvétel/Árajánlatkérés</h2>
-<div class="contact-form">
-<form id="contact-form">
-<input type="text" name="name" placeholder="Név" required>
-<input type="email" name="email" placeholder="E-mail" required>
-<input type="tel" name="phone" placeholder="+36 30/20/70 +7 karakter, vagy egyben írva." 
-       pattern="(\+36\s?(30|20|70)\s?\d{7}|06(30|20|70)\d{7})" 
-       title="Érvényes magyar telefonszám: +36 30/20/70 +7 karakter, vagy egyben írva." 
-       required>
-<textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
-<button type="submit">Küldés</button>
-</form>
-<p id="form-message" style="text-align:center; margin-top:10px;"></p>
-</div>
+    <h2 class="section-title">Kapcsolatfelvétel</h2>
+    <div class="contact-container">
+        <div class="contact-form">
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="Név" required>
+                <input type="email" name="email" placeholder="E-mail" required>
+                <input type="tel" name="phone" placeholder="+36 30/20/70 +7 karakter, vagy egyben írva." 
+                       pattern="(\+36\s?(30|20|70)\s?\d{7}|06(30|20|70)\d{7})" 
+                       title="Érvényes magyar telefonszám: +36 30/20/70 +7 karakter, vagy egyben írva." 
+                       required>
+                <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
+                <button type="submit">Üzenet küldése</button>
+            </form>
+            <p id="form-message" style="text-align:center; margin-top:15px;"></p>
+        </div>
+    </div>
 </section>
 
-<!-- Kontakt elérhetőségek gombokkal -->
 <div class="contact-info">
-<p>Gyors kapcsolat? Hívd vagy írj e-mailt:</p>
-<div class="contact-item">
-    <span>Ferenc: +36 20 626 0128</span>
-    <a href="tel:+36206260128" class="contact-btn">Hívás most</a>
-</div>
-<div class="contact-item">
-    <span>Mónika: +36 30 261 5676</span>
-    <a href="tel:+36302615676" class="contact-btn">Hívás most</a>
-</div>
-<div class="contact-item">
-    <span>E-mail: mmotthonfelujitas@outlook.hu</span>
-    <a href="mailto:mmotthonfelujitas@outlook.hu" class="contact-btn">E-mail küldése</a>
-</div>
+    <p>Gyors kapcsolat? Hívd vagy írj e-mailt:</p>
+    <div class="contact-item">
+        <span>Ferenc: +36 20 626 0128</span>
+        <a href="tel:+36206260128" class="contact-btn">Hívás most</a>
+    </div>
+    <div class="contact-item">
+        <span>Mónika: +36 30 261 5676</span>
+        <a href="tel:+36302615676" class="contact-btn">Hívás most</a>
+    </div>
+    <div class="contact-item">
+        <span>E-mail: mmotthonfelujitas@outlook.hu</span>
+        <a href="mailto:mmotthonfelujitas@outlook.hu" class="contact-btn">E-mail küldése</a>
+    </div>
 </div>
 
 <a href="tel:+36206260128" class="floating-call">Hívás most</a>
@@ -187,9 +472,9 @@ h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradie
 </main>
 
 <footer class="footer">
-<div class="footer-left"><a href="aszf.html">ÁSZF</a></div>
-<div class="footer-center">&copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.</div>
-<div class="footer-right"><a href="gdpr.html">GDPR tájékoztató</a></div>
+    <div class="footer-left"><a href="aszf.html">ÁSZF</a></div>
+    <div class="footer-center">&copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.</div>
+    <div class="footer-right"><a href="gdpr.html">GDPR tájékoztató</a></div>
 </footer>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -215,7 +500,7 @@ form.addEventListener('submit', function(e){
     })
     .finally(() => {
         btn.disabled = false;
-        btn.textContent = "Küldés";
+        btn.textContent = "Üzenet küldése";
     });
 });
 
@@ -225,20 +510,20 @@ function showMessage(msg, type) {
     setTimeout(() => { formMessage.textContent = ""; formMessage.className = ""; }, 5000);
 }
 
-// Egyszerű konfetti effekt
 function confetti() {
     for(let i=0;i<100;i++){
         let c = document.createElement('div');
         c.style.position = 'fixed';
         c.style.width = '6px';
         c.style.height = '6px';
-        c.style.backgroundColor = ['#ff6f3c','#ffb07c','#ffdfc1'][Math.floor(Math.random()*3)];
+        c.style.backgroundColor = ['#f26a36','#ffb090','#cbd5e1'][Math.floor(Math.random()*3)];
         c.style.left = Math.random()*window.innerWidth+'px';
         c.style.top = Math.random()*window.innerHeight+'px';
         c.style.borderRadius = '50%';
         c.style.opacity = '0.8';
         c.style.transform = 'translateY(0)';
         c.style.transition = 'all 1s linear';
+        c.style.zIndex = '9999';
         document.body.appendChild(c);
         setTimeout(()=>{c.style.transform='translateY(100vh)'; c.style.opacity='0';},50);
         setTimeout(()=>{c.remove();},1050);
