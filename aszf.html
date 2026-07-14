@@ -1,95 +1,148 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M&M Otthonfelújítás - ÁSZF</title>
-    <style>
-        * { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
-        body { line-height:1.6; background-color:#f8f8f8; color:#333; padding:20px; }
-        h1, h2 { text-align:center; margin-bottom:20px; color:#ff6f3c; }
-        h1 { font-size:2.5em; }
-        h2 { font-size:1.8em; margin-top:40px; }
-        p, li { margin-bottom:15px; }
-        ul { margin-left:20px; margin-bottom:15px; }
-        a { color:#ff6f3c; text-decoration:none; }
-        a:hover { text-decoration:underline; }
-        footer { background-color:#222; color:white; text-align:center; padding:20px 0; margin-top:40px; }
-        .container { max-width:900px; margin:auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&M Otthonfelújítás - ÁSZF</title>
+<style>
+* { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
+body { line-height:1.6; background-color:#f8f8f8; color:#333; display:flex; flex-direction:column; min-height:100vh; }
+a { text-decoration:none; color:#333; }
 
-        /* Vissza gomb stílus */
-        .back-link {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+/* FEJLÉC */
+header { background-color:#ff6f3c; color:white; padding:20px 0; box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+header h1 { text-align:center; font-size:2.5em; text-shadow:1px 1px 4px rgba(0,0,0,0.3);}
+nav { text-align:center; margin-top:10px;}
+nav a { margin:0 15px; font-weight:bold; color:white; transition:0.3s;}
+nav a:hover { text-decoration:underline; color:#fff9f0;}
 
-        .back-link a {
-            display: inline-block;
-            background-color: #ff6f3c;
-            color: white;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+/* SZAKASZOK */
+main { flex:1; }
+section { padding:60px 20px; max-width:1000px; margin:auto; }
+h2 { text-align:center; margin-bottom:40px; color:#fff; background:linear-gradient(135deg, rgba(255,111,60,0.9), rgba(255,166,121,0.9)); display:inline-block; padding:12px 25px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.3);}
 
-        .back-link a:hover {
-            background-color: #e85f2f;
-            text-decoration: none;
-        }
-    </style>
+/* TARTALOM DOBOZ */
+.content-box {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+}
+.content-box p, .content-box li {
+    font-size: 1.05em;
+    margin-bottom: 20px;
+    color: #444;
+}
+.content-box ul {
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+.content-box li {
+    margin-bottom: 10px;
+}
+.content-box a {
+    color: #ff6f3c;
+    font-weight: bold;
+}
+.content-box a:hover {
+    text-decoration: underline;
+}
+
+/* VISSZA GOMB */
+.back-btn-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.back-btn {
+    display: inline-block;
+    background: #ff6f3c;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.back-btn:hover {
+    background: #ff3f0c;
+    transform: scale(1.05);
+}
+
+/* LÁBLÉC */
+.footer { background-color:#222; color:white; padding:20px; font-size:0.9em; display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; margin-top: auto; }
+.footer a { color:white; font-weight:bold; text-decoration:none; transition:0.3s; }
+.footer a:hover { text-decoration: underline; }
+.footer-center { text-align:center; flex:1; }
+
+/* MOBIL */
+@media(max-width:768px){ .content-box { padding: 25px 15px; margin: 10px; } }
+@media (max-width:600px){ .footer { flex-direction: column; gap:10px; text-align:center; } }
+</style>
 </head>
 <body>
 
-<div class="container">
+<header>
+<h1>M&M Otthonfelújítás</h1>
+<nav>
+<a href="index.html#home">Főoldal</a>
+<a href="index.html#about">Rólunk</a>
+<a href="index.html#services">Szolgáltatások</a>
+<a href="referenciak.html">Referenciák</a>
+<a href="index.html#contact">Kapcsolat</a>
+</nav>
+</header>
 
-    <h1>Általános Szerződési Feltételek (ÁSZF)</h1>
+<main>
+<section>
+    <h2>Általános Szerződési Feltételek</h2>
+    
+    <div class="content-box">
+        <p>Ez az oldal tartalmazza a M&M Otthonfelújítás szolgáltatásaira vonatkozó általános szerződési feltételeket. Kérjük, figyelmesen olvassa el az alábbiakat a szolgáltatás igénybevétele előtt.</p>
 
-    <!-- Vissza a főoldalra – középen, a cím alatt -->
-    <div class="back-link">
-        <a href="index.html">← Vissza a főoldalra</a>
+        <p><strong>1. Szolgáltatások</strong><br>
+        A M&M Otthonfelújítás különféle ház körüli és beltéri felújítási munkákat kínál, beleértve a gipszkartonozást, festést, tetőfelújítást, burkolást és takarítást. A szolgáltatások részleteit a weboldalon található leírások tartalmazzák.</p>
+
+        <p><strong>2. Megrendelés és ajánlatkérés</strong><br>
+        Az ajánlatkérés a weboldalon keresztül, e-mailen vagy telefonon történhet. Az ajánlatot a megrendelő részére a lehető legrövidebb időn belül továbbítjuk. A szolgáltatás megrendelésekor a megrendelőnek pontosan meg kell adnia a szükséges információkat.</p>
+
+        <p><strong>3. Díjak és fizetés</strong></p>
+        <ul>
+            <li>A szolgáltatások díját az egyedi árajánlat tartalmazza.</li>
+            <li>A fizetés készpénzben, átutalással vagy előre egyeztetett módon történhet.</li>
+            <li>A díjak tartalmazzák a munkadíjat és az alapanyagokat, kivéve, ha az árajánlat mást tartalmaz.</li>
+        </ul>
+
+        <p><strong>4. Teljesítés és határidők</strong><br>
+        A M&M Otthonfelújítás a lehető leghamarabb végzi el a megrendelt szolgáltatásokat, a megrendelővel egyeztetett határidők szerint. A határidők betartása a helyszíni körülményektől és időjárási viszonyoktól is függhet.</p>
+
+        <p><strong>5. Felelősség és garancia</strong><br>
+        A szolgáltató minden tőle telhetőt megtesz a precíz és biztonságos munkavégzés érdekében. Kizárólag a szolgáltatás teljesítéséért vállalunk felelősséget. Bármely anyaghiba, természeti kár vagy külső beavatkozás esetén a szolgáltató felelőssége korlátozott.</p>
+
+        <p><strong>6. Adatvédelem</strong><br>
+        A megrendelők adatait a M&M Otthonfelújítás bizalmasan kezeli, és kizárólag a szolgáltatás teljesítéséhez használja fel. Részletes adatkezelési tájékoztatót a <a href="gdpr.html">GDPR tájékoztató</a> tartalmaz.</p>
+
+        <p><strong>7. Panaszkezelés</strong><br>
+        Amennyiben a megrendelő a szolgáltatással kapcsolatban panaszt kíván tenni, azt írásban, e-mailen vagy telefonon jelezheti. A panaszokat a M&M Otthonfelújítás haladéktalanul kivizsgálja.</p>
+
+        <p><strong>8. Jogviták</strong><br>
+        Az ÁSZF-ben nem rendezett kérdésekben a hatályos magyar jogszabályok az irányadók. A szolgáltató és a megrendelő között felmerülő jogvitákat elsősorban békés úton próbáljuk rendezni, ennek sikertelensége esetén a magyar bíróság illetékes.</p>
+
+        <p><strong>9. Az ÁSZF elfogadása</strong><br>
+        A szolgáltatás igénybevételével a megrendelő tudomásul veszi, hogy elolvasta az Általános Szerződési Feltételeket, és azok minden pontjával <strong>teljes mértékben egyetért és elfogadja</strong>. Az ÁSZF elfogadása a szolgáltatás megrendelésének előfeltétele.</p>
     </div>
 
-    <p>Ez az oldal tartalmazza a M&M Otthonfelújítás szolgáltatásaira vonatkozó általános szerződési feltételeket. Kérjük, figyelmesen olvassa el az alábbiakat a szolgáltatás igénybevétele előtt.</p>
+    <div class="back-btn-container">
+        <a href="index.html" class="back-btn">← Vissza a főoldalra</a>
+    </div>
+</section>
+</main>
 
-    <h2>1. Szolgáltatások</h2>
-    <p>A M&M Otthonfelújítás különféle ház körüli és beltéri felújítási munkákat kínál, beleértve a gipszkartonozást, festést, tetőfelújítást, burkolást és takarítást. A szolgáltatások részleteit a weboldalon található leírások tartalmazzák.</p>
-
-    <h2>2. Megrendelés és ajánlatkérés</h2>
-    <p>Az ajánlatkérés a weboldalon keresztül, e-mailen vagy telefonon történhet. Az ajánlatot a megrendelő részére a lehető legrövidebb időn belül továbbítjuk. A szolgáltatás megrendelésekor a megrendelőnek pontosan meg kell adnia a szükséges információkat.</p>
-
-    <h2>3. Díjak és fizetés</h2>
-    <ul>
-        <li>A szolgáltatások díját az egyedi árajánlat tartalmazza.</li>
-        <li>A fizetés készpénzben, átutalással vagy előre egyeztetett módon történhet.</li>
-        <li>A díjak tartalmazzák a munkadíjat és az alapanyagokat, kivéve, ha az árajánlat mást tartalmaz.</li>
-    </ul>
-
-    <h2>4. Teljesítés és határidők</h2>
-    <p>A M&M Otthonfelújítás a lehető leghamarabb végzi el a megrendelt szolgáltatásokat, a megrendelővel egyeztetett határidők szerint. A határidők betartása a helyszíni körülményektől és időjárási viszonyoktól is függhet.</p>
-
-    <h2>5. Felelősség és garancia</h2>
-    <p>A szolgáltató minden tőle telhetőt megtesz a precíz és biztonságos munkavégzés érdekében. Kizárólag a szolgáltatás teljesítéséért vállalunk felelősséget. Bármely anyaghiba, természeti kár vagy külső beavatkozás esetén a szolgáltató felelőssége korlátozott.</p>
-
-    <h2>6. Adatvédelem</h2>
-    <p>A megrendelők adatait a M&M Otthonfelújítás bizalmasan kezeli, és kizárólag a szolgáltatás teljesítéséhez használja fel. Részletes adatkezelési tájékoztatót a <a href="gdpr.html">GDPR tájékoztató</a> tartalmaz.</p>
-
-    <h2>7. Panaszkezelés</h2>
-    <p>Amennyiben a megrendelő a szolgáltatással kapcsolatban panaszt kíván tenni, azt írásban, e-mailen vagy telefonon jelezheti. A panaszokat a M&M Otthonfelújítás haladéktalanul kivizsgálja.</p>
-
-    <h2>8. Jogviták</h2>
-    <p>Az ÁSZF-ben nem rendezett kérdésekben a hatályos magyar jogszabályok az irányadók. A szolgáltató és a megrendelő között felmerülő jogvitákat elsősorban békés úton próbáljuk rendezni, ennek sikertelensége esetén a magyar bíróság illetékes.</p>
-
-    <h2>9. Az ÁSZF elfogadása</h2>
-    <p>A szolgáltatás igénybevételével a megrendelő tudomásul veszi, hogy elolvasta az Általános Szerződési Feltételeket, és azok minden pontjával <strong>teljes mértékben egyetért és elfogadja</strong>. Az ÁSZF elfogadása a szolgáltatás megrendelésének előfeltétele.</p>
-
-    <footer>
-        &copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva. 
-        <br>
-        <a href="index.html">Főoldal</a> | <a href="gdpr.html">GDPR tájékoztató</a>
-    </footer>
-
-</div>
+<footer class="footer">
+<div class="footer-left"><a href="aszf.html">ÁSZF</a></div>
+<div class="footer-center">&copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.</div>
+<div class="footer-right"><a href="gdpr.html">GDPR tájékoztató</a></div>
+</footer>
 
 </body>
 </html>
