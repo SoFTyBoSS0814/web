@@ -614,9 +614,15 @@ section {
     </div>
 </footer>
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-emailjs.init("g-8Yxa02UFTkWcjXH");
+<!-- A legfrissebb, 4-es verziójú hivatalos EmailJS könyvtár betöltése -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+(function() {
+    // Inicializálás az új nyilvános kulccsal
+    emailjs.init({
+        publicKey: "g-8Yxa02UFTkWcjXH",
+    });
+})();
 
 const form = document.getElementById('contact-form');
 const formMessage = document.getElementById('form-message');
@@ -627,13 +633,15 @@ form.addEventListener('submit', function(e){
     btn.disabled = true; 
     btn.textContent = "Küldés...";
 
-    // AZ ÚJ ID-K BEILLESZTVE: service_2azfi3i ÉS ob8ryfb
+    // sendForm hívás a beállított Service ID-vel és Template ID-vel
     emailjs.sendForm('service_2azfi3i', 'ob8ryfb', this)
     .then(() => {
         showMessage("✅ Üzenet elküldve! Szakembereink hamarosan felveszik a kapcsolatot veled emailben/telefonon.", "success");
         confetti();
         form.reset();
-    }, () => {
+    }, (error) => {
+        // Ha hiba történne, a konzolba kiírja a pontos okot
+        console.error('EmailJS sikertelen küldés részletei:', error);
         showMessage("❌ Hiba történt, kérlek próbáld újra!", "error");
     })
     .finally(() => {
