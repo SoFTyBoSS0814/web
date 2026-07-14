@@ -1,170 +1,319 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referenciák – M&M Otthonfelújítás</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&M Házfelújítás - Referenciák</title>
+<!-- Modern betűtípus beágyazása -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* GLOBÁLIS BEÁLLÍTÁSOK (Pontosan mint az index.html-ben) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+:root {
+    --primary: #f26a36; /* Meleg, modern narancs */
+    --primary-hover: #d95523;
+    --dark: #1e293b; /* Elegáns pala-szürke */
+    --light-bg: #cbd5e1; /* Sötétebb szürke az átmenethez */
+    --card-bg: #ffffff;
+    --text-main: #1e293b; /* Sötétebb szövegszín a jobb olvashatóságért */
+    --text-muted: #475569;
+    --radius: 16px;
+    --shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    --shadow-hover: 0 15px 35px rgba(15, 23, 42, 0.2);
+    --transition: all 0.3s ease;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+body {
+    line-height: 1.7;
+    background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%) !important;
+    background-attachment: fixed !important;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
 
-        body {
-            background-color: #f8f8f8;
-            color: #333;
-        }
+/* FEJLÉC (Pontosan mint az index.html-ben) */
+header {
+    background-color: var(--dark);
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+}
+.header-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.logo-link {
+    display: inline-block;
+    transition: var(--transition);
+}
+.logo-link:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+header h1 {
+    font-size: 1.6em;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff, #ffb090);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+nav a {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #cbd5e1;
+}
+nav a:hover {
+    color: var(--primary);
+}
 
-        a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
+/* SZAKASZOK KÖZÖS STÍLUSAI */
+main { flex: 1; }
+section {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--dark);
+    font-size: 2.2em;
+    font-weight: 800;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
+}
 
-        header {
-            background-color: #ff6f3c;
-            color: white;
-            padding: 25px 10px 35px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-        }
+/* ÉV VÁLASZTÓ GOMBOK (A Hero-btn stílusára alapozva) */
+.years {
+    text-align: center;
+    margin: 20px 0 40px 0;
+}
+.years button {
+    background: var(--dark);
+    border: none;
+    color: #cbd5e1;
+    padding: 14px 35px;
+    margin: 10px;
+    border-radius: 30px;
+    font-size: 1.05em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+.years button:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+.years button.active {
+    background: linear-gradient(135deg, var(--primary) 0%, #e0531f 100%);
+    color: white;
+    box-shadow: 0 10px 20px rgba(242, 106, 54, 0.3);
+}
 
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
+/* TARTALOM KÁRTYA ÉS GALÉRIA */
+.content-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+.gallery img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(15, 23, 42, 0.1);
+    transition: var(--transition);
+}
+.gallery img:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
 
-        /* Vissza gomb – egységes az ÁSZF / GDPR oldalakkal */
-        .back-link {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
+/* ÜRES/FELTÖLTÉS ALATT STÍLUS */
+.year-only {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 80px 20px;
+}
 
-        .back-link a {
-            background-color: white;
-            color: #ff6f3c;
-            padding: 10px 26px;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+/* LIGHTBOX (NAGYÍTÁS) */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.95);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    backdrop-filter: blur(5px);
+}
+.lightbox img {
+    max-width: 90%;
+    max-height: 85%;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
 
-        .back-link a:hover {
-            background-color: #f2f2f2;
-        }
+/* VISSZA GOMB STÍLUS */
+.back-btn-container {
+    text-align: center;
+    margin-top: 40px;
+}
+.back-btn {
+    display: inline-block;
+    background: var(--dark);
+    color: white;
+    padding: 16px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+.back-btn:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(242, 106, 54, 0.2);
+}
 
-        .years {
-            text-align: center;
-            margin: 40px 0;
-        }
+/* LÁBLÉC (Pontosan mint az index.html-ben) */
+.footer {
+    background-color: var(--dark);
+    color: #cbd5e1;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 80px;
+    border-top: 1px solid #334155;
+}
+.footer-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+.footer-link:hover {
+    color: var(--primary) !important;
+}
+.footer-center { text-align: center; flex: 1; }
 
-        .years button {
-            background: #ff6f3c;
-            border: none;
-            color: white;
-            padding: 14px 28px;
-            margin: 10px;
-            border-radius: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-
-        .years button.active {
-            background: #e85c2a;
-        }
-
-        .gallery {
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery img {
-            width: 100%;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-        }
-
-        .year-only {
-            text-align: center;
-            font-size: 4em;
-            font-weight: bold;
-            color: #ccc;
-            padding: 160px 20px;
-        }
-
-        .lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-        }
-
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            .year-only {
-                font-size: 2.5em;
-            }
-        }
-    </style>
+/* REZPONZIVITÁS */
+@media(max-width:768px){
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a {
+        margin: 0 10px;
+    }
+    section {
+        padding: 50px 15px;
+    }
+    .content-card {
+        padding: 20px;
+    }
+}
+@media (max-width:600px){
+    .footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+</style>
 </head>
-
 <body>
 
 <header>
-    <h1>Referenciáink</h1>
-    <div class="back-link">
-        <a href="index.html">← Vissza a főoldalra</a>
+    <div class="header-container">
+        <a href="index.html#home" class="logo-link">
+            <h1>M&M Házfelújítás</h1>
+        </a>
+        <nav>
+            <a href="index.html#home">Főoldal</a>
+            <a href="index.html#about">Rólunk</a>
+            <a href="index.html#services">Szolgáltatások</a>
+            <a href="referenciak.html" style="color: var(--primary);">Referenciák</a>
+            <a href="index.html#contact">Kapcsolat</a>
+        </nav>
     </div>
 </header>
 
-<div class="years">
-    <button class="active" data-year="2026">2026</button>
-    <button data-year="2025">2025</button>
-</div>
+<main>
+<section>
+    <h2 class="section-title">Referenciáink</h2>
 
-<div id="content"></div>
+    <div class="years">
+        <button class="active" data-year="2026">2026</button>
+        <button data-year="2025">2025</button>
+    </div>
+
+    <!-- Az index.html kártya-elrendezéséhez igazított tároló -->
+    <div class="content-card" id="content"></div>
+
+    <div class="back-btn-container">
+        <a href="index.html" class="back-btn">← Vissza a főoldalra</a>
+    </div>
+</section>
+</main>
 
 <div class="lightbox" id="lightbox">
     <img id="lightbox-img" src="">
 </div>
 
-<footer>
-    &copy; 2026 M&M Otthonfelújítás. Minden jog fenntartva.
+<footer class="footer">
+    <div class="footer-left">
+        <a href="aszf.html" class="footer-link">ÁSZF</a>
+    </div>
+    <div class="footer-center">&copy; 2026 M&M Házfelújítás. Minden jog fenntartva.</div>
+    <div class="footer-right">
+        <a href="gdpr.html" class="footer-link">GDPR tájékoztató</a>
+    </div>
 </footer>
 
 <script>
