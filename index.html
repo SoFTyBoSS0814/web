@@ -361,7 +361,7 @@ section {
 }
 
 /* ==========================================
-   PONTOS ANDROID & iOS MOBIL OPTIMALIZÁLÁS (Garantáltan érvényesül!)
+   PONTOS ANDROID & iOS MOBIL OPTIMALIZÁLÁS
    ========================================== */
 @media (max-width: 768px) {
     /* 1. Globális rögzítések */
@@ -679,13 +679,12 @@ function confetti() {
         setTimeout(()=>{c.remove();},1050);
     }
 }
-    <script type="text/javascript">
-// 1. Jobb klikk letiltása
+
+// Jobb klikk és fejlesztői gyorsbillentyűk (F12, Ctrl+U, Ctrl+Shift+I/J, Ctrl+S) letiltása
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
 
-// 2. Gyorsbillentyűk letiltása (F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+S)
 document.addEventListener('keydown', function(e) {
     // F12 letiltása
     if (e.key === "F12") {
@@ -700,24 +699,23 @@ document.addEventListener('keydown', function(e) {
     }
     
     // Ctrl+Shift+I (Fejlesztői eszközök)
-    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
         e.preventDefault();
         return false;
     }
     
     // Ctrl+Shift+J (Fejlesztői konzol)
-    if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
         e.preventDefault();
         return false;
     }
 
-    // Ctrl+S (Mentés másként - hogy ne tudják egyben lementeni az oldalt)
+    // Ctrl+S (Mentés másként)
     if (e.ctrlKey && e.key === 's') {
         e.preventDefault();
         return false;
     }
 });
-</script>
 </script>
 </body>
 </html>
