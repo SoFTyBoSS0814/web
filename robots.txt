@@ -1,4 +1,12 @@
+# M&M Házfelújítás - Robots.txt
+
 User-agent: *
 Allow: /
 
+# Belső mappák kizárása az indexelésből
+Disallow: /admin/
+Disallow: /private/
+Disallow: /drafts/
+
+# Sitemap pontos helye
 Sitemap: https://mmhazfelujitas.hu/sitemap.xml
