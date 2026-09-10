@@ -48,10 +48,12 @@
       <input type="text" id="code" required placeholder="Pl. JANOS123" style="text-transform: uppercase;">
     </div>
 
-    <div class="checkbox-group">
-      <input type="checkbox" id="terms" required>
-      <label for="terms">Elfogadom az ÁSZF-et és az Adatkezelési Tájékoztatót.</label>
-    </div>
+<div class="checkbox-group" style="display: flex; align-items: center; gap: 8px;">
+    <input type="checkbox" id="terms" required style="cursor: pointer;">
+    <label for="terms" style="cursor: pointer;">
+        Elfogadom az <a href="aszf.html" target="_blank" style="color: #38bdf8; text-decoration: underline;">ÁSZF</a>-et és az <a href="gdpr.html" target="_blank" style="color: #38bdf8; text-decoration: underline;">Adatkezelési Tájékoztatót</a>.
+    </label>
+</div>
 
     <button type="submit" class="submit-btn" id="btn-submit">Kód regisztrálása</button>
     <div id="msg-box"></div>
