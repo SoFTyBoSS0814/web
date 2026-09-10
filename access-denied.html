@@ -1,40 +1,111 @@
-<script>
-      (function() {
-        // A te letiltott IP-d és az indokod
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hozzáférés megtagadva - M&M Házfelújítás</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #1a1e24;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .banned-card {
+            background-color: #252a32;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            max-width: 520px;
+            width: 100%;
+            border-top: 5px solid #ff4d4d;
+        }
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ff4d4d;
+        }
+        p {
+            font-size: 15px;
+            color: #a0a6b1;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .info-box {
+            background-color: #1e2228;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #ff6b6b;
+            font-family: monospace;
+            border: 1px solid #3a2222;
+            margin-bottom: 10px;
+        }
+        .ip-box {
+            font-size: 12px;
+            color: #717782;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banned-card">
+        <div class="icon">🚫</div>
+        <h1>Hozzáférés letiltva</h1>
+        <p>Az oldal adminisztrátora korlátozta a hozzáférést erről a hálózatról fiktív, komolytalan ajánlatkérés vagy visszaélésszerű használat miatt.</p>
+        
+        <div class="info-box" id="banned-reason-display">
+            INDOKLÁS: Ellenőrzés...
+        </div>
+        
+        <div class="ip-box" id="banned-ip-display">
+            LETILTOTT IP: Ellenőrzés...
+        </div>
+    </div>
+
+    <!-- TISZTA IP ÉS INDOKOLÁS LEKÉRDEZŐ SCRIPT (Nincs fixen beégetve senki) -->
+    <script>
         const bannedList = {
-          '77.110.174.78': 'Ki lettél tiltva az alábbi indokkal: Teszt'
+            '77.110.174.78': 'Ki lettél tiltva az alábbi indokkal: Teszt'
+            // Ide jöhetnek a jövőbeli tiltottak:
+            // '123.45.67.89': 'Második tiltott indoklása'
         };
 
-        // Megpróbáljuk lekérni az IP-t, de ha hiba van, a saját teszt IP-nket vesszük alapul
         fetch('https://api.ipify.org?format=json')
-          .then(response => response.json())
-          .then(data => processBan(data.ip))
-          .catch(err => {
-            console.warn('API hiba, fallback IP használata:', err);
-            processBan('77.110.174.78'); // Tesztcélra beállítva, ha az API blockolva van
-          });
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                var userIP = data.ip;
+                // Megkeressük a listában az aktuális látogató IP-jét
+                var reason = bannedList[userIP] || 'A hozzáférés biztonsági okokból korlátozva.';
 
-        function processBan(userIP) {
-          const reason = bannedList[userIP] || 'Ismeretlen vagy adminisztratív tiltás';
-
-          // Biztosítjuk, hogy a DOM elemek megvannak
-          const updateUI = () => {
-            const ipDisplay = document.getElementById('banned-ip-display');
-            const reasonDisplay = document.getElementById('banned-reason-display');
-
-            if (ipDisplay) {
-              ipDisplay.innerText = "LETILTOTT IP: " + userIP;
-            }
-            if (reasonDisplay) {
-              reasonDisplay.innerText = "INDOKLÁS: " + reason;
-            }
-          };
-
-          if (document.readyState === 'loading') {
-            document.addEventListener("DOMContentLoaded", updateUI);
-          } else {
-            updateUI();
-          }
-        }
-      })();
+                // Kiírjuk a ténylegesen lekérdezett IP-t és a hozzá tartozó indokot
+                document.getElementById('banned-ip-display').innerText = "LETILTOTT IP: " + userIP;
+                document.getElementById('banned-reason-display').innerText = "INDOKLÁS: " + reason;
+            })
+            .catch(function(err) {
+                console.error('IP lekérdezési hiba:', err);
+                document.getElementById('banned-ip-display').innerText = "LETILTOTT IP: Ismeretlen";
+                document.getElementById('banned-reason-display').innerText = "INDOKLÁS: Nem sikerült azonosítani a hálózatot.";
+            });
     </script>
+
+</body>
+</html>
