@@ -746,7 +746,7 @@ section {
     let checkTimeout = null;
     let isCodeValid = true;
 
-    // 1. REF kód valós idejű ellenőrzése
+    // 1. REF kód ellenőrzése és NÉV kiírása
     async function verifyRefCode(code) {
       const cleanCode = code.trim().toUpperCase();
 
@@ -794,7 +794,6 @@ section {
         }, 400);
       });
 
-      // Megnyitáskor URL paraméter (pl. ?ref=REF) beolvasása
       const urlParams = new URLSearchParams(window.location.search);
       const refFromUrl = urlParams.get('ref');
       if (refFromUrl) {
@@ -825,7 +824,7 @@ section {
             if (data) {
               await supabaseClient
                 .from('refcode')
-                .update({ used: (data.used || 0) + 1 })
+                .update({ used: Number(data.used || 0) + 1 })
                 .eq('code', usedCode);
             }
           } catch (err) {
