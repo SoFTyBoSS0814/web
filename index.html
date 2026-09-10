@@ -716,6 +716,13 @@ section {
                        title="Érvényes magyar telefonszám: +36 30/20/70 +7 karakter, vagy egyben írva." 
                        required>
                 <textarea name="message" rows="6" placeholder="Üzenet" required></textarea>
+                
+                <!-- ÚJ MEZŐ: Ajánlói kód és státusz visszajelzés -->
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <input type="text" id="ref_code" name="ref_code" placeholder="Ajánlói / Kedvezmény kód (ha van)" style="text-transform: uppercase;">
+                    <div id="ref-status" style="font-size: 13px; margin-top: 5px; font-weight: bold; min-height: 18px;"></div>
+                </div>
+
                 <button type="submit">Üzenet küldése</button>
             </form>
             <p id="form-message" style="text-align:center; margin-top:15px;"></p>
