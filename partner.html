@@ -60,9 +60,9 @@
 
 <script> 
   const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_ut6xD_yLfuzOhkjd5MhPrA_z0QvA';
+  // Cserélve a működő anon public JWT kulcsra:
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtb3lwdm5oaHFtZGpteGF3a3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwMzg0MTQsImV4cCI6MjEwNDYxNDQxNH0.J7BfwG-feB6cQK2hBOfA2mKIivfnOO-rBxFwAx9HcSU';
   
-  // Javítva: window.supabase használatával elkerüljük a névütközést
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const form = document.getElementById('partner-form');
