@@ -6,7 +6,7 @@
   <title>Partneri Regisztráció - M&M Házfelújítás</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    body { background-color: #0f172a; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+    body { background-color: #0f172a; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; flex-direction: column; }
     .partner-card { background: #1e293b; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); max-width: 450px; width: 100%; }
     h2 { margin-top: 0; color: #38bdf8; text-align: center; }
     p.desc { font-size: 14px; color: #94a3b8; text-align: center; margin-bottom: 25px; line-height: 1.5; }
@@ -19,6 +19,8 @@
     .submit-btn { width: 100%; background: #2563eb; color: #fff; border: none; padding: 14px; border-radius: 30px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.3s; }
     .submit-btn:hover { background: #1d4ed8; }
     #msg-box { margin-top: 15px; font-size: 13px; text-align: center; font-weight: bold; }
+    .back-home { display: block; text-align: center; margin-top: 20px; font-size: 14px; color: #94a3b8; text-decoration: none; transition: color 0.2s; }
+    .back-home:hover { color: #38bdf8; }
   </style>
 </head>
 <body>
@@ -48,21 +50,23 @@
       <input type="text" id="code" required placeholder="Pl. JANOS123" style="text-transform: uppercase;">
     </div>
 
-<div class="checkbox-group" style="display: flex; align-items: center; gap: 8px;">
-    <input type="checkbox" id="terms" required style="cursor: pointer;">
-    <label for="terms" style="cursor: pointer;">
-        Elfogadom az <a href="aszf.html" target="_blank" style="color: #38bdf8; text-decoration: underline;">ÁSZF</a>-et és az <a href="gdpr.html" target="_blank" style="color: #38bdf8; text-decoration: underline;">Adatkezelési Tájékoztatót</a>.
-    </label>
-</div>
+    <div class="checkbox-group" style="display: flex; align-items: center; gap: 8px;">
+      <input type="checkbox" id="terms" required style="cursor: pointer;">
+      <label for="terms" style="cursor: pointer;">
+          Elfogadom az <a href="aszf.html" target="_blank" style="color: #38bdf8; text-decoration: underline;">ÁSZF</a>-et és az <a href="gdpr.html" target="_blank" style="color: #38bdf8; text-decoration: underline;">Adatkezelési Tájékoztatót</a>.
+      </label>
+    </div>
 
     <button type="submit" class="submit-btn" id="btn-submit">Kód regisztrálása</button>
     <div id="msg-box"></div>
   </form>
+
+  <!-- Vissza a főoldalra link -->
+  <a href="index.html" class="back-home">← Vissza a főoldalra</a>
 </div>
 
-<script> 
+<script>  
   const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
-  // Cserélve a működő anon public JWT kulcsra:
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtb3lwdm5oaHFtZGpteGF3a3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwMzg0MTQsImV4cCI6MjEwNDYxNDQxNH0.J7BfwG-feB6cQK2hBOfA2mKIivfnOO-rBxFwAx9HcSU';
   
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -130,7 +134,6 @@
     }
   });
 </script>
-</main>
 
 </body>
 </html>
