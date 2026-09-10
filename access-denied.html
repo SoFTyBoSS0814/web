@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hozzáférés megtagadva - M&M Házfelújítás</title>
 
-    <!-- IP ELLENŐRZŐ SCRIPT -->
+    <!-- IP ELLENŐRZŐ ÉS EGYEDI INDOKLÁS SCRIPT -->
     <script>
       (function() {
-        // 1. IDE ÍRD BE A LETILTANDÓ IP-CÍMEKET:
-        const bannedIPs = [
-          '77.110.174.78',  // Cseréld ki a letiltani kívánt IP-címre
-          '......'
-        ];
+        // 1. IDE ÍRD BE AZ IP-CÍMEKET ÉS A HOZZÁJUK TARTOZÓ EGYEDI INDOKOKAT:
+        const bannedList = {
+          '77.110.174.78': 'Teszt indok'
+        };
 
         // 2. Lekérjük a látogató IP-címét
         fetch('https://api.ipify.org?format=json')
@@ -20,19 +19,24 @@
           .then(data => {
             const userIP = data.ip;
 
-            // Kiírjuk az IP-t a kijelzőre
+            // Ha az IP NINCS a tiltólistán, visszaküldjük a főoldalra:
+            if (!bannedList[userIP]) {
+              window.location.href = 'index.html';
+              return;
+            }
+
+            // Ha a tiltólistán van, frissítjük a kijelzőt az ő IP-jével és egyedi indokával
             document.addEventListener("DOMContentLoaded", function() {
               const ipDisplay = document.getElementById('banned-ip-display');
+              const reasonDisplay = document.getElementById('banned-reason-display');
+
               if (ipDisplay) {
                 ipDisplay.innerText = "LETILTOTT IP: " + userIP;
               }
+              if (reasonDisplay) {
+                reasonDisplay.innerText = "INDOKLÁS: " + bannedList[userIP];
+              }
             });
-
-            // Ha az IP NINCSEEN a tiltólistán (pl. egy normális ügyfél keveredett ide),
-            // visszaküldjük a főoldalra:
-            if (!bannedIPs.includes(userIP)) {
-              window.location.href = 'index.html';
-            }
           })
           .catch(err => console.error('IP ellenőrzési hiba:', err));
       })();
@@ -103,8 +107,8 @@
         <h1>Hozzáférés letiltva</h1>
         <p>Az oldal adminisztrátora korlátozta a hozzáférést erről a hálózatról fiktív, komolytalan ajánlatkérés vagy visszaélésszerű használat miatt.</p>
         
-        <div class="info-box">
-            INDOKLÁS: VALÓTLAN ADATMEGADÁS / KOMOLYTALAN MEGKERESÉS
+        <div class="info-box" id="banned-reason-display">
+            INDOKLÁS: Ellenőrzés...
         </div>
         
         <div class="ip-box" id="banned-ip-display">
