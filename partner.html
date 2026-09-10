@@ -59,9 +59,11 @@
 </div>
 
 <script> 
-const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_ut6xD_yLfuzOhkjd5MhPrA_z0QvA';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_ut6xD_yLfuzOhkjd5MhPrA_z0QvA';
+  
+  // Javítva: window.supabase használatával elkerüljük a névütközést
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const form = document.getElementById('partner-form');
   const msgBox = document.getElementById('msg-box');
@@ -74,17 +76,21 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     msgBox.style.color = "#38bdf8";
 
     try {
-      const ipRes = await fetch('https://api.ipify.org?format=json');
-      const ipData = await ipRes.json();
-      const userIp = ipData.ip;
+      let userIp = "127.0.0.1";
+      try {
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipRes.json();
+        userIp = ipData.ip;
+      } catch(ipErr) {
+        console.warn("IP lekérés nem sikerült:", ipErr);
+      }
 
       const fullName = document.getElementById('full_name').value.trim();
       const email = document.getElementById('email').value.trim();
       const phone = document.getElementById('phone').value.trim();
-      // Kis/nagybetű függetlenné tesszük azzal, hogy mindig csupa nagybetűként mentjük:
       const code = document.getElementById('code').value.trim().toUpperCase();
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from('refcode')
         .insert([
           { 
@@ -115,7 +121,8 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
 
     } catch (err) {
-      msgBox.innerText = "✕ Hálózati hiba történt.";
+      console.error(err);
+      msgBox.innerText = "✕ Hálózati hiba történt: " + err.message;
       msgBox.style.color = "#ef4444";
       submitBtn.disabled = false;
     }
