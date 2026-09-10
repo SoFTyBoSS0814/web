@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hozzáférés megtagadva - M&M Házfelújítás</title>
 
-    <!-- IP ELLENŐRZŐ ÉS EGYEDI INDOKLÁS SCRIPT -->
+    <!-- IP ELLENŐRZŐ ÉS EGYEDI INDOKLÁS SCRIPT (Átirányítás nélkül) -->
     <script>
       (function() {
         // 1. IDE ÍRD BE AZ IP-CÍMEKET ÉS A HOZZÁJUK TARTOZÓ EGYEDI INDOKOKAT:
@@ -18,14 +18,9 @@
           .then(response => response.json())
           .then(data => {
             const userIP = data.ip;
+            const reason = bannedList[userIP] || 'Ismeretlen vagy adminisztratív tiltás';
 
-            // Ha az IP NINCS a tiltólistán, visszaküldjük a főoldalra:
-            if (!bannedList[userIP]) {
-              window.location.href = 'index.html';
-              return;
-            }
-
-            // Ha a tiltólistán van, frissítjük a kijelzőt az ő IP-jével és egyedi indokával
+            // Megjelenítjük a címet és az indokot a DOM betöltődése után
             document.addEventListener("DOMContentLoaded", function() {
               const ipDisplay = document.getElementById('banned-ip-display');
               const reasonDisplay = document.getElementById('banned-reason-display');
@@ -34,7 +29,7 @@
                 ipDisplay.innerText = "LETILTOTT IP: " + userIP;
               }
               if (reasonDisplay) {
-                reasonDisplay.innerText = "INDOKLÁS: " + bannedList[userIP];
+                reasonDisplay.innerText = "INDOKLÁS: " + reason;
               }
             });
           })
