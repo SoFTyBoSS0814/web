@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partneri Regisztráció - M&M Házfelújítás</title>
+  
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .partner-card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      max-width: 450px;
+      width: 100%;
+    }
+    h2 {
+      margin-top: 0;
+      color: #38bdf8;
+      text-align: center;
+    }
+    p.desc {
+      font-size: 14px;
+      color: #94a3b8;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #cbd5e1;
+    }
+    input[type="text"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background-color: #0f172a;
+      color: #fff;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    input:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+    .checkbox-group input {
+      margin-top: 3px;
+    }
+    .submit-btn {
+      width: 100%;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+    #msg-box {
+      margin-top: 15px;
+      font-size: 13px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="partner-card">
+  <h2>Legyél a Partnerünk!</h2>
+  <p class="desc">Generálj egyedi ajánlói kódot, ajánlj minket ismerőseidnek, és keress jutalékot minden sikeres megrendelés után!</p>
+
+  <form id="partner-form">
+    <div class="form-group">
+      <label for="full_name">Teljes neved *</label>
+      <input type="text" id="full_name" required placeholder="Pl. Kovács János">
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail címed *</label>
+      <input type="email" id="email" required placeholder="kovacs@gmail.com">
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Telefonszámod *</label>
+      <input type="tel" id="phone" required placeholder="+36 30 123 4567">
+    </div>
+
+    <div class="form-group">
+      <label for="code">Kívánt egyedi REF kódod *</label>
+      <input type="text" id="code" required placeholder="Pl. JANOS123" style="text-transform: uppercase;">
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="terms" required>
+      <label for="terms">Elfogadom a Partneri ÁSZF-et és az Adatkezelési Tájékoztatót. Tudomásul veszem, hogy a rendszer visszaélések elkerülése miatt rögzíti az IP-címemet.</label>
+    </div>
+
+    <button type="submit" class="submit-btn" id="btn-submit">Kód regisztrálása</button>
+    <div id="msg-box"></div>
+  </form>
+</div>
+
+<script>
+  // Supabase adatok beállítása
+  const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
+  const SUPABASE_ANON_KEY = 'a-te-anon-public-kulcsod'; // <-- Cseréld ki a saját Anon Key-edre!
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById('partner-form');
+  const msgBox = document.getElementById('msg-box');
+  const submitBtn = document.getElementById('btn-submit');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    msgBox.innerText = "Feldolgozás...";
+    msgBox.style.color = "#38bdf8";
+
+    try {
+      // 1. IP-cím lekérése az ipify API-val
+      const ipRes = await fetch('https://api.ipify.org?format=json');
+      const ipData = await ipRes.json();
+      const userIp = ipData.ip;
+
+      // 2. Mezők kiolvasása
+      const fullName = document.getElementById('full_name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const code = document.getElementById('code').value.trim().toUpperCase();
+
+      // 3. Mentés Supabase-be
+      const { data, error } = await supabase
+        .from('refcode')
+        .insert([
+          { 
+            full_name: fullName, 
+            email: email, 
+            phone: phone, 
+            code: code,
+            ip_address: userIp,
+            terms_accepted: true,
+            is_active: true
+          }
+        ]);
+
+      if (error) {
+        // Unique hiba kezelése (ha a kód már létezik)
+        if (error.code === '23505') {
+          msgBox.innerText = "✕ Ez a kód már foglalt! Kérjük, válassz másikat.";
+        } else {
+          msgBox.innerText = "✕ Hiba történt a mentés során: " + error.message;
+        }
+        msgBox.style.color = "#ef4444";
+        submitBtn.disabled = false;
+      } else {
+        msgBox.innerText = "✓ Sikeres regisztráció! A kódod azonnal aktív.";
+        msgBox.style.color = "#22c55e";
+        form.reset();
+        submitBtn.disabled = false;
+      }
+
+    } catch (err) {
+      msgBox.innerText = "✕ Hiba történt a hálózati kapcsolatban.";
+      msgBox.style.color = "#ef4444";
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
