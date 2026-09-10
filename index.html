@@ -730,6 +730,113 @@ section {
     </div>
 </section>
 
+<!-- Supabase SDK és validációs szkript -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtb3lwdm5oaHFtZGpteGF3a3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwMzg0MTQsImV4cCI6MjEwNDYxNDQxNH0.J7BfwG-feB6cQK2hBOfA2mKIivfnOO-rBxFwAx9HcSU';
+
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const refInput = document.getElementById('ref_code');
+    const refStatus = document.getElementById('ref-status');
+    const contactForm = document.getElementById('contact-form');
+
+    let checkTimeout = null;
+    let isCodeValid = true;
+
+    // 1. REF kód valós idejű ellenőrzése
+    async function verifyRefCode(code) {
+      const cleanCode = code.trim().toUpperCase();
+
+      if (cleanCode === "") {
+        refStatus.innerText = "";
+        isCodeValid = true;
+        return;
+      }
+
+      refStatus.innerText = "⏳ Kód ellenőrzése...";
+      refStatus.style.color = "#38bdf8";
+
+      try {
+        const { data, error } = await supabaseClient
+          .from('refcode')
+          .select('full_name, is_active')
+          .eq('code', cleanCode)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (data && data.is_active !== false) {
+          refStatus.innerText = "✓ Ajánló: " + data.full_name;
+          refStatus.style.color = "#22c55e"; // Zöld
+          isCodeValid = true;
+        } else {
+          refStatus.innerText = "✕ Érvénytelen vagy nem létező kód";
+          refStatus.style.color = "#ef4444"; // Piros
+          isCodeValid = false;
+        }
+      } catch (err) {
+        console.error("Lekérdezési hiba:", err);
+        refStatus.innerText = "✕ Hiba a kód ellenőrzésekor";
+        refStatus.style.color = "#ef4444";
+        isCodeValid = false;
+      }
+    }
+
+    // 2. Gépelés figyelése
+    if (refInput) {
+      refInput.addEventListener('input', function(e) {
+        clearTimeout(checkTimeout);
+        checkTimeout = setTimeout(() => {
+          verifyRefCode(e.target.value);
+        }, 400);
+      });
+
+      // Megnyitáskor URL paraméter (pl. ?ref=REF) beolvasása
+      const urlParams = new URLSearchParams(window.location.search);
+      const refFromUrl = urlParams.get('ref');
+      if (refFromUrl) {
+        refInput.value = refFromUrl;
+        verifyRefCode(refFromUrl);
+      }
+    }
+
+    // 3. Form beküldése és számláló növelése
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        const usedCode = refInput ? refInput.value.trim().toUpperCase() : '';
+
+        if (usedCode !== "" && !isCodeValid) {
+          e.preventDefault();
+          alert("A megadott ajánlói kód érvénytelen! Kérjük, javítsd vagy hagyd üresen a mezőt.");
+          return false;
+        }
+
+        if (usedCode !== "" && isCodeValid) {
+          try {
+            const { data } = await supabaseClient
+              .from('refcode')
+              .select('used')
+              .eq('code', usedCode)
+              .single();
+
+            if (data) {
+              await supabaseClient
+                .from('refcode')
+                .update({ used: (data.used || 0) + 1 })
+                .eq('code', usedCode);
+            }
+          } catch (err) {
+            console.error("Számláló frissítési hiba:", err);
+          }
+        }
+      });
+    }
+  });
+</script>
+
 <div class="contact-info">
     <p>Györs kapcsolat? Hívd vagy írj e-mailt:</p>
     <div class="contact-item">
