@@ -19,24 +19,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- IP-ALAPÚ TILTÁS ÉS ÁTIRÁNYÍTÁS -->
+  
+<!-- IP-ALAPÚ TILTÁS ÉS ÁTIRÁNYÍTÁS (Végtelen hurok elleni védelemmel) -->
   <script>
-    (function() {
-      const bannedIPs = [
-        '77.110.174.78' // Ide írhatod a többi letiltandó IP-címet is vesszővel elválasztva
-      ];
+  (function() {
+    const bannedIPs = [
+      '77.110.174.78' // Ide írhatod a többi letiltandó IP-címet is vesszővel elválasztva
+    ];
 
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          if (bannedIPs.includes(data.ip)) {
-            window.location.href = 'access-denied.html';
-          }
-        })
-        .catch(err => console.error('IP ellenőrzési hiba:', err));
-    })();
-  </script>
+    // Ha ebben a munkamenetben már ellenőriztük és tiltva van, ne hívogassa az API-t feleslegesen
+    if (sessionStorage.getItem('access_denied') === 'true') {
+      window.location.href = 'access-denied.html';
+      return;
+    }
+
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        if (bannedIPs.includes(data.ip)) {
+          sessionStorage.setItem('access_denied', 'true');
+          window.location.href = 'access-denied.html';
+        }
+      })
+      .catch(err => console.error('IP ellenőrzési hiba:', err));
+  })();
+</script>
   <style>
 /* GLOBÁLIS BEÁLLÍTÁSOK */
 * {
