@@ -79,23 +79,20 @@
         }
         .img-card {
             background: #0f172a;
-            border: 2px dashed #475569;
+            border: 2px solid #475569;
             border-radius: 8px;
             padding: 10px;
             text-align: center;
-            min-height: 180px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #64748b;
-            font-size: 13px;
+            overflow: hidden;
+            min-height: 180px;
         }
-        /* Ha raksz bele képet, cseréld le a div tartalmát <img src="kep.jpg" style="max-width:100%; border-radius:6px;"> formátumra */
         .img-card img {
             max-width: 100%;
+            max-height: 180px;
             border-radius: 6px;
-            max-height: 160px;
             object-fit: cover;
         }
         .timer-warning {
@@ -118,7 +115,7 @@
             transition: background 0.3s;
         }
         .back-btn:hover {
-            background: id #1d4ed8;
+            background: #1d4ed8;
         }
     </style>
 </head>
@@ -129,15 +126,13 @@
         <h1>Malán Feri a 40-es éveiben járó legenda</h1>
         <p class="subtitle">Ez az oldal kizárólag azért jött létre, hogy megörökítse Feri elképesztő mindennapjait, amíg teljesen el nem felejtjük.</p>
 
-        <!-- KÉPEK HELYE -->
+        <!-- KÉPEK -->
         <div class="image-grid">
             <div class="img-card">
-                <!-- Ide jöhet az első kép, pl: <img src="feri1.jpg" alt="Feri"> -->
-                <span>[ Ide jöhet az 1. Feri kép ]<br><small>Tedd be a fájlnevét</small></span>
+                <img src="malanferi1.jpg" alt="Malán Feri 1">
             </div>
             <div class="img-card">
-                <!-- Ide jöhet a második kép, pl: <img src="feri2.jpg" alt="Feri"> -->
-                <span>[ Ide jöhet a 2. Feri kép ]<br><small>Tedd be a fájlnevét</small></span>
+                <img src="malanferi2.jpg" alt="Malán Feri 2">
             </div>
         </div>
 
