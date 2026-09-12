@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hivatalos Malán Feri Fan Club & Életmű Archívum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0b0f19;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border-top: 6px solid #f97316;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .badge {
+            display: inline-block;
+            background: #334155;
+            color: #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: #f97316;
+            margin-bottom: 15px;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .story-box {
+            background: #0f172a;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: left;
+            margin-bottom: 30px;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        .story-box p {
+            margin-bottom: 15px;
+        }
+        .story-box p:last-child {
+            margin-bottom: 0;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .img-card {
+            background: #0f172a;
+            border: 2px dashed #475569;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+        /* Ha raksz bele képet, cseréld le a div tartalmát <img src="kep.jpg" style="max-width:100%; border-radius:6px;"> formátumra */
+        .img-card img {
+            max-width: 100%;
+            border-radius: 6px;
+            max-height: 160px;
+            object-fit: cover;
+        }
+        .timer-warning {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: id #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="badge">Szigorúan Bizalmas / Eseti Híradó</div>
+        <h1>Malán Feri a 40-es éveiben járó legenda</h1>
+        <p class="subtitle">Ez az oldal kizárólag azért jött létre, hogy megörökítse Feri elképesztő mindennapjait, amíg teljesen el nem felejtjük.</p>
+
+        <!-- KÉPEK HELYE -->
+        <div class="image-grid">
+            <div class="img-card">
+                <!-- Ide jöhet az első kép, pl: <img src="feri1.jpg" alt="Feri"> -->
+                <span>[ Ide jöhet az 1. Feri kép ]<br><small>Tedd be a fájlnevét</small></span>
+            </div>
+            <div class="img-card">
+                <!-- Ide jöhet a második kép, pl: <img src="feri2.jpg" alt="Feri"> -->
+                <span>[ Ide jöhet a 2. Feri kép ]<br><small>Tedd be a fájlnevét</small></span>
+            </div>
+        </div>
+
+        <!-- VICCES TÖRTÉNET -->
+        <div class="story-box">
+            <p><strong>Hogyan kezdődött?</strong> Amikor Feri belépett a bűvös negyvenes klubba, a fizika törvényei azonnal megváltoztak körülötte. Azóta nincs olyan kávé, amit ne hűtene vissza háromszor, mert elkalandozott a telefonján, és nincs olyan szerszám, amit ne kellene kétszer keresni.</p>
+            <p><strong>A legenda:</strong> A környéken csak úgy emlegetik, mint a <em>"40-es évek bűvészét"</em>, aki képes bármilyen egyszerű feladatot három órás szakértői tanácskozássá alakítani, miközben a kávéja mindig kihűl.</p>
+            <p><em>Feri, ha olvasod ezt: örülünk, hogy bírod a gevicset, most már küldheted a sört! 🍻</em></p>
+        </div>
+
+        <div class="timer-warning">
+            ⚠️ Figyelem: Ez az oldal annyira titkos, hogy hamarosan önmagától is megsemmisül (vagy mielőtt a főnök meglátja).
+        </div>
+
+        <a href="index.html" class="back-btn">Vissza a normális életbe</a>
+    </div>
+
+</body>
+</html>
