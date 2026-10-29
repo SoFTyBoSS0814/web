@@ -864,20 +864,38 @@ section {
         <a href="https://www.facebook.com/groups/709643184487051" target="_blank" class="contact-btn" style="background-color: #1877f2;">Csatlakozom</a>
     </div>
     <div class="contact-item">
-        <span>Csoportba küldés szöveggel:</span>
-        <button onclick="shareWithPresetText()" class="contact-btn" style="background-color: #1877f2; border: none; cursor: pointer;">Megosztás 1 kattintással</button>
+        <span>Hová szeretnél posztolni?</span>
+        <select id="shareTarget" class="contact-btn" style="background-color: #fff; color: #333; border: 1px solid #ccc; cursor: pointer; margin-bottom: 5px; width: 100%;">
+            <option value="feed">Saját idővonal / Hírfolyam</option>
+            <option value="group">Facebook csoport</option>
+            <option value="friend">Ismerős idővonala</option>
+        </select>
+        <button onclick="shareToFacebookAdvanced()" class="contact-btn" style="background-color: #1877f2; border: none; cursor: pointer; width: 100%;">Megosztás kiválasztása 1 kattintással</button>
     </div>
 </div>
 
 <script>
-function shareWithPresetText() {
+function shareToFacebookAdvanced() {
     const presetText = "Kedves leendő ügyfeleink, keressenek bennünket bizalommal bármifajta házkörüli munkát illetően. Legyen szó akár csak pakolásról, festésről, tájékozódjanak jobban az oldalunkon, és kérjenek ingyenes árajánlatot! https://www.mmhazfelujitas.hu";
+    const target = document.getElementById('shareTarget').value;
     
-    // Automatikusan a vágólapra teszi a szöveget
+    // Először a vágólapra tesszük a szöveget, hogy könnyű legyen beilleszteni
     navigator.clipboard.writeText(presetText).then(() => {
-        const url = encodeURIComponent('https://mmhazfelujitas.hu');
-        // Megnyitja a Facebook megosztót
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        let fbUrl = '';
+        
+        if (target === 'group') {
+            // Megnyitja a Facebook csoportok keresőjét / főoldalát, ahová be tudsz lépni posztolni
+            fbUrl = 'https://www.facebook.com/groups/feed/';
+        } else if (target === 'friend') {
+            // Megnyitja a Facebook főoldalt, ahol az ismerősöket éred el
+            fbUrl = 'https://www.facebook.com/';
+        } else {
+            // Alap hírfolyam / saját idővonal megosztó
+            const url = encodeURIComponent('https://mmhazfelujitas.hu');
+            fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        }
+        
+        window.open(fbUrl, '_blank', 'width=700,height=600');
     }).catch(err => {
         console.error('Hiba a vágólapra másoláskor: ', err);
     });
