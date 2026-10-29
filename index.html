@@ -845,6 +845,79 @@ section {
   });
 </script>
 
+<style>
+.post-generator-card {
+    background: #ffffff;
+    border: 2px solid #1877f2;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.post-generator-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1877f2;
+    margin-bottom: 10px;
+}
+
+.post-textarea {
+    width: 100%;
+    height: 110px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.post-btn {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.2s, transform 0.1s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.post-btn-primary {
+    background-color: #1877f2;
+    color: #ffffff;
+    flex: 1;
+}
+
+.post-btn-secondary {
+    background-color: #42b72a;
+    color: #ffffff;
+    flex: 1;
+}
+
+.post-btn:active {
+    transform: scale(0.98);
+}
+
+.copy-status {
+    display: none;
+    font-size: 12px;
+    color: #2e7d32;
+    font-weight: bold;
+    margin-top: 8px;
+}
+</style>
+
 <div class="contact-info">
     <p>Gyors kapcsolat? Hívd vagy írj e-mailt:</p>
     <div class="contact-item">
@@ -853,7 +926,7 @@ section {
     </div>
     <div class="contact-item">
         <span>Mónika: +36 30 261 5676</span>
-        <a href="tel:+302615676" class="contact-btn">Hívás most</a>
+        <a href="tel:+36302615676" class="contact-btn">Hívás most</a>
     </div>
     <div class="contact-item">
         <span>E-mail: kapcsolat@mmhazfelujitas.hu</span>
@@ -863,41 +936,36 @@ section {
         <span>Facebook csoportunk: M&M Házfelújítás - Országosan!</span>
         <a href="https://www.facebook.com/groups/709643184487051" target="_blank" class="contact-btn" style="background-color: #1877f2;">Csatlakozom</a>
     </div>
-    <div class="contact-item">
-        <span>Hová szeretnél posztolni?</span>
-        <select id="shareTarget" class="contact-btn" style="background-color: #fff; color: #333; border: 1px solid #ccc; cursor: pointer; margin-bottom: 5px; width: 100%;">
-            <option value="feed">Saját idővonal / Hírfolyam</option>
-            <option value="group">Facebook csoport</option>
-            <option value="friend">Ismerős idővonala</option>
-        </select>
-        <button onclick="shareToFacebookAdvanced()" class="contact-btn" style="background-color: #1877f2; border: none; cursor: pointer; width: 100%;">Megosztás kiválasztása 1 kattintással</button>
+
+    <!-- Gyors Hirdetés Generátor Doboz -->
+    <div class="post-generator-card">
+        <div class="post-generator-title">Facebook Hirdetés Generátor</div>
+        <textarea id="customPostText" class="post-textarea">Kedves leendő ügyfeleink, keressenek bennünket bizalommal bármifajta házkörüli munkát illetően. Legyen szó akár csak pakolásról, festésről, tájékozódjanak jobban az oldalunkon, és kérjenek ingyenes árajánlatot! https://www.mmhazfelujitas.hu</textarea>
+        
+        <div class="post-actions">
+            <button onclick="copyGeneratorText()" class="post-btn post-btn-primary">
+                1. Szöveg másolása
+            </button>
+            <a href="https://www.facebook.com/groups/feed/" target="_blank" onclick="copyGeneratorText()" class="post-btn post-btn-secondary">
+                2. Másolás & Csoportok megnyitása
+            </a>
+        </div>
+        <div id="copyStatusMessage" class="copy-status">✓ Szöveg vágólapra másolva! A nyíló ablakban csak nyomj Ctrl+V-t.</div>
     </div>
 </div>
 
 <script>
-function shareToFacebookAdvanced() {
-    const presetText = "Kedves leendő ügyfeleink, keressenek bennünket bizalommal bármifajta házkörüli munkát illetően. Legyen szó akár csak pakolásról, festésről, tájékozódjanak jobban az oldalunkon, és kérjenek ingyenes árajánlatot! https://www.mmhazfelujitas.hu";
-    const target = document.getElementById('shareTarget').value;
+function copyGeneratorText() {
+    const text = document.getElementById('customPostText').value;
     
-    // Először a vágólapra tesszük a szöveget, hogy könnyű legyen beilleszteni
-    navigator.clipboard.writeText(presetText).then(() => {
-        let fbUrl = '';
-        
-        if (target === 'group') {
-            // Megnyitja a Facebook csoportok keresőjét / főoldalát, ahová be tudsz lépni posztolni
-            fbUrl = 'https://www.facebook.com/groups/feed/';
-        } else if (target === 'friend') {
-            // Megnyitja a Facebook főoldalt, ahol az ismerősöket éred el
-            fbUrl = 'https://www.facebook.com/';
-        } else {
-            // Alap hírfolyam / saját idővonal megosztó
-            const url = encodeURIComponent('https://mmhazfelujitas.hu');
-            fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        }
-        
-        window.open(fbUrl, '_blank', 'width=700,height=600');
+    navigator.clipboard.writeText(text).then(() => {
+        const statusMsg = document.getElementById('copyStatusMessage');
+        statusMsg.style.display = 'block';
+        setTimeout(() => {
+            statusMsg.style.display = 'none';
+        }, 4000);
     }).catch(err => {
-        console.error('Hiba a vágólapra másoláskor: ', err);
+        console.error('Hiba a másoláskor: ', err);
     });
 }
 </script>
