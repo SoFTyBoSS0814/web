@@ -846,7 +846,7 @@ section {
 </script>
 
 <div class="contact-info">
-    <p>Györs kapcsolat? Hívd vagy írj e-mailt:</p>
+    <p>Gyors kapcsolat? Hívd vagy írj e-mailt:</p>
     <div class="contact-item">
         <span>Ferenc: +36 20 626 0128</span>
         <a href="tel:+36206260128" class="contact-btn">Hívás most</a>
@@ -863,7 +863,18 @@ section {
         <span>Facebook csoportunk: M&M Házfelújítás - Országosan!</span>
         <a href="https://www.facebook.com/groups/709643184487051" target="_blank" class="contact-btn" style="background-color: #1877f2;">Csatlakozom</a>
     </div>
+    <div class="contact-item">
+        <span>Oldal megosztása Facebookon:</span>
+        <button onclick="shareToFacebook()" class="contact-btn" style="background-color: #1877f2; border: none; cursor: pointer;">Megosztás 1 kattintással</button>
+    </div>
 </div>
+
+<script>
+function shareToFacebook() {
+    const url = encodeURIComponent('https://mmhazfelujitas.hu');
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+}
+</script>
 
 <a href="tel:+36206260128" class="floating-call">Hívás most</a>
 
