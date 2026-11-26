@@ -1086,72 +1086,71 @@ document.addEventListener('keydown', function(e) {
         return false;
     }
 });
-  <!-- MAGYAR (HU) LÁTOGATÓK RÖGZÍTÉSE SUPABASE-BE -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+</script>
+<!-- MAGYAR (HU) LÁTOGATÓK RÖGZÍTÉSE SUPABASE-BE -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-    const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
-    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_yq_zk9lELc8cF0srpqNEeA_-OGj4VaF';
+  const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_yq_zk9lELc8cF0srpqNEeA_-OGj4VaF';
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-    async function lekerOrszagEsIp() {
-      try {
-        const r1 = await fetch('https://get.geojs.io/v1/ip/geo.json');
-        if (r1.ok) {
-          const d1 = await r1.json();
-          if (d1 && d1.country_code) {
-            return { countryCode: d1.country_code.toUpperCase(), ip: d1.ip || 'unknown' };
-          }
-        }
-      } catch (_) {}
-
-      try {
-        const r2 = await fetch('https://ipapi.co/json/');
-        if (r2.ok) {
-          const d2 = await r2.json();
-          if (d2 && d2.country_code) {
-            return { countryCode: d2.country_code.toUpperCase(), ip: d2.ip || 'unknown' };
-          }
-        }
-      } catch (_) {}
-
-      try {
-        const r3 = await fetch('https://ipwho.is/');
-        if (r3.ok) {
-          const d3 = await r3.json();
-          if (d3 && d3.success && d3.country_code) {
-            return { countryCode: d3.country_code.toUpperCase(), ip: d3.ip || 'unknown' };
-          }
-        }
-      } catch (_) {}
-
-      return null;
-    }
-
-    async function rogzitMagyarLatogatast() {
-      try {
-        const geo = await lekerOrszagEsIp();
-        if (!geo || geo.countryCode !== 'HU') {
-          return;
-        }
-
-        const { error } = await supabase
-          .from('hu_latogatok')
-          .insert({
-            ip_cim: geo.ip,
-            country_code: 'HU'
-          });
-
-        if (error) {
-          console.error('Supabase insert hiba:', error);
-        }
-      } catch (err) {
-        console.error('Mérőscript hiba:', err);
+  async function lekerOrszagEsIp() {
+    const forrasok = [
+      async () => {
+        const r = await fetch('https://get.geojs.io/v1/ip/geo.json');
+        if (!r.ok) return null;
+        const d = await r.json();
+        return d?.country_code ? { countryCode: d.country_code.toUpperCase(), ip: d.ip || 'unknown' } : null;
+      },
+      async () => {
+        const r = await fetch('https://ipapi.co/json/');
+        if (!r.ok) return null;
+        const d = await r.json();
+        return d?.country_code ? { countryCode: d.country_code.toUpperCase(), ip: d.ip || 'unknown' } : null;
+      },
+      async () => {
+        const r = await fetch('https://ipwho.is/');
+        if (!r.ok) return null;
+        const d = await r.json();
+        return d?.success && d?.country_code ? { countryCode: d.country_code.toUpperCase(), ip: d.ip || 'unknown' } : null;
       }
+    ];
+
+    for (const lekerdezo of forrasok) {
+      try {
+        const eredmeny = await lekerdezo();
+        if (eredmeny) return eredmeny;
+      } catch (_) {}
     }
 
-    rogzitMagyarLatogatast();
-  </script>
+    return null;
+  }
+
+  async function rogzitMagyarLatogatast() {
+    try {
+      const geo = await lekerOrszagEsIp();
+      if (!geo || geo.countryCode !== 'HU') {
+        return;
+      }
+
+      const { error } = await supabase
+        .from('hu_latogatok')
+        .insert({
+          ip_cim: geo.ip,
+          country_code: 'HU'
+        });
+
+      if (error) {
+        console.error('Supabase insert hiba:', error);
+      }
+    } catch (err) {
+      console.error('Mérőscript hiba:', err);
+    }
+  }
+
+  rogzitMagyarLatogatast();
+</script>
 </body>
 </html>
