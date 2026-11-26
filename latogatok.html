@@ -42,9 +42,8 @@
   <script type="module">
     import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-    // Cseréld ki a saját Supabase URL-edre és anon kulcsodra:
-    const SUPABASE_URL = 'IDE_JON_A_SUPABASE_URL';
-    const SUPABASE_ANON_KEY = 'IDE_JON_A_ANON_KEY';
+    const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtb3lwdm5oaHFtZGpteGF3a3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwMzg0MTQsImV4cCI6MjEwNDYxNDQxNH0.J7BfwG-feB6cQK2hBOfA2mKIivfnOO-rBxFwAx9HcSU';
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -63,10 +62,8 @@
         'Élő frissítés aktív • Utoljára frissítve: ' + new Date().toLocaleTimeString('hu-HU');
     }
 
-    // Első betöltéskor azonnal frissít
     frissitStatisztikat();
 
-    // Minden egyes új sor (új HU látogató) után azonnal frissít
     supabase
       .channel('hu-latogatok-live')
       .on(
@@ -78,7 +75,6 @@
       )
       .subscribe();
 
-    // Biztonsági tartalék: 10 másodpercenként is frissít
     setInterval(frissitStatisztikat, 10000);
   </script>
 </body>
