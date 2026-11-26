@@ -275,6 +275,32 @@
       return path === '' ? '/' : path;
     }
 
+    function lekerBudapestiNap() {
+      return new Intl.DateTimeFormat('sv-SE', {
+        timeZone: 'Europe/Budapest',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).format(new Date());
+    }
+
+    function elsoNapiLatogatasE() {
+      try {
+        const kulcs = 'mm_hu_latogato_nap';
+        const ma = lekerBudapestiNap();
+        const utolsoNap = localStorage.getItem(kulcs);
+
+        if (utolsoNap === ma) {
+          return false;
+        }
+
+        localStorage.setItem(kulcs, ma);
+        return true;
+      } catch (_) {
+        return true;
+      }
+    }
+
     async function lekerOrszagEsIp() {
       const forrasok = [
         async () => {
@@ -315,13 +341,15 @@
         }
 
         const aktualisOldal = lekerAktualisOldal();
+        const egyediNap = elsoNapiLatogatasE();
 
         const { error } = await supabase
           .from('hu_latogatok')
           .insert({
             ip_cim: geo.ip,
             country_code: 'HU',
-            oldal: aktualisOldal
+            oldal: aktualisOldal,
+            egyedi_nap: egyediNap
           });
 
         if (error) {
