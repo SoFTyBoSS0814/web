@@ -134,6 +134,79 @@
     }
   });
 </script>
+</script>
+<!-- MAGYAR (HU) LÁTOGATÓK RÖGZÍTÉSE SUPABASE-BE -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
+    const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_yq_zk9lELc8cF0srpqNEeA_-OGj4VaF';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    function lekerAktualisOldal() {
+      const path = window.location.pathname || '/';
+      return path === '' ? '/' : path;
+    }
+
+    async function lekerOrszagEsIp() {
+      const forrasok = [
+        async () => {
+          const r = await fetch('https://get.geojs.io/v1/ip/geo.json');
+          if (!r.ok) return null;
+          const d = await r.json();
+          return d?.country_code ? { countryCode: d.country_code.toUpperCase(), ip: d.ip || 'unknown' } : null;
+        },
+        async () => {
+          const r = await fetch('https://ipapi.co/json/');
+          if (!r.ok) return null;
+          const d = await r.json();
+          return d?.country_code ? { countryCode: d.country_code.toUpperCase(), ip: d.ip || 'unknown' } : null;
+        },
+        async () => {
+          const r = await fetch('https://ipwho.is/');
+          if (!r.ok) return null;
+          const d = await r.json();
+          return d?.success && d?.country_code ? { countryCode: d.country_code.toUpperCase(), ip: d.ip || 'unknown' } : null;
+        }
+      ];
+
+      for (const lekerdezo of forrasok) {
+        try {
+          const eredmeny = await lekerdezo();
+          if (eredmeny) return eredmeny;
+        } catch (_) {}
+      }
+
+      return null;
+    }
+
+    async function rogzitMagyarLatogatast() {
+      try {
+        const geo = await lekerOrszagEsIp();
+        if (!geo || geo.countryCode !== 'HU') {
+          return;
+        }
+
+        const aktualisOldal = lekerAktualisOldal();
+
+        const { error } = await supabase
+          .from('hu_latogatok')
+          .insert({
+            ip_cim: geo.ip,
+            country_code: 'HU',
+            oldal: aktualisOldal
+          });
+
+        if (error) {
+          console.error('Supabase insert hiba:', error);
+        }
+      } catch (err) {
+        console.error('Mérőscript hiba:', err);
+      }
+    }
+
+    rogzitMagyarLatogatast();
+  </script>
 </body>
 </html>
