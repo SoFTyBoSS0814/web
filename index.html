@@ -1049,72 +1049,43 @@ function confetti() {
         setTimeout(()=>{c.remove();},1050);
     }
 }
-<!-- MAGYAR (HU) LÁTOGATÓK RÖGZÍTÉSE SUPABASE-BE -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-    const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_uCGx9_yLfuzOHkjd5WhPrA_Z6QvAIPo';
+// Jobb klikk és fejlesztői gyorsbillentyűk (F12, Ctrl+U, Ctrl+Shift+I/J, Ctrl+S) letiltása
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    async function lekerOrszagEsIp() {
-      try {
-        const r1 = await fetch('https://get.geojs.io/v1/ip/geo.json');
-        if (r1.ok) {
-          const d1 = await r1.json();
-          if (d1 && d1.country_code) {
-            return { countryCode: d1.country_code.toUpperCase(), ip: d1.ip || 'unknown' };
-          }
-        }
-      } catch (_) {}
-
-      try {
-        const r2 = await fetch('https://ipapi.co/json/');
-        if (r2.ok) {
-          const d2 = await r2.json();
-          if (d2 && d2.country_code) {
-            return { countryCode: d2.country_code.toUpperCase(), ip: d2.ip || 'unknown' };
-          }
-        }
-      } catch (_) {}
-
-      try {
-        const r3 = await fetch('https://ipwho.is/');
-        if (r3.ok) {
-          const d3 = await r3.json();
-          if (d3 && d3.success && d3.country_code) {
-            return { countryCode: d3.country_code.toUpperCase(), ip: d3.ip || 'unknown' };
-          }
-        }
-      } catch (_) {}
-
-      return null;
+document.addEventListener('keydown', function(e) {
+    // F12 letiltása
+    if (e.key === "F12") {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Ctrl+U (Forráskód megtekintése)
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Ctrl+Shift+I (Fejlesztői eszközök)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+        e.preventDefault();
+        return false;
+    }
+    
+    // Ctrl+Shift+J (Fejlesztői konzol)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+        e.preventDefault();
+        return false;
     }
 
-    async function rogzitMagyarLatogatast() {
-      try {
-        const geo = await lekerOrszagEsIp();
-        if (!geo || geo.countryCode !== 'HU') {
-          return;
-        }
-
-        const { error } = await supabase
-          .from('hu_latogatok')
-          .insert({
-            ip_cim: geo.ip,
-            country_code: 'HU'
-          });
-
-        if (error) {
-          console.error('Supabase insert hiba:', error);
-        }
-      } catch (err) {
-        console.error('Mérőscript hiba:', err);
-      }
+    // Ctrl+S (Mentés másként)
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        return false;
     }
-
-    rogzitMagyarLatogatast();
+});
   </script>
 </body>
 </html>
