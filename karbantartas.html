@@ -206,6 +206,150 @@ p {
         &copy; 2026 M&M Házfelújítás Türelmeteket köszönjük!
     </div>
 </div>
+</script>
+<!-- MAGYAR (HU) LÁTOGATÓK RÖGZÍTÉSE SUPABASE-BE -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
+    const SUPABASE_URL = 'https://emoypvnhhqmdjmxawkpg.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_yq_zk9lELc8cF0srpqNEeA_-OGj4VaF';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    function lekerAktualisOldal() {
+      const path = window.location.pathname || '/';
+      return path === '' ? '/' : path;
+    }
+
+    function lekerBudapestiNap() {
+      return new Intl.DateTimeFormat('sv-SE', {
+        timeZone: 'Europe/Budapest',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).format(new Date());
+    }
+
+    function olvasNapCookie(nev) {
+      const match = document.cookie.match(new RegExp('(?:^|; )' + nev + '=([^;]*)'));
+      return match ? decodeURIComponent(match[1]) : null;
+    }
+
+    function irNapCookie(nev, ertek) {
+      document.cookie = `${nev}=${encodeURIComponent(ertek)}; path=/; max-age=172800; SameSite=Lax`;
+    }
+
+    function elsoNapiLatogatasE() {
+      const kulcs = 'mm_hu_latogato_nap';
+      const ma = lekerBudapestiNap();
+
+      let lsNap = null;
+      try {
+        lsNap = localStorage.getItem(kulcs);
+      } catch (_) {}
+
+      const cookieNap = olvasNapCookie(kulcs);
+
+      if (lsNap === ma || cookieNap === ma) {
+        try { localStorage.setItem(kulcs, ma); } catch (_) {}
+        irNapCookie(kulcs, ma);
+        return false;
+      }
+
+      try { localStorage.setItem(kulcs, ma); } catch (_) {}
+      irNapCookie(kulcs, ma);
+      return true;
+    }
+
+    function tisztitMegye(ertek) {
+      if (!ertek || typeof ertek !== 'string') return 'Ismeretlen';
+      const tiszta = ertek.trim();
+      return tiszta ? tiszta : 'Ismeretlen';
+    }
+
+    async function lekerOrszagEsIp() {
+      const forrasok = [
+        async () => {
+          const r = await fetch('https://get.geojs.io/v1/ip/geo.json');
+          if (!r.ok) return null;
+          const d = await r.json();
+          return d?.country_code ? {
+            countryCode: d.country_code.toUpperCase(),
+            ip: d.ip || 'unknown',
+            megye: tisztitMegye(d.region),
+            forras: 'geojs'
+          } : null;
+        },
+        async () => {
+          const r = await fetch('https://ipapi.co/json/');
+          if (!r.ok) return null;
+          const d = await r.json();
+          return d?.country_code ? {
+            countryCode: d.country_code.toUpperCase(),
+            ip: d.ip || 'unknown',
+            megye: tisztitMegye(d.region),
+            forras: 'ipapi'
+          } : null;
+        },
+        async () => {
+          const r = await fetch('https://ipwho.is/');
+          if (!r.ok) return null;
+          const d = await r.json();
+          return d?.success && d?.country_code ? {
+            countryCode: d.country_code.toUpperCase(),
+            ip: d.ip || 'unknown',
+            megye: tisztitMegye(d.region),
+            forras: 'ipwho'
+          } : null;
+        }
+      ];
+
+      for (const lekerdezo of forrasok) {
+        try {
+          const eredmeny = await lekerdezo();
+          if (eredmeny) return eredmeny;
+        } catch (_) {}
+      }
+
+      return null;
+    }
+
+    async function rogzitMagyarLatogatast() {
+      try {
+        const geo = await lekerOrszagEsIp();
+        if (!geo || geo.countryCode !== 'HU') {
+          return;
+        }
+
+        const aktualisOldal = lekerAktualisOldal();
+        const egyediNap = elsoNapiLatogatasE();
+
+        console.log('HU látogató geo adat:', {
+          forras: geo.forras,
+          megye: geo.megye,
+          oldal: aktualisOldal,
+          egyediNap
+        });
+
+        const { error } = await supabase
+          .from('hu_latogatok')
+          .insert({
+            ip_cim: geo.ip,
+            country_code: 'HU',
+            oldal: aktualisOldal,
+            egyedi_nap: egyediNap,
+            megye: geo.megye
+          });
+
+        if (error) {
+          console.error('Supabase insert hiba:', error);
+        }
+      } catch (err) {
+        console.error('Mérőscript hiba:', err);
+      }
+    }
+
+    rogzitMagyarLatogatast();
+  </script>
 </body>
 </html>
