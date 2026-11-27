@@ -3,10 +3,11 @@
 User-agent: *
 Allow: /
 
-# Belső mappák kizárása az indexelésből
+# Belső mappák és statisztikai oldal kizárása az indexelésből
 Disallow: /admin/
 Disallow: /private/
 Disallow: /drafts/
+Disallow: /latogatok.html
 
 # Sitemap pontos helye
 Sitemap: https://mmhazfelujitas.hu/sitemap.xml
